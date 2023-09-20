@@ -34,6 +34,14 @@ const productController = {
 
     res.status(StatusCodes.OK).json(updatedProduct);
   },
+
+  deleteProduct: async (req: GetOneProductDTO, res: Response) => {
+    const { id } = req.params;
+
+    await productService.deleteProduct(id);
+
+    res.status(StatusCodes.OK).json({ message: 'Success!' });
+  },
 };
 
 export default productController;

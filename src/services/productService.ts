@@ -37,6 +37,14 @@ const productService = {
 
     return updatedProduct;
   },
+
+  deleteProduct: async (id: mongoose.Types.ObjectId) => {
+    const result = await Product.findByIdAndDelete(id);
+
+    if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
+
+    return result;
+  },
 };
 
 export default productService;
