@@ -7,3 +7,5 @@ export interface IProduct {
   image: string;
   tags: ITags[];
 }
+
+export interface IUpdateProduct extends Partial<IProduct> {}
