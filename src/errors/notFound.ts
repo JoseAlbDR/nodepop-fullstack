@@ -3,6 +3,6 @@ import { CustomAPIError } from './customError';
 
 export class NotFoundError extends CustomAPIError {
   constructor(public message: string) {
-    super(message, StatusCodes.NOT_FOUND);
+    super('Not Found', message, StatusCodes.NOT_FOUND);
   }
 }

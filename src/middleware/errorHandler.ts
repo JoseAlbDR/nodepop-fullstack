@@ -9,13 +9,16 @@ const errorHandlerMiddleware = (
   _next: NextFunction
 ) => {
   console.log(err);
-  if (err instanceof CustomAPIError) {
-    return res.status(err.statusCode).json({ msg: err.message });
-  }
 
-  return res
-    .status(StatusCodes.INTERNAL_SERVER_ERROR)
-    .json({ name: err.name, msg: err.message, stack: err.stack });
+  const statusCode =
+    err instanceof CustomAPIError
+      ? err.statusCode
+      : StatusCodes.INTERNAL_SERVER_ERROR;
+
+  const msg =
+    'message' in err ? err.message : 'Internal Server Error Try Again Later';
+
+  return res.status(statusCode).json({ name: err.name, msg, stack: err.stack });
 };
 
 export default errorHandlerMiddleware;
