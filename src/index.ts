@@ -3,18 +3,14 @@ import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
 import { dbConnect } from './db/dbConnect';
+
+import productsRouter from './routes/productRoutes';
 const app = express();
 
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
-app.get('/', (_req, res) => {
-  res.send('Hello there');
-});
-
-app.post('/', (req: { body: { name: string } }, res) => {
-  res.json({ message: 'Data received', data: req.body });
-});
+app.use('/api/v1/products', productsRouter);
 
 const start = async () => {
   const port = process.env.PORT;
