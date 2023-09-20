@@ -15,7 +15,7 @@ const productController = {
   createProduct: async (req: CreateProductDTO, res: Response) => {
     const product = await productService.createProduct(req.body);
 
-    res.status(StatusCodes.CREATED).json({ product });
+    res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
   },
 
   getOneProduct: async (req: GetOneProductDTO, res: Response) => {
@@ -32,15 +32,19 @@ const productController = {
 
     const updatedProduct = await productService.updateProduct(id, updates);
 
-    res.status(StatusCodes.OK).json({ product: updatedProduct });
+    res
+      .status(StatusCodes.OK)
+      .json({ msg: 'product updated', product: updatedProduct });
   },
 
   deleteProduct: async (req: GetOneProductDTO, res: Response) => {
     const { id } = req.params;
 
-    await productService.deleteProduct(id);
+    const removedProduct = await productService.deleteProduct(id);
 
-    res.status(StatusCodes.OK).json({ message: 'Success!' });
+    res
+      .status(StatusCodes.OK)
+      .json({ msg: 'product deleted', product: removedProduct });
   },
 
   getAllTags: async (_req: Request, res: Response) => {
