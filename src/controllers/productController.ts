@@ -15,7 +15,7 @@ const productController = {
   createProduct: async (req: CreateProductDTO, res: Response) => {
     const product = await productService.createProduct(req.body);
 
-    res.status(StatusCodes.OK).json(product);
+    res.status(StatusCodes.OK).json({ product });
   },
 
   getOneProduct: async (req: GetOneProductDTO, res: Response) => {
@@ -23,7 +23,7 @@ const productController = {
 
     const product = await productService.getOneProduct(id);
 
-    res.status(StatusCodes.OK).json(product);
+    res.status(StatusCodes.OK).json({ product });
   },
 
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
@@ -32,7 +32,7 @@ const productController = {
 
     const updatedProduct = await productService.updateProduct(id, updates);
 
-    res.status(StatusCodes.OK).json(updatedProduct);
+    res.status(StatusCodes.OK).json({ product: updatedProduct });
   },
 
   deleteProduct: async (req: GetOneProductDTO, res: Response) => {
