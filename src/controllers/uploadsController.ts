@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { BadRequestError } from '../errors';
 import { UploadedFile } from 'express-fileupload';
-import path from 'path';
 import { StatusCodes } from 'http-status-codes';
+import uploadsService from '../services/uploadsService';
 
 const uploadsController = {
   uploadProductImage: async (req: Request, res: Response) => {
@@ -19,12 +19,7 @@ const uploadsController = {
     if (image.size > maxSize)
       throw new BadRequestError('File has to be smaller than 1Mb');
 
-    const imagePath = path.join(
-      __dirname,
-      '../public/uploads/' + `${image.name}`
-    );
-
-    await image.mv(imagePath);
+    await uploadsService.uploadProductImage(image);
 
     res.status(StatusCodes.OK).json({ image: `/uploads/${image.name}` });
   },
