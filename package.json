@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/JoseAlbDR/nodepop-backend-ts#readme",
   "dependencies": {
+    "@faker-js/faker": "^8.1.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.1",
     "cookie-parser": "^1.4.6",
@@ -43,6 +44,7 @@
     "express-async-errors": "^3.1.1",
     "express-fileupload": "^1.4.0",
     "express-validator": "^7.0.1",
+    "faker": "^6.6.6",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
