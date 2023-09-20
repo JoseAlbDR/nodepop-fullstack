@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import _ from 'lodash';
+
 import { Product } from '../models/Product';
 import { IProduct, IUpdateProduct } from '../types/product-interfaces';
 import { NotFoundError } from '../errors';
@@ -44,6 +46,14 @@ const productService = {
     if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
 
     return result;
+  },
+
+  getAllTags: async (): Promise<string[]> => {
+    const products = await Product.find({});
+
+    const uniqueTags = _.uniq(products.flatMap((product) => product.tags));
+
+    return uniqueTags;
   },
 };
 

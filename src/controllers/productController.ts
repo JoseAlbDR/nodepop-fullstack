@@ -42,6 +42,12 @@ const productController = {
 
     res.status(StatusCodes.OK).json({ message: 'Success!' });
   },
+
+  getAllTags: async (_req: Request, res: Response) => {
+    const tags = await productService.getAllTags();
+
+    res.status(StatusCodes.OK).json({ tags });
+  },
 };
 
 export default productController;
