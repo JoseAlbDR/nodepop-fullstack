@@ -1,4 +1,4 @@
-import { IProduct } from '../types/product-interfaces';
+import { IProduct } from '../types/productInterfaces';
 
 export interface CreateProductDTO {
   body: IProduct;

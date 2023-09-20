@@ -1,8 +1,12 @@
+// Packages
 import mongoose from 'mongoose';
 import _ from 'lodash';
 
+// Model, interfaces
 import { Product } from '../models/Product';
-import { IProduct, IUpdateProduct } from '../types/product-interfaces';
+import { IProduct, IUpdateProduct } from '../types/productInterfaces';
+
+// Errors
 import { NotFoundError } from '../errors';
 
 const productService = {

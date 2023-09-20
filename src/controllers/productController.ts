@@ -1,9 +1,14 @@
+// Packages
 import { Request, Response } from 'express';
-import productService from '../services/productService';
 import { StatusCodes } from 'http-status-codes';
-import { CreateProductDTO } from '../dto/create-product.dto';
-import { GetOneProductDTO } from '../dto/get-one-product.dto';
-import { UpdateProductDTO } from '../dto/update-product.dto';
+
+// Services
+import productService from '../services/productService';
+
+// DTOS, Interfaces
+import { CreateProductDTO } from '../dto/createProduct';
+import { UpdateProductDTO } from '../dto/updateProduct';
+import { ProductIDParam } from '../types/productInterfaces';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
@@ -18,7 +23,7 @@ const productController = {
     res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
   },
 
-  getOneProduct: async (req: GetOneProductDTO, res: Response) => {
+  getOneProduct: async (req: ProductIDParam, res: Response) => {
     const { id } = req.params;
 
     const product = await productService.getOneProduct(id);
@@ -37,7 +42,7 @@ const productController = {
       .json({ msg: 'product updated', product: updatedProduct });
   },
 
-  deleteProduct: async (req: GetOneProductDTO, res: Response) => {
+  deleteProduct: async (req: ProductIDParam, res: Response) => {
     const { id } = req.params;
 
     const removedProduct = await productService.deleteProduct(id);

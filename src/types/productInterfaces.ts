@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export type ITags = 'motor' | 'work' | 'mobile' | 'lifestyle';
 
 export interface IProduct {
@@ -9,3 +11,11 @@ export interface IProduct {
 }
 
 export interface IUpdateProduct extends Partial<IProduct> {}
+
+export interface IID {
+  id: mongoose.Types.ObjectId;
+}
+
+export interface ProductIDParam {
+  params: IID;
+}

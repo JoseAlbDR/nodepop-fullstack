@@ -1,2 +1,2 @@
-export { BadRequestError } from './bad-request';
-export { NotFoundError } from './not-found';
+export { BadRequestError } from './badRequest';
+export { NotFoundError } from './notFound';
