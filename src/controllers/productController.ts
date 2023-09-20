@@ -6,7 +6,7 @@ import { StatusCodes } from 'http-status-codes';
 import productService from '../services/productService';
 
 // DTOS, Interfaces
-import { CreateProductDTO } from '../dto/createProduct';
+import { CreateProductDTO } from '../dto/createProductDto';
 import { UpdateProductDTO } from '../dto/updateProduct';
 import { ProductIDParam } from '../types/productInterfaces';
 
