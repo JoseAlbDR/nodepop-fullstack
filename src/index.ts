@@ -10,6 +10,7 @@ import { dbConnect } from './db/dbConnect';
 
 // Routers
 import productsRouter from './routes/productRoutes';
+import populateRouter from './routes/populateDatabaseRouter';
 
 // Middlewares
 import notFoundMiddleware from './middleware/notFound';
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(fileUpload());
 
 app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/populate', populateRouter);
 
 // Middlewares
 app.use(notFoundMiddleware);
