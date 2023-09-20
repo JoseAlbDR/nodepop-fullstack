@@ -1,5 +1,6 @@
 import express from 'express';
 import productController from '../controllers/productController';
+import uploadsController from '../controllers/uploadsController';
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router
   .post(productController.createProduct);
 
 router.get('/tags', productController.getAllTags);
+router.post('/uploadImage', uploadsController.uploadProductImage);
 
 router
   .route('/:id')
