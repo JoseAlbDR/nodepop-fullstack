@@ -19,11 +19,16 @@ app.use(errorHandlerMiddleware);
 
 const start = async () => {
   const port = process.env.PORT;
-  await dbConnect(process.env.MONGO_URL);
-  console.log('Connected to db');
-  app.listen(port, () => {
-    console.log(`Server listening on port: ${port}`);
-  });
+  try {
+    await dbConnect(process.env.MONGO_URL);
+    console.log('Connected to db');
+    app.listen(port, () => {
+      console.log(`Server listening on port: ${port}`);
+    });
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
 };
 
 void start();
