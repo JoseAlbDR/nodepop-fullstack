@@ -7,37 +7,36 @@ import { NotFoundError } from '../errors';
 
 const productService = {
   getAllProducts: async () => {
-    const products = await Product.find({}).sort('-createdAt');
-    return products;
+    const results = await Product.find({}).sort('-createdAt');
+    return results;
   },
 
   createProduct: async (product: IProduct) => {
-    const newProduct = await Product.create(product);
+    const result = await Product.create(product);
 
-    return newProduct;
+    return result;
   },
 
   getOneProduct: async (id: mongoose.Types.ObjectId) => {
-    const product = await Product.findById(id);
+    const result = await Product.findById(id);
 
-    if (!product) throw new NotFoundError(`Product with id: ${id} not found`);
+    if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
 
-    return product;
+    return result;
   },
 
   updateProduct: async (
     id: mongoose.Types.ObjectId,
     updates: IUpdateProduct
   ) => {
-    const updatedProduct = Product.findByIdAndUpdate(id, updates, {
+    const result = Product.findByIdAndUpdate(id, updates, {
       runValidators: true,
       new: true,
     });
 
-    if (!updatedProduct)
-      throw new NotFoundError(`Product with id: ${id} not found`);
+    if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
 
-    return updatedProduct;
+    return result;
   },
 
   deleteProduct: async (id: mongoose.Types.ObjectId) => {
@@ -49,9 +48,9 @@ const productService = {
   },
 
   getAllTags: async (): Promise<string[]> => {
-    const products = await Product.find({});
+    const result = await Product.find({});
 
-    const uniqueTags = _.uniq(products.flatMap((product) => product.tags));
+    const uniqueTags = _.uniq(result.flatMap((item) => item.tags));
 
     return uniqueTags;
   },
