@@ -15,7 +15,7 @@ const productController = {
   createProduct: async (req: CreateProductDTO, res: Response) => {
     const product = await productService.createProduct(req.body);
 
-    res.status(StatusCodes.OK).json({ product });
+    res.status(StatusCodes.CREATED).json({ product });
   },
 
   getOneProduct: async (req: GetOneProductDTO, res: Response) => {
