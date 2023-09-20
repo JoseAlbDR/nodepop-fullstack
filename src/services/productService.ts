@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { Product } from '../models/Product';
-import { IProduct } from '../types/product-interfaces';
+import { IProduct, IUpdateProduct } from '../types/product-interfaces';
 import { NotFoundError } from '../errors';
 
 const productService = {
@@ -21,6 +21,21 @@ const productService = {
     if (!product) throw new NotFoundError(`Product with id: ${id} not found`);
 
     return product;
+  },
+
+  updateProduct: async (
+    id: mongoose.Types.ObjectId,
+    updates: IUpdateProduct
+  ) => {
+    const updatedProduct = Product.findByIdAndUpdate(id, updates, {
+      runValidators: true,
+      new: true,
+    });
+
+    if (!updatedProduct)
+      throw new NotFoundError(`Product with id: ${id} not found`);
+
+    return updatedProduct;
   },
 };
 
