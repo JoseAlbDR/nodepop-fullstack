@@ -15,7 +15,8 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --files index.ts",
     "lint": "eslint --ext .ts .",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "setup-project": "npm i && cd client && npm i"
   },
   "repository": {
     "type": "git",
