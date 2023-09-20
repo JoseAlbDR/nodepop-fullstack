@@ -10,10 +10,10 @@ const errorHandlerMiddleware = (
 ) => {
   console.log(err);
   if (err instanceof CustomAPIError) {
-    res.status(err.statusCode).json({ msg: err.message });
+    return res.status(err.statusCode).json({ msg: err.message });
   }
 
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
+  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
 };
 
 export default errorHandlerMiddleware;
