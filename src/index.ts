@@ -3,6 +3,7 @@ import 'express-async-errors';
 import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
+import fileUpload from 'express-fileupload';
 
 // DB
 import { dbConnect } from './db/dbConnect';
@@ -18,6 +19,7 @@ const app = express();
 
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+app.use(fileUpload());
 
 app.use('/api/v1/products', productsRouter);
 
