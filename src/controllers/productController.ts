@@ -8,7 +8,6 @@ import productService from '../services/productService';
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dto/createProductDto';
 import { UpdateProductDTO } from '../dto/updateProductDto';
-import { ProductIDParam } from '../types/productInterfaces';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
@@ -23,7 +22,7 @@ const productController = {
     res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
   },
 
-  getOneProduct: async (req: ProductIDParam, res: Response) => {
+  getOneProduct: async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const product = await productService.getOneProduct(id);
@@ -42,7 +41,7 @@ const productController = {
       .json({ msg: 'product updated', product: updatedProduct });
   },
 
-  deleteProduct: async (req: ProductIDParam, res: Response) => {
+  deleteProduct: async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const removedProduct = await productService.deleteProduct(id);

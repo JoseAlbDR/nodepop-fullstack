@@ -1,6 +1,6 @@
-import { IID, IUpdateProduct } from '../types/productInterfaces';
+import { IUpdateProduct } from '../types/productInterfaces';
 
 export interface UpdateProductDTO {
   body: IUpdateProduct;
-  params: IID;
+  params: { id: string };
 }

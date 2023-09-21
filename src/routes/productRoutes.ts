@@ -1,7 +1,10 @@
 import express from 'express';
 import productController from '../controllers/productController';
 import uploadsController from '../controllers/uploadsController';
-import { validateProductCreation } from '../middleware/validation';
+import {
+  validateProductCreation,
+  validateIdParam,
+} from '../middleware/validation';
 
 const router = express.Router();
 
@@ -15,8 +18,8 @@ router.post('/uploadImage', uploadsController.uploadProductImage);
 
 router
   .route('/:id')
-  .get(productController.getOneProduct)
-  .patch(productController.updateProduct)
-  .delete(productController.deleteProduct);
+  .get(validateIdParam, productController.getOneProduct)
+  .patch(validateIdParam, productController.updateProduct)
+  .delete(validateIdParam, productController.deleteProduct);
 
 export default router;

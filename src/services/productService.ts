@@ -1,5 +1,4 @@
 // Packages
-import mongoose from 'mongoose';
 import _ from 'lodash';
 
 // Model, interfaces
@@ -21,7 +20,7 @@ const productService = {
     return result;
   },
 
-  getOneProduct: async (id: mongoose.Types.ObjectId) => {
+  getOneProduct: async (id: string) => {
     const result = await Product.findById(id);
 
     if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
@@ -29,10 +28,7 @@ const productService = {
     return result;
   },
 
-  updateProduct: async (
-    id: mongoose.Types.ObjectId,
-    updates: IUpdateProduct
-  ) => {
+  updateProduct: async (id: string, updates: IUpdateProduct) => {
     const result = Product.findByIdAndUpdate(id, updates, {
       runValidators: true,
       new: true,
@@ -43,7 +39,7 @@ const productService = {
     return result;
   },
 
-  deleteProduct: async (id: mongoose.Types.ObjectId) => {
+  deleteProduct: async (id: string) => {
     const result = await Product.findByIdAndDelete(id);
 
     if (!result) throw new NotFoundError(`Product with id: ${id} not found`);
