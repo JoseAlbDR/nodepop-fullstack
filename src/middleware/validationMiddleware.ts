@@ -1,10 +1,9 @@
 import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError } from '../errors';
-import { TAGS } from '../utils/constants';
-import { Product } from '../models/ProductModel';
 import { UploadedFile } from 'express-fileupload';
-import mongoose from 'mongoose';
+import { validateGetOneProduct } from '../utils/validateGetOneProduct';
+import { tagsValidationMessage, validateTags } from '../utils/validateTags';
 
 export const requestValidator = (
   req: Request,
@@ -66,17 +65,7 @@ export const validateIdParam = [
   param('id')
     .notEmpty()
     .withMessage('id cannot be empty')
-    .custom(async (value: string) => {
-      const isValid = mongoose.Types.ObjectId.isValid(value);
-
-      if (!isValid)
-        throw new BadRequestError(`${value} is not a valid MongoDB id`);
-
-      const result = await Product.findById(value);
-
-      if (!result)
-        throw new NotFoundError(`Product with id: ${value} not found`);
-    }),
+    .custom(async (value: string) => await validateGetOneProduct(value)),
   requestValidator,
 ];
 
@@ -116,20 +105,8 @@ export const validateProductCreation = [
   body('tags')
     .notEmpty()
     .withMessage('tags is required')
-    .custom((tags) => {
-      // Validate array
-      if (!Array.isArray(tags)) return false;
-      // Validate tags in array
-      const allTagsValid = tags.every((tag: string) => TAGS.includes(tag));
-      if (!allTagsValid) return false;
-      return true;
-    })
-    .withMessage(
-      (value) =>
-        `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS.join(
-          ', '
-        )}`
-    ),
+    .custom((tags: string[]) => validateTags(tags))
+    .withMessage(tagsValidationMessage),
 
   requestValidator,
 ];
@@ -175,20 +152,8 @@ export const validateProductUpdate = [
     .optional()
     .notEmpty()
     .withMessage('tags is required')
-    .custom((tags) => {
-      // Validate array
-      if (!Array.isArray(tags)) return false;
-      // Validate tags in array
-      const allTagsValid = tags.every((tag: string) => TAGS.includes(tag));
-      if (!allTagsValid) return false;
-      return true;
-    })
-    .withMessage(
-      (value) =>
-        `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS.join(
-          ', '
-        )}`
-    ),
+    .custom((tags: string[]) => validateTags(tags))
+    .withMessage(tagsValidationMessage),
 
   requestValidator,
 ];
