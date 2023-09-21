@@ -23,6 +23,7 @@ const productController = {
   },
 
   getOneProduct: async (req: Request, res: Response) => {
+    console.log({ id: req.params.id });
     const product = await productService.getOneProduct(req.params.id);
 
     res.status(StatusCodes.OK).json({ product });

@@ -4,6 +4,7 @@ import { BadRequestError, NotFoundError } from '../errors';
 import { TAGS } from '../utils/constants';
 import { Product } from '../models/Product';
 import { UploadedFile } from 'express-fileupload';
+import mongoose from 'mongoose';
 
 export const requestValidator = (
   req: Request,
@@ -59,10 +60,12 @@ export const validateIdParam = [
   param('id')
     .notEmpty()
     .withMessage('id cannot be empty')
-    .isHexadecimal()
-    .isLength({ min: 24, max: 24 })
-    .withMessage((id) => `${id} is not a valid MongoDB id`)
     .custom(async (value: string) => {
+      const isValid = mongoose.Types.ObjectId.isValid(value);
+
+      if (!isValid)
+        throw new BadRequestError(`${value} is not a valid MongoDB id`);
+
       const result = await Product.findById(value);
 
       if (!result)
