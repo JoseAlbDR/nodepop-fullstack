@@ -22,6 +22,7 @@ export const requestValidator = (
   next();
 };
 
+// Upload image file
 export const validateUploadedFiles = (
   req: Request,
   _res: Response,
@@ -47,6 +48,7 @@ export const validateUploadedFiles = (
   next();
 };
 
+// Populate param
 export const validatePopulateParam = [
   param('n')
     .optional()
@@ -56,6 +58,7 @@ export const validatePopulateParam = [
   requestValidator,
 ];
 
+// Product params, create and update
 export const validateIdParam = [
   param('id')
     .notEmpty()
