@@ -5,7 +5,7 @@ import { validatePopulateParam } from '../middleware/validationMiddleware';
 const router = express.Router();
 
 router
-  .route(['/', '/:n'])
-  .get(validatePopulateParam, populateController.populateDatabase);
+  .route('/:n?')
+  .post(validatePopulateParam, populateController.populateDatabase);
 
 export default router;
