@@ -1,9 +1,13 @@
-import { body, validationResult } from 'express-validator';
+import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError } from '../errors';
 import { TAGS } from '../utils/constants';
 
-const requestValidator = (req: Request, _res: Response, next: NextFunction) => {
+export const requestValidator = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map((error) => error.msg as string);
@@ -11,6 +15,16 @@ const requestValidator = (req: Request, _res: Response, next: NextFunction) => {
   }
   next();
 };
+
+export const validateIdParam = [
+  param('id')
+    .notEmpty()
+    .withMessage('id cannot be empty')
+    .isHexadecimal()
+    .isLength({ min: 24, max: 24 })
+    .withMessage((id) => `${id} is not a valid MongoDB id`),
+  requestValidator,
+];
 
 export const validateProductCreation = [
   body('name')
