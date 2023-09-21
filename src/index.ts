@@ -9,8 +9,9 @@ import fileUpload from 'express-fileupload';
 import { dbConnect } from './db/dbConnect';
 
 // Routers
-import productsRouter from './routes/productRoutes';
+import productsRouter from './routes/productRouter';
 import populateRouter from './routes/populateDatabaseRouter';
+import authRouter from './routes/authRouter';
 
 // Middlewares
 import notFoundMiddleware from './middleware/notFoundMIddleware';
@@ -22,8 +23,10 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(fileUpload());
 
+// Routes
 app.use('/api/v1/products', productsRouter);
 app.use('/api/v1/populate', populateRouter);
+app.use('/api/v1/auth', authRouter);
 
 // Middlewares
 app.use(notFoundMiddleware);
