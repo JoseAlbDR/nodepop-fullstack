@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { faker } from '@faker-js/faker';
 import { IProduct } from '../types/productInterfaces';
 import { randomBoolean } from '../utils/randomBoolean';
@@ -6,13 +6,10 @@ import { getRandomTags } from '../utils/randomTags';
 import populateService from '../services/populateService';
 import { StatusCodes } from 'http-status-codes';
 
-interface PopulateNumParam {
-  params: { n: number };
-}
-
 export const populateController = {
-  populateDatabase: async (req: PopulateNumParam, res: Response) => {
-    const { n } = req.params;
+  populateDatabase: async (req: Request, res: Response) => {
+    const n = !isNaN(+req.params.n) ? +req.params.n : 10;
+
     const products: IProduct[] = [];
 
     for (let i = 0; i < n; i++) {

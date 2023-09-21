@@ -16,6 +16,15 @@ export const requestValidator = (
   next();
 };
 
+export const validatePopulateParam = [
+  param('n')
+    .optional()
+    .isNumeric()
+    .isFloat({ min: 1 })
+    .withMessage('n must be a positive number'),
+  requestValidator,
+];
+
 export const validateIdParam = [
   param('id')
     .notEmpty()
