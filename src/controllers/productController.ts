@@ -7,7 +7,7 @@ import productService from '../services/productService';
 
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dto/createProductDto';
-import { UpdateProductDTO } from '../dto/updateProduct';
+import { UpdateProductDTO } from '../dto/updateProductDto';
 import { ProductIDParam } from '../types/productInterfaces';
 
 const productController = {
