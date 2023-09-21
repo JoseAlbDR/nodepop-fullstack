@@ -23,18 +23,16 @@ const productController = {
   },
 
   getOneProduct: async (req: Request, res: Response) => {
-    const { id } = req.params;
-
-    const product = await productService.getOneProduct(id);
+    const product = await productService.getOneProduct(req.params.id);
 
     res.status(StatusCodes.OK).json({ product });
   },
 
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
-    const { id } = req.params;
-    const updates = req.body;
-
-    const updatedProduct = await productService.updateProduct(id, updates);
+    const updatedProduct = await productService.updateProduct(
+      req.params.id,
+      req.body
+    );
 
     res
       .status(StatusCodes.OK)
@@ -42,9 +40,7 @@ const productController = {
   },
 
   deleteProduct: async (req: Request, res: Response) => {
-    const { id } = req.params;
-
-    const removedProduct = await productService.deleteProduct(id);
+    const removedProduct = await productService.deleteProduct(req.params.id);
 
     res
       .status(StatusCodes.OK)
