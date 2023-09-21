@@ -14,7 +14,7 @@ import populateRouter from './routes/populateDatabaseRouter';
 import authRouter from './routes/authRouter';
 
 // Middlewares
-import notFoundMiddleware from './middleware/notFoundMIddleware';
+import notFoundMiddleware from './middleware/notFoundMiddleware';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 
 const app = express();
