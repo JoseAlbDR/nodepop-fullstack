@@ -1,7 +1,8 @@
 import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
-import { BadRequestError } from '../errors';
+import { BadRequestError, NotFoundError } from '../errors';
 import { TAGS } from '../utils/constants';
+import { Product } from '../models/Product';
 
 export const requestValidator = (
   req: Request,
@@ -31,7 +32,13 @@ export const validateIdParam = [
     .withMessage('id cannot be empty')
     .isHexadecimal()
     .isLength({ min: 24, max: 24 })
-    .withMessage((id) => `${id} is not a valid MongoDB id`),
+    .withMessage((id) => `${id} is not a valid MongoDB id`)
+    .custom(async (value: string) => {
+      const result = await Product.findById(value);
+
+      if (!result)
+        throw new NotFoundError(`Product with id: ${value} not found`);
+    }),
   requestValidator,
 ];
 
