@@ -4,7 +4,7 @@ import uploadsController from '../controllers/uploadsController';
 import {
   validateProductCreation,
   validateIdParam,
-} from '../middleware/validation';
+} from '../middleware/validationMiddleware';
 
 const router = express.Router();
 

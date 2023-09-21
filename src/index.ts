@@ -13,8 +13,8 @@ import productsRouter from './routes/productRoutes';
 import populateRouter from './routes/populateDatabaseRouter';
 
 // Middlewares
-import notFoundMiddleware from './middleware/notFound';
-import errorHandlerMiddleware from './middleware/errorHandler';
+import notFoundMiddleware from './middleware/notFoundMIddleware';
+import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 
 const app = express();
 
