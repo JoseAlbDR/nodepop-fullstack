@@ -2,7 +2,7 @@
 import _ from 'lodash';
 
 // Model, interfaces
-import { Product } from '../models/Product';
+import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
 
 const productService = {

@@ -2,7 +2,7 @@ import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError } from '../errors';
 import { TAGS } from '../utils/constants';
-import { Product } from '../models/Product';
+import { Product } from '../models/ProductModel';
 import { UploadedFile } from 'express-fileupload';
 import mongoose from 'mongoose';
 

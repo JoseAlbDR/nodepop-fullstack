@@ -1,4 +1,4 @@
-import { Product } from '../models/Product';
+import { Product } from '../models/ProductModel';
 import { IProduct } from '../types/productInterfaces';
 
 const populateService = {
