@@ -4,6 +4,7 @@ import uploadsController from '../controllers/uploadsController';
 import {
   validateProductCreation,
   validateIdParam,
+  validateProductUpdate,
 } from '../middleware/validationMiddleware';
 
 const router = express.Router();
@@ -19,7 +20,11 @@ router.post('/uploadImage', uploadsController.uploadProductImage);
 router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)
-  .patch(validateIdParam, productController.updateProduct)
+  .patch(
+    validateProductUpdate,
+    validateIdParam,
+    productController.updateProduct
+  )
   .delete(validateIdParam, productController.deleteProduct);
 
 export default router;

@@ -87,7 +87,64 @@ export const validateProductCreation = [
     })
     .withMessage(
       (value) =>
-        `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS}`
+        `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS.join(
+          ', '
+        )}`
+    ),
+
+  requestValidator,
+];
+
+export const validateProductUpdate = [
+  body('name')
+    .optional()
+    .notEmpty()
+    .withMessage('name is required')
+    .isString()
+    .withMessage('name must be a string')
+    .isLength({ min: 3, max: 50 })
+    .withMessage('name must be between 3 and 50 characters'),
+
+  body('onSale')
+    .optional()
+    .notEmpty()
+    .withMessage('onSale is required')
+    .isBoolean()
+    .withMessage('onSale must be a boolean'),
+
+  body('price')
+    .optional()
+    .notEmpty()
+    .withMessage('price is required')
+    .isFloat({ min: 0 })
+    .withMessage('price must be a positive number'),
+
+  body('image')
+    .optional()
+    .notEmpty()
+    .withMessage('image is required')
+    .isString()
+    .withMessage('image must be a string')
+    .isLength({ min: 3, max: 50 })
+    .withMessage('image must be between 3 and 50 characters'),
+
+  body('tags')
+    .optional()
+    .notEmpty()
+    .withMessage('tags is required')
+    .custom((tags) => {
+      // Validate array
+      if (!Array.isArray(tags)) return false;
+      // Validate tags in array
+      const allTagsValid = tags.every((tag: string) => TAGS.includes(tag));
+      if (!allTagsValid) return false;
+      return true;
+    })
+    .withMessage(
+      (value) =>
+        `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS.join(
+          ', '
+        )}`
     ),
 
   requestValidator,
