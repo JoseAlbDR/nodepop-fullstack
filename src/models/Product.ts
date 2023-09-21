@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { TAGS } from '../utils/constants';
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -21,6 +22,11 @@ const ProductSchema = new mongoose.Schema(
     tags: {
       type: [String],
       required: [true, 'Tag is required'],
+      validate: {
+        validator: (tags: string[]) => {
+          return tags.every((tag) => TAGS.includes(tag));
+        },
+      },
     },
   },
   { timestamps: true }
