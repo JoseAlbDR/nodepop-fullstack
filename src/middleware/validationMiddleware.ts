@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError } from '../errors';
 import { TAGS } from '../utils/constants';
 import { Product } from '../models/Product';
+import { UploadedFile } from 'express-fileupload';
 
 export const requestValidator = (
   req: Request,
@@ -17,6 +18,31 @@ export const requestValidator = (
     }
     throw new BadRequestError(errorMessages.join(', '));
   }
+  next();
+};
+
+export const validateUploadedFiles = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    throw new BadRequestError('No file uploaded');
+  }
+
+  const image = req.files.image as UploadedFile;
+
+  if (!image.mimetype.startsWith('image')) {
+    throw new BadRequestError('File has to be an image');
+  }
+
+  // 1MB max image size
+  const maxSize = 1024 * 1024;
+
+  if (image.size > maxSize) {
+    throw new BadRequestError('File has to be smaller than 1MB');
+  }
+
   next();
 };
 

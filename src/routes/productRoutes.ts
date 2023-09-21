@@ -1,6 +1,7 @@
 import express from 'express';
 import productController from '../controllers/productController';
 import uploadsController from '../controllers/uploadsController';
+import { validateUploadedFiles } from '../middleware/validationMiddleware';
 import {
   validateProductCreation,
   validateIdParam,
@@ -15,7 +16,11 @@ router
   .post(validateProductCreation, productController.createProduct);
 
 router.get('/tags', productController.getAllTags);
-router.post('/uploadImage', uploadsController.uploadProductImage);
+router.post(
+  '/uploadImage',
+  validateUploadedFiles,
+  uploadsController.uploadProductImage
+);
 
 router
   .route('/:id')
