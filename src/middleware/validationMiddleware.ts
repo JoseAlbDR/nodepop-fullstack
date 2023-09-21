@@ -13,7 +13,9 @@ export const requestValidator = (
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const errorMessages = errors.array().map((error) => error.msg as string);
+    const errorMessages: string[] = errors
+      .array()
+      .map((error) => error.msg as string);
     if (errorMessages[0].startsWith('Product')) {
       throw new NotFoundError(errorMessages.join(', '));
     }
@@ -79,6 +81,7 @@ export const validateIdParam = [
 
 export const validateProductCreation = [
   body('name')
+    .trim()
     .notEmpty()
     .withMessage('name is required')
     .isString()
@@ -87,18 +90,21 @@ export const validateProductCreation = [
     .withMessage('name must be between 3 and 50 characters'),
 
   body('onSale')
+    .trim()
     .notEmpty()
     .withMessage('onSale is required')
     .isBoolean()
     .withMessage('onSale must be a boolean'),
 
   body('price')
+    .trim()
     .notEmpty()
     .withMessage('price is required')
     .isFloat({ min: 0 })
     .withMessage('price must be a positive number'),
 
   body('image')
+    .trim()
     .notEmpty()
     .withMessage('image is required')
     .isString()
@@ -129,6 +135,7 @@ export const validateProductCreation = [
 
 export const validateProductUpdate = [
   body('name')
+    .trim()
     .optional()
     .notEmpty()
     .withMessage('name is required')
@@ -138,6 +145,7 @@ export const validateProductUpdate = [
     .withMessage('name must be between 3 and 50 characters'),
 
   body('onSale')
+    .trim()
     .optional()
     .notEmpty()
     .withMessage('onSale is required')
@@ -145,6 +153,7 @@ export const validateProductUpdate = [
     .withMessage('onSale must be a boolean'),
 
   body('price')
+    .trim()
     .optional()
     .notEmpty()
     .withMessage('price is required')
@@ -152,6 +161,7 @@ export const validateProductUpdate = [
     .withMessage('price must be a positive number'),
 
   body('image')
+    .trim()
     .optional()
     .notEmpty()
     .withMessage('image is required')
@@ -177,6 +187,44 @@ export const validateProductUpdate = [
         `Invalid tags: ${value}, tags must be an array of strings with any combination of: ${TAGS.join(
           ', '
         )}`
+    ),
+
+  requestValidator,
+];
+
+// Auth validation
+
+export const validateRegisterUser = [
+  body('name')
+    .trim()
+    .notEmpty()
+    .withMessage('name is required')
+    .isString()
+    .withMessage('name must be a string')
+    .isLength({ min: 3 })
+    .withMessage('name must be at least 3 characters long'),
+
+  body('email')
+    .trim()
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('email must be a valid email address'),
+
+  body('password')
+    .trim()
+    .notEmpty()
+    .withMessage('password is required')
+    .isStrongPassword({
+      minLength: 9,
+      minUppercase: 1,
+      minNumbers: 1,
+      minLowercase: 1,
+      minSymbols: 1,
+    })
+    .withMessage(
+      (pass) =>
+        `Password: ${pass}, must be at least 9 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
     ),
 
   requestValidator,
