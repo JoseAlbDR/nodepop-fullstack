@@ -12,6 +12,9 @@ export const requestValidator = (
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map((error) => error.msg as string);
+    if (errorMessages[0].startsWith('Product')) {
+      throw new NotFoundError(errorMessages.join(', '));
+    }
     throw new BadRequestError(errorMessages.join(', '));
   }
   next();
