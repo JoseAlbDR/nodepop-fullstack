@@ -3,12 +3,6 @@ import { CustomAPIError } from '../errors/customError';
 import { StatusCodes } from 'http-status-codes';
 import { MongoError } from 'mongodb';
 
-interface IDuplicateMongoError extends MongoError {
-  keyValue: {
-    [x: string]: string;
-  };
-}
-
 const errorHandlerMiddleware = (
   err: Error,
   _req: Request,
@@ -27,10 +21,9 @@ const errorHandlerMiddleware = (
 
   // Duplicate UNIQUE email error
   if (err instanceof MongoError && err.code === 11000) {
+    console.log(err);
     statusCode = StatusCodes.CONFLICT;
-    msg = `Duplicate value entered for ${Object.keys(
-      (err as IDuplicateMongoError).keyValue
-    ).join(', ')} please enter a valid value`;
+    msg = `Email already exist, please try another email or login.`;
   }
 
   // Check rest of errors
