@@ -15,10 +15,12 @@ export const requestValidator = (
     const errorMessages: string[] = errors
       .array()
       .map((error) => error.msg as string);
+
     // If error starts with "Product" means that is a NotFoundError
     if (errorMessages[0].startsWith('Product'))
       throw new NotFoundError(errorMessages.join(', '));
 
+    // If error starts with "Not authorized" means that is a UnauthorizedError
     if (errorMessages[0].startsWith('Not authorized'))
       throw new UnauthorizedError(errorMessages.join(', '));
 
