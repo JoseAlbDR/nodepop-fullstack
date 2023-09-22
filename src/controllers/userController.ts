@@ -14,7 +14,7 @@ const userController = {
     // Remove password just in case...
     const obj = { ...req.body };
     delete obj.password;
-    console.log(obj);
+
     const user = await userService.updateUser(req.user.userId, obj);
 
     res.status(StatusCodes.OK).json({ msg: user });
