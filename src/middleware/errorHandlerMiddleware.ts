@@ -28,7 +28,7 @@ const errorHandlerMiddleware = (
   // Check rest of errors
   return res.status(statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({
     name: err.name,
-    msg: msg || 'Internal Server Error Try Again Later',
+    msg: msg || err.message || 'Internal Server Error Try Again Later',
     stack: err.stack,
   });
 };
