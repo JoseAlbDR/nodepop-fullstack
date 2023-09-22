@@ -5,7 +5,7 @@ import uploadsService from '../services/uploadsService';
 
 const uploadsController = {
   uploadProductImage: async (req: Request, res: Response) => {
-    const image = req?.files?.image as UploadedFile;
+    const image = req.files!.image as UploadedFile;
 
     await uploadsService.uploadProductImage(image);
 
