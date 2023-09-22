@@ -1,6 +1,6 @@
 import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
-import { BadRequestError, NotFoundError } from '../errors';
+import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { UploadedFile } from 'express-fileupload';
 import { validateOneProductMutation } from '../utils/validateOneProductMutation';
 import { tagsValidationMessage, validateTags } from '../utils/validateTags';
@@ -16,9 +16,12 @@ export const requestValidator = (
       .array()
       .map((error) => error.msg as string);
     // If error starts with "Product" means that is a NotFoundError
-    if (errorMessages[0].startsWith('Product')) {
+    if (errorMessages[0].startsWith('Product'))
       throw new NotFoundError(errorMessages.join(', '));
-    }
+
+    if (errorMessages[0].startsWith('Not authorized'))
+      throw new UnauthorizedError(errorMessages.join(', '));
+
     throw new BadRequestError(errorMessages.join(', '));
   }
   next();
