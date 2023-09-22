@@ -10,7 +10,8 @@ import { CreateProductDTO } from '../dto/createProductDto';
 import { UpdateProductDTO } from '../dto/updateProductDto';
 
 const productController = {
-  getAllProducts: async (_req: Request, res: Response) => {
+  getAllProducts: async (req: Request, res: Response) => {
+    console.log(req.user);
     const products = await productService.getAllProducts();
 
     res.status(StatusCodes.OK).json({ products });

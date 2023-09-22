@@ -1,3 +1,6 @@
+import { JwtPayload } from 'jsonwebtoken';
+import mongoose from 'mongoose';
+
 export type Role = 'admin' | 'user';
 
 export interface IUser {
@@ -10,3 +13,10 @@ export interface IUser {
 }
 
 export type ILoginUser = Omit<IUser, 'name' | 'lastName' | 'location' | 'role'>;
+
+export interface ITokenPayload extends JwtPayload {
+  userId: mongoose.Types.ObjectId;
+  role: Role;
+  iat: number;
+  exp: number;
+}

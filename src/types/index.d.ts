@@ -7,7 +7,6 @@ declare global {
     interface Request {
       user: {
         userId: mongoose.Types.ObjectId;
-        name: string;
         role: Role;
       };
     }

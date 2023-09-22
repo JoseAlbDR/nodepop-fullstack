@@ -19,6 +19,7 @@ import authRouter from './routes/authRouter';
 import notFoundMiddleware from './middleware/notFoundMiddleware';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 import cookieParser from 'cookie-parser';
+import { authenticateUser } from './middleware/authMiddleware';
 
 const app = express();
 
@@ -28,7 +29,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(fileUpload());
 
 // Routes
-app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/products', authenticateUser, productsRouter);
 app.use('/api/v1/populate', populateRouter);
 app.use('/api/v1/auth', authRouter);
 

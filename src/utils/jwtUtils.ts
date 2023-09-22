@@ -11,3 +11,6 @@ export const createJWT = (payload: JWTPayload) => {
 
   return token;
 };
+
+export const verifyJWT = (token: string) =>
+  jwt.verify(token, process.env.JWT_SECRET);
