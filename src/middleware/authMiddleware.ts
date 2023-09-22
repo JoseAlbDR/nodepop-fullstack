@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 // import { verifyJWT } from '../utils/jwtUtils';
-import { UnauthenticatedError } from '../errors';
+import { UnauthenticatedError, UnauthorizedError } from '../errors';
 import { verifyJWT } from '../utils/jwtUtils';
-import { ITokenPayload } from '../types/authInterfaces';
+import { ITokenPayload, Role } from '../types/authInterfaces';
 
-export const authenticateUser = async (
+const authenticateUser = async (
   req: Request,
   _res: Response,
   next: NextFunction
@@ -22,3 +22,14 @@ export const authenticateUser = async (
     throw new UnauthenticatedError('authentication invalid');
   }
 };
+
+const authorizePermissions = (...roles: Role[]) => {
+  return (req: Request, _res: Response, next: NextFunction) => {
+    const { role } = req.user;
+    if (!roles.includes(role))
+      throw new UnauthorizedError('Unauthorized to view this route');
+    next();
+  };
+};
+
+export { authenticateUser, authorizePermissions };
