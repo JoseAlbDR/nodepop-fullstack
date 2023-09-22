@@ -22,7 +22,7 @@ const errorHandlerMiddleware = (
   // Duplicate UNIQUE email error
   if (err instanceof MongoError && err.code === 11000) {
     statusCode = StatusCodes.CONFLICT;
-    msg = `Email already exist, please try another email or login.`;
+    msg = `Email already exist, please try another email.`;
   }
 
   // Check rest of errors
