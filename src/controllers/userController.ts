@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
+import { UpdateUserDTO } from '../dtos/updateUserDto';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -9,8 +10,8 @@ const userController = {
     res.status(StatusCodes.OK).json({ msg: user });
   },
 
-  updateUser: async (_req: Request, res: Response) => {
-    const user = await userService.updateUser();
+  updateUser: async (req: UpdateUserDTO, res: Response) => {
+    const user = await userService.updateUser(req.user.userId, req.body);
 
     res.status(StatusCodes.OK).json({ msg: user });
   },
