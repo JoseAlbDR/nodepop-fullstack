@@ -1,7 +1,8 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { authService } from '../services/authService';
 import { RegisterUserDTO } from '../dto/registerUserDto';
 import { StatusCodes } from 'http-status-codes';
+import { LoginUserDTO } from '../dto/loginUserDto';
 
 export const authController = {
   register: async (req: RegisterUserDTO, res: Response) => {
@@ -10,7 +11,9 @@ export const authController = {
     res.status(StatusCodes.CREATED).json({ msg: 'user created' });
   },
 
-  login: async (_req: Request, res: Response) => {
-    res.send(authService.login());
+  login: async (req: LoginUserDTO, res: Response) => {
+    const user = await authService.login(req.body);
+
+    res.status(StatusCodes.OK).json({ user });
   },
 };
