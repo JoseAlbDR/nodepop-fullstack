@@ -21,7 +21,9 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "dev": "cross-env DEBUG=nodepop-ts:* ts-node-dev --files src/index.ts",
+    "server": "cross-env DEBUG=nodepop-ts:* ts-node-dev --files src/index.ts",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \" npm run server\" \"npm run client\"",
     "lint": "eslint --ext .ts .",
     "start": "node build/index.js",
     "setup-project": "npm i && cd client && npm i"

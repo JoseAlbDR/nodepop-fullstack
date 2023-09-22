@@ -4,7 +4,7 @@ import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
 import fileUpload from 'express-fileupload';
-import cors from 'cors';
+// import cors from 'cors';
 import debug from 'debug';
 const serverDebug = debug('nodepop-ts:server');
 
@@ -25,7 +25,7 @@ import { authenticateUser } from './middleware/authMiddleware';
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
