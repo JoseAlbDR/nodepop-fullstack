@@ -3,8 +3,8 @@ import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 
 const userController = {
-  getCurrentUser: async (_req: Request, res: Response) => {
-    const user = await userService.getCurrentUser();
+  getCurrentUser: async (req: Request, res: Response) => {
+    const user = await userService.getCurrentUser(req.user.userId);
 
     res.status(StatusCodes.OK).json({ msg: user });
   },

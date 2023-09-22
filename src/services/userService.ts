@@ -1,6 +1,12 @@
+import mongoose from 'mongoose';
+import { User } from '../models/UserModel';
+
 const userService = {
-  getCurrentUser: async () => {
-    return 'get current user';
+  getCurrentUser: async (
+    userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
+  ) => {
+    const response = await User.findById(userId).select('-password');
+    return response;
   },
 
   updateUser: async () => {

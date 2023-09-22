@@ -3,8 +3,8 @@ import userController from '../controllers/userController';
 
 const router = express.Router();
 
-router.get('/showMe', userController.getCurrentUser);
-router.patch('/updateUser', userController.updateUser);
-router.get('/stats', userController.getApplicationStats);
+router.get('/current-user', userController.getCurrentUser);
+router.patch('/update-user', userController.updateUser);
+router.get('/admin/app-stats', userController.getApplicationStats);
 
 export default router;
