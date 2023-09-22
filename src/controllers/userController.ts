@@ -14,16 +14,16 @@ const userController = {
     // Remove password just in case...
     const obj = { ...req.body };
     delete obj.password;
-
+    console.log(obj);
     const user = await userService.updateUser(req.user.userId, obj);
 
     res.status(StatusCodes.OK).json({ msg: user });
   },
 
   getApplicationStats: async (_req: Request, res: Response) => {
-    const stats = await userService.getApplicationStats();
+    const { users, products } = await userService.getApplicationStats();
 
-    res.status(StatusCodes.OK).json({ msg: stats });
+    res.status(StatusCodes.OK).json({ users, products });
   },
 };
 

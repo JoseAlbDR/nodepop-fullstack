@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { User } from '../models/UserModel';
 import { IUpdateUser } from '../types/userInterfaces';
 import { NotFoundError } from '../errors';
+import { Product } from '../models/ProductModel';
 
 const userService = {
   getCurrentUser: async (
@@ -37,7 +38,10 @@ const userService = {
   },
 
   getApplicationStats: async () => {
-    return 'application stats';
+    const users = await User.countDocuments();
+    const products = await Product.countDocuments();
+
+    return { users, products };
   },
 };
 
