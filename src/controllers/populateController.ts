@@ -24,6 +24,7 @@ export const populateController = {
         price,
         image,
         tags,
+        createdBy: req.user.userId,
       };
       products.push(product);
     }
