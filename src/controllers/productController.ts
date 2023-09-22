@@ -23,8 +23,8 @@ const productController = {
   },
 
   createProduct: async (req: CreateProductDTO, res: Response) => {
+    req.body.createdBy = req.user.userId;
     const product = await productService.createProduct(req.body);
-
     res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
   },
 
