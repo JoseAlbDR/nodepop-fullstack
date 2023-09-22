@@ -6,11 +6,14 @@ export const checkPermissions = (
   requestUser: JWTPayload,
   resourceUserId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
 ) => {
-  console.log(requestUser);
-  console.log(resourceUserId);
-  console.log(typeof resourceUserId);
-  console.log(requestUser.userId === resourceUserId);
+  // console.log(requestUser);
+  // console.log(resourceUserId);
+  // console.log(typeof resourceUserId);
+  // console.log(requestUser.userId === resourceUserId);
+
   if (requestUser.role === 'admin') return;
+
+  // Check if the user created the resourze
   if (resourceUserId && typeof resourceUserId === 'object') {
     const userId = resourceUserId as mongoose.Types.ObjectId;
     if (requestUser.userId === userId.toString()) return;
