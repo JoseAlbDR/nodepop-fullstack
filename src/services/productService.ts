@@ -5,6 +5,9 @@ import _ from 'lodash';
 import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
 import mongoose from 'mongoose';
+import { JWTPayload } from '../types/authInterfaces';
+import { checkPermissions } from '../utils/checkPermissionsUtil';
+import { NotFoundError } from '../errors';
 
 const productService = {
   getAllProducts: async () => {
@@ -33,7 +36,16 @@ const productService = {
     return result;
   },
 
-  updateProduct: async (id: string, updates: IUpdateProduct) => {
+  updateProduct: async (
+    id: string,
+    updates: IUpdateProduct,
+    user: JWTPayload
+  ) => {
+    const product = await Product.findById(id);
+
+    if (!product) throw new NotFoundError(`Product with id ${id} not found`);
+    checkPermissions(user, product._id);
+
     const result = Product.findByIdAndUpdate(id, updates, {
       runValidators: true,
       new: true,
