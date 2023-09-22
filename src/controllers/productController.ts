@@ -16,7 +16,7 @@ const productController = {
     res.status(StatusCodes.OK).json({ products });
   },
 
-  getUserProdcuts: async (req: Request, res: Response) => {
+  getUserProducts: async (req: Request, res: Response) => {
     const products = await productService.getUserProducts(req.user.userId);
 
     res.status(StatusCodes.OK).json({ products });
