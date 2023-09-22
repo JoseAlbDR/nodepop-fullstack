@@ -8,6 +8,14 @@ const userService = {
     userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
   ) => {
     const response = await User.findById(userId).select('-password');
+
+    if (!response)
+      throw new NotFoundError(
+        `User with ${(
+          userId as mongoose.Types.ObjectId
+        ).toString()} does not found`
+      );
+
     return response;
   },
 
