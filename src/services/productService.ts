@@ -4,6 +4,7 @@ import _ from 'lodash';
 // Model, interfaces
 import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
+import mongoose from 'mongoose';
 
 const productService = {
   getAllProducts: async () => {
@@ -14,13 +15,21 @@ const productService = {
     return results;
   },
 
+  getUserProducts: async (userId: mongoose.Types.ObjectId) => {
+    const products = await Product.find({ createdBy: userId });
+    return products;
+  },
+
   createProduct: async (product: IProduct) => {
     const result = await Product.create(product);
     return result;
   },
 
   getOneProduct: async (id: string) => {
-    const result = await Product.findById(id);
+    const result = await Product.findById(id).populate({
+      path: 'createdBy',
+      select: 'name email',
+    });
     return result;
   },
 
@@ -29,6 +38,7 @@ const productService = {
       runValidators: true,
       new: true,
     });
+
     return result;
   },
 

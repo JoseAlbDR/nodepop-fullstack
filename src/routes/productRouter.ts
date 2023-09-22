@@ -15,6 +15,7 @@ router
   .get(productController.getAllProducts)
   .post(validateProductCreation, productController.createProduct);
 
+router.get('/userProducts', productController.getUserProdcuts);
 router.get('/tags', productController.getAllTags);
 router.post(
   '/uploadImage',
