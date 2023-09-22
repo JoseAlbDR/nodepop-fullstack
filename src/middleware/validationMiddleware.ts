@@ -125,7 +125,6 @@ export const validateProductCreation = [
 export const validateProductUpdate = [
   body('name')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('name is required')
     .isString()
@@ -135,7 +134,6 @@ export const validateProductUpdate = [
 
   body('onSale')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('onSale is required')
     .isBoolean()
@@ -143,7 +141,6 @@ export const validateProductUpdate = [
 
   body('price')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('price is required')
     .isFloat({ min: 0 })
@@ -151,7 +148,6 @@ export const validateProductUpdate = [
 
   body('image')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('image is required')
     .isString()
@@ -160,7 +156,6 @@ export const validateProductUpdate = [
     .withMessage('image must be between 3 and 50 characters'),
 
   body('tags')
-    .optional()
     .notEmpty()
     .withMessage('tags is required')
     .custom((tags: string[]) => validateTags(tags))
@@ -252,7 +247,6 @@ export const validateLoginUser = [
 export const validateUpdateUser = [
   body('name')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('name is required')
     .isString()
@@ -262,8 +256,6 @@ export const validateUpdateUser = [
 
   body('lastName')
     .trim()
-    .optional()
-    .optional()
     .notEmpty()
     .withMessage('last name cannot be empty')
     .isString()
@@ -271,16 +263,13 @@ export const validateUpdateUser = [
 
   body('email')
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('email is required')
     .isEmail()
     .withMessage('email must be a valid email address'),
 
   body('location')
-    .optional()
     .trim()
-    .optional()
     .notEmpty()
     .withMessage('location cannot be empty')
     .isString()
