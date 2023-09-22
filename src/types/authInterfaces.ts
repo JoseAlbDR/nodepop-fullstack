@@ -17,6 +17,7 @@ export type ILoginUser = Omit<IUser, 'name' | 'lastName' | 'location' | 'role'>;
 export interface ITokenPayload extends JwtPayload {
   userId: mongoose.Types.ObjectId;
   role: Role;
+  email: string;
   iat: number;
   exp: number;
 }

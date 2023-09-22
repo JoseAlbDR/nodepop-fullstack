@@ -8,6 +8,7 @@ declare global {
       user: {
         userId: mongoose.Types.ObjectId;
         role: Role;
+        email: string;
       };
     }
   }

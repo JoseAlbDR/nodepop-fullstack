@@ -30,7 +30,7 @@ app.use(fileUpload());
 
 // Routes
 app.use('/api/v1/products', authenticateUser, productsRouter);
-app.use('/api/v1/populate', populateRouter);
+app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/auth', authRouter);
 
 // Middlewares

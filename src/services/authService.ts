@@ -28,7 +28,11 @@ export const authService = {
     if (!isPasswordCorrect)
       throw new UnauthenticatedError('Incorrect password');
 
-    const token = createJWT({ userId: user._id, role: user.role });
+    const token = createJWT({
+      userId: user._id,
+      role: user.role,
+      email: user.email,
+    });
 
     return token;
   },

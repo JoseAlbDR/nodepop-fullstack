@@ -5,7 +5,7 @@ import { hashPassword } from '../utils/hashPasswordUtil';
 const UserSchema = new mongoose.Schema(
   {
     name: String,
-    email: { type: String, unique: true },
+    email: { type: String, required: true, unique: true },
     password: { type: String, required: [true, 'password is required'] },
     lastName: {
       type: String,

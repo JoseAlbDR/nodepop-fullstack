@@ -12,6 +12,7 @@ import { UpdateProductDTO } from '../dto/updateProductDto';
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
     console.log(req.user);
+
     const products = await productService.getAllProducts();
 
     res.status(StatusCodes.OK).json({ products });
