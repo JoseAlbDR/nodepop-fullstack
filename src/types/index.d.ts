@@ -6,7 +6,7 @@ declare global {
   namespace Express {
     interface Request {
       user: {
-        userId: mongoose.Types.ObjectId;
+        userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
         role: Role;
         email: string;
       };

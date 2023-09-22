@@ -8,7 +8,7 @@ export interface IProduct {
   price: number;
   image: string;
   tags: ITags[];
-  createdBy: mongoose.Types.ObjectId;
+  createdBy: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
 }
 
 export interface IUpdateProduct extends Partial<IProduct> {}

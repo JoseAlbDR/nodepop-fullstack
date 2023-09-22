@@ -18,7 +18,9 @@ const productService = {
     return results;
   },
 
-  getUserProducts: async (userId: mongoose.Types.ObjectId) => {
+  getUserProducts: async (
+    userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
+  ) => {
     const products = await Product.find({ createdBy: userId });
     return products;
   },
@@ -44,7 +46,8 @@ const productService = {
     const product = await Product.findById(id);
 
     if (!product) throw new NotFoundError(`Product with id ${id} not found`);
-    checkPermissions(user, product._id);
+
+    checkPermissions(user, product.createdBy);
 
     const result = Product.findByIdAndUpdate(id, updates, {
       runValidators: true,
