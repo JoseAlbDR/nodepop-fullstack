@@ -1,11 +1,11 @@
-import { JWTPayload } from './../types/authInterfaces';
+import { JWTPayload } from '../types/authInterfaces';
 import mongoose from 'mongoose';
 import { BadRequestError, NotFoundError } from '../errors';
 import { Product } from '../models/ProductModel';
 import { Request } from 'express-validator/src/base';
 import { checkPermissions } from './checkPermissionsUtil';
 
-export const validateOneProductMutation = async (
+export const validateProductGetDeleteUpdate = async (
   value: string,
   req: Request
 ) => {

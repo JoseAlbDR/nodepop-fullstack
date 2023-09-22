@@ -2,7 +2,7 @@ import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { UploadedFile } from 'express-fileupload';
-import { validateOneProductMutation } from '../utils/validateOneProductMutation';
+import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
 import { tagsValidationMessage, validateTags } from '../utils/validateTags';
 
 export const requestValidator = (
@@ -72,7 +72,7 @@ export const validateIdParam = [
     .withMessage('id cannot be empty')
     .custom(
       async (value: string, { req }) =>
-        await validateOneProductMutation(value, req)
+        await validateProductGetDeleteUpdate(value, req)
     ),
   requestValidator,
 ];
