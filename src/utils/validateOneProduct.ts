@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { BadRequestError, NotFoundError } from '../errors';
 import { Product } from '../models/ProductModel';
 
-export const validateGetOneProduct = async (value: string) => {
+export const validateOneProductPatchDelete = async (value: string) => {
   const isValid = mongoose.Types.ObjectId.isValid(value);
 
   if (!isValid) throw new BadRequestError(`${value} is not a valid MongoDB id`);
