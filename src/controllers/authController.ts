@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { authService } from '../services/authService';
 import { RegisterUserDTO } from '../dto/registerUserDto';
 import { StatusCodes } from 'http-status-codes';
@@ -24,5 +24,14 @@ export const authController = {
     });
 
     res.status(StatusCodes.OK).json({ msg: 'user logged in' });
+  },
+
+  logout: async (_req: Request, res: Response) => {
+    res.cookie('token', 'logout', {
+      httpOnly: true,
+      expires: new Date(Date.now()),
+    });
+
+    res.status(StatusCodes.OK).json({ msg: 'user logged out' });
   },
 };
