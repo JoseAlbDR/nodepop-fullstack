@@ -170,6 +170,14 @@ export const validateRegisterUser = [
     .isLength({ min: 3 })
     .withMessage('name must be at least 3 characters long'),
 
+  body('lastName')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('last name cannot be empty')
+    .isString()
+    .withMessage('last name must be a string'),
+
   body('email')
     .trim()
     .notEmpty()
@@ -182,16 +190,24 @@ export const validateRegisterUser = [
     .notEmpty()
     .withMessage('password is required')
     .isStrongPassword({
-      minLength: 9,
+      minLength: 8,
       minUppercase: 1,
       minNumbers: 1,
       minLowercase: 1,
       minSymbols: 1,
     })
     .withMessage(
-      (pass) =>
-        `Password: ${pass}, must be at least 9 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
+      `Password must be at least 8 characters long and contains: one uppercase letter, one 
+      lowercase letter, one number and one symbol`
     ),
+
+  body('location')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('location cannot be empty')
+    .isString()
+    .withMessage('location must be a string'),
 
   requestValidator,
 ];
