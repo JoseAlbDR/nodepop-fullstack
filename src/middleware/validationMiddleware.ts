@@ -211,7 +211,7 @@ export const validateRegisterUser = [
   requestValidator,
 ];
 
-export const validateLoginUser = () => [
+export const validateLoginUser = [
   body('email')
     .trim()
     .notEmpty()
