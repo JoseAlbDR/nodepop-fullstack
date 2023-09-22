@@ -23,7 +23,7 @@ export const authController = {
       signed: true,
     });
 
-    res.status(StatusCodes.OK).json({ msg: 'user logged out' });
+    res.status(StatusCodes.OK).json({ msg: 'user logged in' });
   },
 
   logout: async (_req: Request, res: Response) => {
