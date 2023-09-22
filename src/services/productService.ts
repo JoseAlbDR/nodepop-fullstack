@@ -7,7 +7,10 @@ import { IProduct, IUpdateProduct } from '../types/productInterfaces';
 
 const productService = {
   getAllProducts: async () => {
-    const results = await Product.find({}).sort('-createdAt');
+    const results = await Product.find({}).populate({
+      path: 'createdBy',
+      select: 'name email',
+    });
     return results;
   },
 
