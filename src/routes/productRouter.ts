@@ -7,18 +7,35 @@ import {
   validateIdParam,
   validateProductUpdate,
 } from '../middleware/validationMiddleware';
+import { authorizePermissions } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(productController.getAllProducts)
-  .post(validateProductCreation, productController.createProduct);
+  .get([
+    authorizePermissions('user', 'admin'),
+    productController.getAllProducts,
+  ])
+  .post(
+    authorizePermissions('user', 'admin'),
+    validateProductCreation,
+    productController.createProduct
+  );
 
-router.get('/userProducts', productController.getUserProducts);
-router.get('/tags', productController.getAllTags);
+router.get('/userProducts', [
+  authorizePermissions('user', 'admin'),
+  productController.getUserProducts,
+]);
+
+router.get('/tags', [
+  authorizePermissions('user', 'admin'),
+  productController.getAllTags,
+]);
+
 router.post(
   '/uploadImage',
+  authorizePermissions('user', 'admin'),
   validateUploadedFiles,
   uploadsController.uploadProductImage
 );
