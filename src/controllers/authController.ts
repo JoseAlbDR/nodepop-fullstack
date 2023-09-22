@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { authService } from '../services/authService';
-import { RegisterUserDTO } from '../dto/registerUserDto';
+import { RegisterUserDTO } from '../dtos/registerUserDto';
 import { StatusCodes } from 'http-status-codes';
-import { LoginUserDTO } from '../dto/loginUserDto';
+import { LoginUserDTO } from '../dtos/loginUserDto';
 
 export const authController = {
   register: async (req: RegisterUserDTO, res: Response) => {

@@ -6,8 +6,8 @@ import { StatusCodes } from 'http-status-codes';
 import productService from '../services/productService';
 
 // DTOS, Interfaces
-import { CreateProductDTO } from '../dto/createProductDto';
-import { UpdateProductDTO } from '../dto/updateProductDto';
+import { CreateProductDTO } from '../dtos/createProductDto';
+import { UpdateProductDTO } from '../dtos/updateProductDto';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
