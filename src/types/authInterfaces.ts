@@ -21,3 +21,9 @@ export interface ITokenPayload extends JwtPayload {
   iat: number;
   exp: number;
 }
+
+export type JWTPayload = {
+  userId: mongoose.Types.ObjectId;
+  role: Role;
+  email: string;
+};

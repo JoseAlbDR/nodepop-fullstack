@@ -1,12 +1,5 @@
 import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
-import { Role } from '../types/authInterfaces';
-
-type JWTPayload = {
-  userId: mongoose.Types.ObjectId;
-  role: Role;
-  email: string;
-};
+import { JWTPayload } from '../types/authInterfaces';
 
 export const createJWT = (payload: JWTPayload) => {
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
