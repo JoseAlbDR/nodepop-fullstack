@@ -3,7 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { UploadedFile } from 'express-fileupload';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
-import { tagsValidationMessage, validateTags } from '../utils/validateTags';
+import {
+  tagsValidationMessage,
+  validateTags,
+} from '../utils/validateTagsUtils';
 
 export const requestValidator = (
   req: Request,
@@ -241,6 +244,47 @@ export const validateLoginUser = [
     .withMessage(
       `Password must be at least 8 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
     ),
+
+  requestValidator,
+];
+
+// User Validation
+export const validateUpdateUser = [
+  body('name')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('name is required')
+    .isString()
+    .withMessage('name must be a string')
+    .isLength({ min: 3 })
+    .withMessage('name must be at least 3 characters long'),
+
+  body('lastName')
+    .trim()
+    .optional()
+    .optional()
+    .notEmpty()
+    .withMessage('last name cannot be empty')
+    .isString()
+    .withMessage('last name must be a string'),
+
+  body('email')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('email is required')
+    .isEmail()
+    .withMessage('email must be a valid email address'),
+
+  body('location')
+    .optional()
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('location cannot be empty')
+    .isString()
+    .withMessage('location must be a string'),
 
   requestValidator,
 ];
