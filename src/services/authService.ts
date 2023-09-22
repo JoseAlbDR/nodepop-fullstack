@@ -1,4 +1,3 @@
-import { NotFoundError } from '../errors';
 import { User } from '../models/UserModel';
 import { ILoginUser, IUser } from '../types/authInterfaces';
 import { UnauthenticatedError } from '../errors/unauthenticatedError';
@@ -19,7 +18,9 @@ export const authService = {
     const user = await User.findOne({ email: email });
 
     if (!user)
-      throw new NotFoundError(`User with email ${loginData.email} not found`);
+      throw new UnauthenticatedError(
+        `User with email ${loginData.email} not found`
+      );
 
     const isPasswordCorrect = await user.checkPassword(password);
 
