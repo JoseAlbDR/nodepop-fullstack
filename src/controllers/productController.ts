@@ -48,7 +48,10 @@ const productController = {
   },
 
   deleteProduct: async (req: Request, res: Response) => {
-    const removedProduct = await productService.deleteProduct(req.params.id);
+    const removedProduct = await productService.deleteProduct(
+      req.params.id,
+      req.user
+    );
 
     res
       .status(StatusCodes.OK)

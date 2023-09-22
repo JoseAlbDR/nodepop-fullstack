@@ -57,7 +57,13 @@ const productService = {
     return result;
   },
 
-  deleteProduct: async (id: string) => {
+  deleteProduct: async (id: string, user: JWTPayload) => {
+    const product = await Product.findById(id);
+
+    if (!product) throw new NotFoundError(`Product with id ${id} not found`);
+
+    checkPermissions(user, product.createdBy);
+
     const result = await Product.findByIdAndDelete(id);
     return result;
   },
