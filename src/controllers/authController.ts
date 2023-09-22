@@ -5,9 +5,9 @@ import { StatusCodes } from 'http-status-codes';
 
 export const authController = {
   register: async (req: RegisterUserDTO, res: Response) => {
-    const user = await authService.register(req.body);
+    await authService.register(req.body);
 
-    res.status(StatusCodes.CREATED).json({ msg: 'user created', user });
+    res.status(StatusCodes.CREATED).json({ msg: 'user created' });
   },
 
   login: async (_req: Request, res: Response) => {
