@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { faker } from '@faker-js/faker';
 import { IProduct } from '../types/productInterfaces';
-import { randomBoolean } from '../utils/randomBoolean';
-import { getRandomTags } from '../utils/randomTags';
+import { randomBoolean } from '../utils/randomBooleanUtil';
+import { getRandomTags } from '../utils/randomTagsUtil';
 import populateService from '../services/populateService';
 import { StatusCodes } from 'http-status-codes';
 

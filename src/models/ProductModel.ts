@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { TAGS } from '../utils/constants';
+import { TAGS } from '../utils/constantsUtil';
 
 const ProductSchema = new mongoose.Schema(
   {

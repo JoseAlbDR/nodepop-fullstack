@@ -1,4 +1,4 @@
-import { TAGS } from './constants';
+import { TAGS } from './constantsUtil';
 
 export const validateTags = (tags: string[]) => {
   if (!Array.isArray(tags)) return false;
