@@ -9,20 +9,4 @@ export interface IUser {
   role: Role;
 }
 
-// name: String,
-//   email: String,
-//   password: String,
-//   lastName: {
-//     type: String,
-//     default: 'lastName',
-//   },
-//   location: {
-//     type: String,
-//     default: 'my city',
-//   },
-//   role: {
-//     type: String,
-//     enum: ['user', 'admin'],
-//     default: 'user',
-//   },
-// });
+export type ILoginUser = Omit<IUser, 'name' | 'lastName' | 'location' | 'role'>;
