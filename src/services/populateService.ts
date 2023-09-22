@@ -3,7 +3,7 @@ import { IProduct } from '../types/productInterfaces';
 
 const populateService = {
   populateDatabase: async (products: IProduct[]) => {
-    await Product.deleteMany();
+    // await Product.deleteMany();
 
     const createdProducts = await Product.insertMany(products);
 
