@@ -14,6 +14,7 @@ import { dbConnect } from './db/dbConnect';
 import productsRouter from './routes/productRouter';
 import populateRouter from './routes/populateDatabaseRouter';
 import authRouter from './routes/authRouter';
+import userRouter from './routes/userRouter';
 
 // Middlewares
 import notFoundMiddleware from './middleware/notFoundMiddleware';
@@ -32,6 +33,7 @@ app.use(fileUpload());
 app.use('/api/v1/products', authenticateUser, productsRouter);
 app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
 
 // Middlewares
 app.use(notFoundMiddleware);
