@@ -12,8 +12,8 @@ export const authController = {
   },
 
   login: async (req: LoginUserDTO, res: Response) => {
-    const user = await authService.login(req.body);
+    const token = await authService.login(req.body);
 
-    res.status(StatusCodes.OK).json({ user });
+    res.status(StatusCodes.OK).json({ token });
   },
 };

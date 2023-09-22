@@ -1,6 +1,7 @@
 import { User } from '../models/UserModel';
 import { ILoginUser, IUser } from '../types/authInterfaces';
 import { UnauthenticatedError } from '../errors/unauthenticatedError';
+import { createJWT } from '../utils/jwtUtils';
 
 export const authService = {
   register: async (user: IUser) => {
@@ -27,6 +28,8 @@ export const authService = {
     if (!isPasswordCorrect)
       throw new UnauthenticatedError('Incorrect password');
 
-    return user;
+    const token = createJWT({ userId: user._id, role: user.role });
+
+    return token;
   },
 };

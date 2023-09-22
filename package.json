@@ -37,6 +37,7 @@
   "homepage": "https://github.com/JoseAlbDR/nodepop-backend-ts#readme",
   "dependencies": {
     "@faker-js/faker": "^8.1.0",
+    "@types/jsonwebtoken": "^9.0.3",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.1",
