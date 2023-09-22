@@ -65,7 +65,10 @@ export const validateIdParam = [
   param('id')
     .notEmpty()
     .withMessage('id cannot be empty')
-    .custom(async (value: string) => await validateOneProductMutation(value)),
+    .custom(
+      async (value: string, { req }) =>
+        await validateOneProductMutation(value, req)
+    ),
   requestValidator,
 ];
 

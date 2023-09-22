@@ -38,8 +38,7 @@ const productController = {
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
     const updatedProduct = await productService.updateProduct(
       req.params.id,
-      req.body,
-      req.user
+      req.body
     );
 
     res
@@ -48,10 +47,7 @@ const productController = {
   },
 
   deleteProduct: async (req: Request, res: Response) => {
-    const removedProduct = await productService.deleteProduct(
-      req.params.id,
-      req.user
-    );
+    const removedProduct = await productService.deleteProduct(req.params.id);
 
     res
       .status(StatusCodes.OK)
