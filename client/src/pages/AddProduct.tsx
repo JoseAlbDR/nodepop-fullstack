@@ -1,13 +1,11 @@
 import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 // import { useDashboard } from '../context/DashboardContext';
-import { FormRow } from '../components';
+import { FormRow, FormSelect, FormTags } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
-import FormSelect from '../components/FormSelect';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
-import FormTags from '../components/FormTags';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
