@@ -3,10 +3,12 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { useState } from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import StyledLogout from '../assets/wrappers/Logout';
+import { useNavigate } from 'react-router-dom';
 
 const LogoutContainer = () => {
   const [showLogout, setShowLogut] = useState(false);
   const { user, logoutUser } = useDashboard();
+  const navigate = useNavigate();
 
   return (
     <StyledLogout>
@@ -20,7 +22,11 @@ const LogoutContainer = () => {
         <IoIosArrowDown />
       </button>
       <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
-        <button type="button" className="dropdown-btn" onClick={logoutUser}>
+        <button
+          type="button"
+          className="dropdown-btn"
+          onClick={() => logoutUser(navigate)}
+        >
           logout
         </button>
       </div>

@@ -3,7 +3,7 @@ import { checkDefaultTheme } from '../App';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import customFetch from '../utils/customFetch';
-import { redirect, useLoaderData } from 'react-router-dom';
+import { NavigateFunction, useLoaderData } from 'react-router-dom';
 import { IUser, IUserData } from '../types/UserInterface';
 
 interface DashboardContextValues {
@@ -12,7 +12,7 @@ interface DashboardContextValues {
   isDarkTheme: boolean;
   toggleDarkTheme: () => void;
   toggleSidebar: () => void;
-  logoutUser: () => Promise<void>;
+  logoutUser: (navigate: NavigateFunction) => Promise<void>;
 }
 
 const DashboardContext = createContext<DashboardContextValues | undefined>(
@@ -37,20 +37,20 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = async () => {
+  const logoutUser = async (navigate: NavigateFunction) => {
     try {
       const {
         data: { msg },
       } = await customFetch('/auth/logout');
       toast.success(msg);
-      redirect('/');
+      navigate('/');
     } catch (error) {
+      console.log(error);
       if (error instanceof AxiosError) {
         toast.error(error?.response?.data?.msg);
       }
       throw error;
     }
-    console.log('logout user');
   };
 
   return (

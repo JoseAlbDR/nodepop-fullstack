@@ -44,21 +44,21 @@ const Register = () => {
           type="text"
           name="name"
           labelText="name"
-          defaultValue="yusep"
+          defaultValue="Jose Alberto"
           disabled={isSubmitting}
         />
         <FormRow
           type="text"
           name="lastName"
           labelText="last name"
-          defaultValue="delgado"
+          defaultValue="Delgado Robles"
           disabled={isSubmitting}
         />
         <FormRow
           type="text"
           name="location"
           labelText="location"
-          defaultValue="granada"
+          defaultValue="Granada"
           disabled={isSubmitting}
         />
         <FormRow
