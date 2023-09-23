@@ -7,6 +7,8 @@ import FormSelect from '../components/FormSelect';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
+import { useTags } from '../hooks/useTags';
+import { ITags } from '../../../src/types/productInterfaces';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
@@ -42,6 +44,9 @@ const AddProduct = () => {
   // const { user } = useDashboard();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+  const { data, isLoading: isLoadingTags } = useTags();
+
+  if (isLoadingTags) return;
 
   return (
     <StyledAddProduct>
@@ -74,7 +79,7 @@ const AddProduct = () => {
             <div className="form-row">
               <label className="form-label">tags</label>
               <fieldset className="form-tags">
-                {TAGS.map((tag, index) => (
+                {data.tags.map((tag: ITags, index: number) => (
                   <label key={tag}>
                     <input
                       type="checkbox"
