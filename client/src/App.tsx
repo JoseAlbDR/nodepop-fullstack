@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import {
   DashboardLayout,
   ErrorPage,
@@ -15,6 +16,7 @@ import {
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { action as addProductAction } from './pages/AddProduct';
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
   document.body.classList.toggle('dark-theme', isDarkTheme);
@@ -51,6 +53,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AddProduct />,
+            action: addProductAction,
           },
           {
             path: 'stats',

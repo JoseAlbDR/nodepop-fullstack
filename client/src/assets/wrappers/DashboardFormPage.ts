@@ -17,6 +17,7 @@ const Wrapper = styled.section`
   }
 
   .form-row {
+    align-self: end;
     margin-bottom: 0;
   }
 
@@ -30,6 +31,8 @@ const Wrapper = styled.section`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
 
     label {
       text-transform: capitalize;

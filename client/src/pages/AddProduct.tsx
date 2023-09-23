@@ -1,16 +1,47 @@
-import { Form, useNavigation } from 'react-router-dom';
+import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
-import { useDashboard } from '../context/DashboardContext';
+// import { useDashboard } from '../context/DashboardContext';
 import { FormRow } from '../components';
 import { TAGS, TYPE } from '../../../src/utils/constantsUtil';
 import FormSelect from '../components/FormSelect';
-import React from 'react';
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
+import { AxiosError } from 'axios';
+
+export const action = async (data: ActionFunctionArgs) => {
+  const { request } = data;
+  const formData = await request.formData();
+  const tags = formData.getAll('tags');
+  const type = formData.get('type');
+  if (tags.length === 0) {
+    toast.error('Select at least one tag!');
+    return null;
+  }
+  const addProductData = Object.fromEntries(formData);
+  try {
+    const {
+      data: { msg },
+    } = await customFetch.post('/products', {
+      ...addProductData,
+      onSale: type === 'on sale',
+      tags,
+    });
+    console.log(msg);
+    toast.success(msg);
+    return null;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      toast.error(error?.response?.data?.msg);
+    }
+    console.log(error);
+    return error;
+  }
+};
 
 const AddProduct = () => {
-  const { user } = useDashboard();
+  // const { user } = useDashboard();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  console.log(user);
 
   return (
     <StyledAddProduct>
@@ -42,7 +73,7 @@ const AddProduct = () => {
             /> */}
             <div className="form-row">
               <label className="form-label">tags</label>
-              <div className="form-tags">
+              <fieldset className="form-tags">
                 {TAGS.map((tag, index) => (
                   <label key={tag}>
                     <input
@@ -55,7 +86,7 @@ const AddProduct = () => {
                     {tag}
                   </label>
                 ))}
-              </div>
+              </fieldset>
             </div>
             <FormRow
               type="text"
