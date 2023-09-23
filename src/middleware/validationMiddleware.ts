@@ -226,20 +226,17 @@ export const validateLoginUser = [
     .isEmail()
     .withMessage('email must be a valid email address'),
 
-  body('password')
-    .trim()
-    .notEmpty()
-    .withMessage('password is required')
-    .isStrongPassword({
-      minLength: 8,
-      minUppercase: 1,
-      minNumbers: 1,
-      minLowercase: 1,
-      minSymbols: 1,
-    })
-    .withMessage(
-      `Password must be at least 8 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
-    ),
+  body('password').trim().notEmpty().withMessage('password is required'),
+  // .isStrongPassword({
+  //   minLength: 8,
+  //   minUppercase: 1,
+  //   minNumbers: 1,
+  //   minLowercase: 1,
+  //   minSymbols: 1,
+  // })
+  // .withMessage(
+  //   `Password must be at least 8 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
+  // ),
 
   requestValidator,
 ];
