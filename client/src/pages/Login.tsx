@@ -1,11 +1,34 @@
-import { Link } from 'react-router-dom';
+import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
 import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow } from '../components';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
+
+export const action = async (data: ActionFunctionArgs) => {
+  const { request } = data;
+  const formData = await request.formData();
+  const loginData = Object.fromEntries(formData);
+
+  try {
+    const {
+      data: { msg },
+    } = await customFetch.post('/auth/login', loginData);
+    toast.success(msg);
+    return redirect('/');
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      toast.error(error.response!.data.msg!);
+    }
+    console.log(error);
+    return error;
+  }
+};
 
 const Login = () => {
   return (
     <StyledLogin>
-      <form className="form">
+      <Form method="post" className="form">
         <Logo />
         <h4>Login</h4>
         <FormRow
@@ -29,7 +52,7 @@ const Login = () => {
         <p>
           Not a member yet?<Link to="/register">Register</Link>
         </p>
-      </form>
+      </Form>
     </StyledLogin>
   );
 };
