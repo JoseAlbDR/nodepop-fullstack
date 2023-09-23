@@ -7,7 +7,7 @@ const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
     const user = await userService.getCurrentUser(req.user.userId);
 
-    res.status(StatusCodes.OK).json({ msg: user });
+    res.status(StatusCodes.OK).json({ user });
   },
 
   updateUser: async (req: UpdateUserDTO, res: Response) => {
