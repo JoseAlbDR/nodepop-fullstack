@@ -25,6 +25,10 @@ const Wrapper = styled.section`
     height: 35px;
   }
 
+  select {
+    text-transform: capitalize;
+  }
+
   @media (width > 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;
