@@ -1,4 +1,12 @@
-const AllJobs = () => {
-  return <h1>All Products</h1>;
+import { useProducts } from '../hooks/useProducts';
+import StyledAllProducts from '../assets/wrappers/AllProductsPage';
+const AllProducts = () => {
+  const { data, isLoading } = useProducts();
+
+  if (isLoading) return;
+
+  console.log(data);
+
+  return <StyledAllProducts></StyledAllProducts>;
 };
-export default AllJobs;
+export default AllProducts;

@@ -2,7 +2,7 @@ interface IFormSelectProps {
   name: string;
   types: string[];
 }
-const FormSelect = ({ name, types }: IFormSelectProps) => {
+const FormRowSelect = ({ name, types }: IFormSelectProps) => {
   return (
     <div className="form-row">
       <label className="form-label" htmlFor={name}>
@@ -19,4 +19,4 @@ const FormSelect = ({ name, types }: IFormSelectProps) => {
   );
 };
 
-export default FormSelect;
+export default FormRowSelect;

@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 // import { useDashboard } from '../context/DashboardContext';
-import { FormRow, FormSelect, FormTags } from '../components';
+import { FormRow, FormRowSelect, FormRowTags } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -60,8 +60,8 @@ const AddProduct = () => {
               defaultValue="300"
               disabled={isSubmitting}
             />
-            <FormSelect name="type" types={TYPE} />
-            <FormTags />
+            <FormRowSelect name="type" types={TYPE} />
+            <FormRowTags />
             <FormRow
               type="text"
               name="image"

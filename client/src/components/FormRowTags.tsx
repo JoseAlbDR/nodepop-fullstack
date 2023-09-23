@@ -1,7 +1,7 @@
 import { ITags } from '../../../src/types/productInterfaces';
 import { useTags } from '../hooks/useTags';
 
-const FormTags = () => {
+const FormRowTags = () => {
   const { data, isLoading: isLoadingTags } = useTags();
   if (isLoadingTags) return;
   return (
@@ -25,4 +25,4 @@ const FormTags = () => {
   );
 };
 
-export default FormTags;
+export default FormRowTags;
