@@ -3,4 +3,5 @@ export interface IFormRowProps {
   name: string;
   labelText: string;
   defaultValue: string;
+  disabled?: boolean;
 }

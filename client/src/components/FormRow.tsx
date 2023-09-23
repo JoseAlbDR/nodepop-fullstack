@@ -1,6 +1,12 @@
 import { IFormRowProps } from '../types/FormRow';
 
-const FormRow = ({ type, name, labelText, defaultValue }: IFormRowProps) => {
+const FormRow = ({
+  type,
+  name,
+  labelText,
+  defaultValue,
+  disabled,
+}: IFormRowProps) => {
   return (
     <div className="form-row">
       <label className="form-label" htmlFor={name}>
@@ -12,6 +18,7 @@ const FormRow = ({ type, name, labelText, defaultValue }: IFormRowProps) => {
         id={name}
         name={name}
         defaultValue={defaultValue || ''}
+        disabled={disabled}
         required
       />
     </div>

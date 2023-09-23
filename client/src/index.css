@@ -266,6 +266,10 @@ button:disabled {
   margin-bottom: 1rem;
 }
 
+.form-input:disabled {
+  background: var(--grey-500);
+}
+
 .form-textarea {
   height: 7rem;
 }

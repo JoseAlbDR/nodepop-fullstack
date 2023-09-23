@@ -8,15 +8,24 @@ import {
 import StyledRegister from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow } from '../components';
 import customFetch from '../utils/customFetch.ts';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
   const formData = await request.formData();
   const registerData = Object.fromEntries(formData);
   try {
-    await customFetch.post('/auth/register', registerData);
+    const {
+      data: { msg },
+    } = await customFetch.post('/auth/register', registerData);
+    console.log(msg);
+    toast.success(msg);
     return redirect('/login');
   } catch (error) {
+    if (error instanceof AxiosError) {
+      toast.error(error.response!.data.msg!);
+    }
     console.log(error);
     return error;
   }
@@ -36,30 +45,35 @@ const Register = () => {
           name="name"
           labelText="name"
           defaultValue="yusep"
+          disabled={isSubmitting}
         />
         <FormRow
           type="text"
           name="lastName"
           labelText="last name"
           defaultValue="delgado"
+          disabled={isSubmitting}
         />
         <FormRow
           type="text"
           name="location"
           labelText="location"
           defaultValue="granada"
+          disabled={isSubmitting}
         />
         <FormRow
           type="email"
           name="email"
           labelText="email"
           defaultValue="jaderodev@gmail.com"
+          disabled={isSubmitting}
         />
         <FormRow
           type="password"
           name="password"
           labelText="password"
           defaultValue="M5e5k5i57."
+          disabled={isSubmitting}
         />
         <button type="submit" className="btn btn-block" disabled={isSubmitting}>
           {isSubmitting ? 'submitting...' : 'submit'}
