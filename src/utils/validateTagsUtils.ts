@@ -1,6 +1,7 @@
 import { TAGS } from './constantsUtil';
 
 export const validateTags = (tags: string[]) => {
+  if (tags.length === 0) return false;
   if (!Array.isArray(tags)) return false;
   // Validate tags in array
   const allTagsValid = tags.every((tag: string) => TAGS.includes(tag));

@@ -194,13 +194,14 @@ export const validateRegisterUser = [
     .trim()
     .notEmpty()
     .withMessage('password is required')
-    .isStrongPassword({
-      minLength: 8,
-      // minUppercase: 1,
-      // minNumbers: 1,
-      // minLowercase: 1,
-      // minSymbols: 1,
-    })
+    .isLength({ min: 8 })
+    // .isStrongPassword({
+    //   minLength: 8,
+    //   // minUppercase: 1,
+    //   // minNumbers: 1,
+    //   // minLowercase: 1,
+    //   // minSymbols: 1,
+    // })
     .withMessage('Password must be at least 8 characters long'),
   // .withMessage(
   //   `Password must be at least 8 characters long and contains: one uppercase letter, one
