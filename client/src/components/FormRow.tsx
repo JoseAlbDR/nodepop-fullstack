@@ -16,6 +16,7 @@ const FormRow = ({
         className="form-input"
         type={type}
         id={name}
+        min={type === 'number' ? 0 : ''}
         name={name}
         defaultValue={defaultValue || ''}
         disabled={disabled}
