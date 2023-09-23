@@ -1,4 +1,10 @@
-import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  Link,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow } from '../components';
 import { AxiosError } from 'axios';
@@ -9,16 +15,15 @@ export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
   const formData = await request.formData();
   const loginData = Object.fromEntries(formData);
-
   try {
     const {
       data: { msg },
     } = await customFetch.post('/auth/login', loginData);
     toast.success(msg);
-    return redirect('/');
+    return redirect('/dashboard');
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast.error(error.response!.data.msg!);
+      toast.error(error?.response?.data?.msg);
     }
     console.log(error);
     return error;
@@ -26,6 +31,8 @@ export const action = async (data: ActionFunctionArgs) => {
 };
 
 const Login = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
   return (
     <StyledLogin>
       <Form method="post" className="form">
@@ -36,17 +43,19 @@ const Login = () => {
           name="email"
           labelText="email"
           defaultValue="jaderodev@gmail.com"
+          disabled={isSubmitting}
         />
         <FormRow
           type="password"
           name="password"
           labelText="password"
           defaultValue="M5e5k5i57."
+          disabled={isSubmitting}
         />
-        <button type="submit" className="btn btn-block">
-          submit
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+          {isSubmitting ? 'submitting...' : 'submit'}
         </button>
-        <button type="submit" className="btn btn-block">
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
           explore the app
         </button>
         <p>

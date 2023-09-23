@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
 import { checkDefaultTheme } from '../App';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import customFetch from '../utils/customFetch';
+import { redirect } from 'react-router-dom';
 
 interface DashboardContextValues {
   user: { name: string };
@@ -32,6 +36,18 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logoutUser = async () => {
+    try {
+      const {
+        data: { msg },
+      } = await customFetch('/auth/logout');
+      toast.success(msg);
+      redirect('/');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      throw error;
+    }
     console.log('logout user');
   };
 

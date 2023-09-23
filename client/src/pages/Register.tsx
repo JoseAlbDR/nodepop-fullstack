@@ -24,7 +24,7 @@ export const action = async (data: ActionFunctionArgs) => {
     return redirect('/login');
   } catch (error) {
     if (error instanceof AxiosError) {
-      toast.error(error.response!.data.msg!);
+      toast.error(error?.response?.data?.msg);
     }
     console.log(error);
     return error;
