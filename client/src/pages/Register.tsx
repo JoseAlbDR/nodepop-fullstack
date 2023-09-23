@@ -11,6 +11,7 @@ export const action = async (data: ActionFunctionArgs) => {
     await customFetch.post('/auth/register', registerData);
     return redirect('/login');
   } catch (error) {
+    console.log(error);
     return error;
   }
 };

@@ -12,13 +12,13 @@ const Login = () => {
           type="email"
           name="email"
           labelText="email"
-          defaultValue="yusepah@gmail.com"
+          defaultValue="jaderodev@gmail.com"
         />
         <FormRow
           type="password"
           name="password"
           labelText="password"
-          defaultValue="mekieros"
+          defaultValue="M5e5k5i57."
         />
         <button type="submit" className="btn btn-block">
           submit
