@@ -20,7 +20,7 @@ export const action = async (data: ActionFunctionArgs) => {
       data: { msg },
     } = await customFetch.post('/auth/register', registerData);
     console.log(msg);
-    toast.success(msg, { className: 'toast-message' });
+    toast.success(msg);
     return redirect('/login');
   } catch (error) {
     if (error instanceof AxiosError) {
