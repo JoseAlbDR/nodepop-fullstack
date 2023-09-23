@@ -3,10 +3,11 @@ import { checkDefaultTheme } from '../App';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import customFetch from '../utils/customFetch';
-import { redirect } from 'react-router-dom';
+import { redirect, useLoaderData } from 'react-router-dom';
+import { IUser, IUserData } from '../types/UserInterface';
 
 interface DashboardContextValues {
-  user: { name: string };
+  user: IUser;
   showSidebar: boolean;
   isDarkTheme: boolean;
   toggleDarkTheme: () => void;
@@ -21,7 +22,8 @@ const DashboardContext = createContext<DashboardContextValues | undefined>(
 function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
-  const user = { name: 'Yusep' };
+  const { user } = useLoaderData() as IUserData;
+  console.log(user);
 
   const toggleDarkTheme = () => {
     const ligthTheme = !isDarkTheme;
