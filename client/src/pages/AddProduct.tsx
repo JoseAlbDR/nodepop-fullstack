@@ -2,14 +2,16 @@ import { Form, useNavigation } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 import { useDashboard } from '../context/DashboardContext';
 import { FormRow } from '../components';
-import { TYPE } from '../../../src/utils/constantsUtil';
+import { TAGS, TYPE } from '../../../src/utils/constantsUtil';
 import FormSelect from '../components/FormSelect';
+import React from 'react';
 
 const AddProduct = () => {
   const { user } = useDashboard();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   console.log(user);
+
   return (
     <StyledAddProduct>
       <div className="dashboard-page">
@@ -31,13 +33,30 @@ const AddProduct = () => {
               disabled={isSubmitting}
             />
             <FormSelect name="type" types={TYPE} />
-            <FormRow
+            {/* <FormRow
               type="email"
               name="email"
               labelText="email"
               defaultValue="jaderodev@gmail.com"
               disabled={isSubmitting}
-            />
+            /> */}
+            <div className="form-row">
+              <label className="form-label">tags</label>
+              <div className="form-tags">
+                {TAGS.map((tag, index) => (
+                  <label key={tag}>
+                    <input
+                      type="checkbox"
+                      name="tags"
+                      value={tag}
+                      className="input-check"
+                      defaultChecked={index === 0}
+                    />
+                    {tag}
+                  </label>
+                ))}
+              </div>
+            </div>
             <FormRow
               type="text"
               name="image"

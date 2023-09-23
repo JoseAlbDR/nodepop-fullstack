@@ -25,6 +25,26 @@ const Wrapper = styled.section`
     height: 35px;
   }
 
+  .form-tags {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+
+    label {
+      text-transform: capitalize;
+    }
+  }
+
+  .input-check {
+    margin-right: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  input[type='checkbox'] {
+    background-color: green;
+  }
+
   select {
     text-transform: capitalize;
   }
