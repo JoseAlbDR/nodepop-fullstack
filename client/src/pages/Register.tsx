@@ -1,4 +1,10 @@
-import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  Link,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 import StyledRegister from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow } from '../components';
 import customFetch from '../utils/customFetch.ts';
@@ -17,6 +23,9 @@ export const action = async (data: ActionFunctionArgs) => {
 };
 
 const Register = () => {
+  const navigation = useNavigation();
+  console.log(navigation);
+  const isSubmitting = navigation.state === 'submitting';
   return (
     <StyledRegister>
       <Form method="post" className="form">
@@ -52,8 +61,8 @@ const Register = () => {
           labelText="password"
           defaultValue="M5e5k5i57."
         />
-        <button type="submit" className="btn btn-block">
-          submit
+        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+          {isSubmitting ? 'submitting...' : 'submit'}
         </button>
         <p>
           Already a member?
