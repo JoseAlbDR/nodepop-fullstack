@@ -270,6 +270,10 @@ button:disabled {
   background: var(--grey-500);
 }
 
+.toast-message {
+  text-transform: capitalize;
+}
+
 .form-textarea {
   height: 7rem;
 }
