@@ -23,7 +23,6 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
   const { user } = useLoaderData() as IUserData;
-  console.log(user);
 
   const toggleDarkTheme = () => {
     const ligthTheme = !isDarkTheme;
