@@ -73,7 +73,8 @@ const Wrapper = styled.div`
     }
   }
 
-  .btn-contact {
+  .btn-contact,
+  .btn-delete {
     width: 80%;
     margin: 0 auto;
     padding: 1rem;
@@ -84,6 +85,11 @@ const Wrapper = styled.div`
     svg {
       color: #fff;
     }
+  }
+
+  .btn-delete {
+    background: var(--red-dark);
+    font-weight: bold;
   }
 
   h2 {

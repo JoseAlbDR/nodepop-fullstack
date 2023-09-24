@@ -74,7 +74,7 @@ const router = createBrowserRouter([
             loader: allProductsLoader,
           },
           {
-            path: 'my-products',
+            path: 'user-products',
             element: <UserProducts />,
             loader: userProductsLoader,
           },

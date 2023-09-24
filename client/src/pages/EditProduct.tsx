@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import { LoaderFunctionArgs, redirect, useLoaderData } from 'react-router-dom';
 
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
@@ -18,6 +18,7 @@ export const loader = async (data: LoaderFunctionArgs) => {
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
+      return redirect('/dashboard/my-products');
     }
     return error;
   }

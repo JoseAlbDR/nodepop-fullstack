@@ -3,8 +3,9 @@ import {
   FaEnvelope,
   FaMoneyBill,
   FaPencilRuler,
+  FaTrash,
 } from 'react-icons/fa';
-import { ProductInfo } from '.';
+import { ProductButton, ProductInfo } from '.';
 import search from '../assets/images/search.svg';
 import sale from '../assets/images/Sell.svg';
 import StyledProduct from '../assets/wrappers/Product';
@@ -13,7 +14,6 @@ import day from 'dayjs';
 import ProductCategories from './ProductCategories';
 import React from 'react';
 import { useDashboard } from '../context/DashboardContext';
-import ContactUpdateLink from './ContactUpdateLink';
 interface ProductProps extends IProduct {}
 
 const Product = ({
@@ -55,17 +55,25 @@ const Product = ({
         <ProductInfo icon={<FaCalendarCheck />} text={date} />
         <ProductCategories tags={tags} />
         {createdBy.email === user.email ? (
-          <ContactUpdateLink
+          <ProductButton
             link={`mailto:${createdBy.email}`}
             icon={<FaEnvelope />}
             text={'CONTACT'}
           />
         ) : (
-          <ContactUpdateLink
-            link={`../edit-product/${_id}`}
-            icon={<FaPencilRuler />}
-            text={'UPDATE'}
-          />
+          <>
+            <ProductButton
+              link={`../edit-product/${_id}`}
+              icon={<FaPencilRuler />}
+              text={'UPDATE'}
+            />
+            <ProductButton
+              link={''}
+              icon={<FaTrash />}
+              text={'DELETE'}
+              id={_id}
+            />
+          </>
         )}
       </div>
     </StyledProduct>

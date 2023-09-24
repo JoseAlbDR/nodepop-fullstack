@@ -16,7 +16,7 @@ interface Links {
 const links: Links[] = [
   { text: 'add product', path: '.', icon: <AiOutlineAppstoreAdd /> },
   { text: 'all products', path: 'all-products', icon: <TiShoppingCart /> },
-  { text: 'my products', path: 'my-products', icon: <FaCubes /> },
+  { text: 'my products', path: 'user-products', icon: <FaCubes /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
   { text: 'admin', path: 'admin', icon: <MdAdminPanelSettings /> },
