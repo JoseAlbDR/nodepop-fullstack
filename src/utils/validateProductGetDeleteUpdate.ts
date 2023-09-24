@@ -11,11 +11,11 @@ export const validateProductGetDeleteUpdate = async (
 ) => {
   const isValid = mongoose.Types.ObjectId.isValid(value);
 
-  if (!isValid) throw new BadRequestError(`${value} is not a valid MongoDB id`);
+  if (!isValid) throw new BadRequestError(`Invalid MongoDB id`);
 
   const result = await Product.findById(value);
 
-  if (!result) throw new NotFoundError(`Product with id: ${value} not found`);
+  if (!result) throw new NotFoundError(`Product not found`);
 
   checkPermissions(req.user as JWTPayload, result.createdBy);
 };
