@@ -23,6 +23,8 @@ import { action as addProductAction } from './pages/AddProduct';
 import { loader as dashboardLoader } from './pages/DashboardLayout';
 import { loader as allProductsLoader } from './pages/AllProducts';
 import { loader as userProductsLoader } from './pages/UserProducts';
+import { loader as editProductLoader } from './pages/EditProduct';
+import { action as editProductAction } from './pages/EditProduct';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -87,6 +89,8 @@ const router = createBrowserRouter([
           {
             path: 'edit-product/:id',
             element: <EditProduct />,
+            loader: editProductLoader,
+            action: editProductAction,
           },
         ],
       },
