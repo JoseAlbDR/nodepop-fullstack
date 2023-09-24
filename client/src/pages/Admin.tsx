@@ -3,6 +3,8 @@ import customFetch from '../utils/customFetch';
 import { AxiosError, AxiosResponse } from 'axios';
 import { redirect, useLoaderData } from 'react-router-dom';
 import StyledStats from '../assets/wrappers/StatsContainer';
+import { StatItem } from '../components';
+import { FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
 interface StatsResponse extends AxiosResponse {
   users: number;
   products: number;
@@ -27,7 +29,20 @@ const Admin = () => {
 
   return (
     <StyledStats>
-      <h1>admin page</h1>
+      <StatItem
+        title="current users"
+        count={users}
+        color="#e9b949"
+        bcg="#fcefc7"
+        icon={<FaSuitcaseRolling />}
+      />
+      <StatItem
+        title="current products"
+        count={products}
+        color="#647ecb"
+        bcg="#e0e8f9"
+        icon={<FaCalendarCheck />}
+      />
     </StyledStats>
   );
 };
