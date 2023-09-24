@@ -5,7 +5,7 @@ import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IProductResponse } from '../types/Products';
 ('react-router-dom');
-import { AllProductsProvider } from '../context/AllJobsContext';
+import { AllProductsProvider } from '../context/AllProductsContext';
 
 export const loader = async () => {
   try {

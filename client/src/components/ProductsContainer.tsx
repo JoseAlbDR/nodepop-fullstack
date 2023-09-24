@@ -1,4 +1,4 @@
-import { useAllProducts } from '../context/AllJobsContext';
+import { useAllProducts } from '../context/AllProductsContext';
 import StyledProductsContainer from '../assets/wrappers/ProductsContainer';
 import { Product } from '.';
 const ProductsContainer = () => {
