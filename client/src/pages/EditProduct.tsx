@@ -18,7 +18,7 @@ export const loader = async (data: LoaderFunctionArgs) => {
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
-      return redirect('/dashboard/my-products');
+      return redirect('/dashboard/user-products');
     }
     return error;
   }
