@@ -25,7 +25,7 @@ const Product = ({
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const imgElement = e.currentTarget;
-    imgElement.src = noImg; // Ruta de la imagen por defecto
+    imgElement.src = noImg;
   };
 
   const date = day(createdAt).format('D MMM, YYYY');

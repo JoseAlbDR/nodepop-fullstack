@@ -10,7 +10,6 @@ const Wrapper = styled.div`
 
   .img {
     border-radius: var(--border-radius);
-    max-height: 257px;
   }
 
   .content {
@@ -91,6 +90,11 @@ const Wrapper = styled.div`
     font-weight: bold;
     text-transform: uppercase;
     align-self: flex-start;
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
   }
 `;
 

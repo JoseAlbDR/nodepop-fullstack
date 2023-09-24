@@ -14,6 +14,7 @@ const ProductsContainer = () => {
   }
   return (
     <StyledProductsContainer>
+      <h5>{products.length} Products Found</h5>
       <div className="products">
         {products.map((product) => {
           return <Product key={product._id} {...product} />;

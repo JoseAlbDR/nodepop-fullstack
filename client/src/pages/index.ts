@@ -10,6 +10,7 @@ import Profile from './Profile';
 import Login from './Login';
 import ErrorPage from './ErrorPage';
 import Stats from './Stats';
+import UserProducts from './UserProducts';
 
 export {
   DashboardLayout,
@@ -24,4 +25,5 @@ export {
   Login,
   ErrorPage,
   Stats,
+  UserProducts,
 };
