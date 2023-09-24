@@ -33,7 +33,7 @@ const Product = ({
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const imgElement = e.currentTarget;
-    imgElement.src = '../src/assets/images/no-image-icon.png';
+    imgElement.src = '../src/assets/images/no-image-available.webp';
   };
 
   const date = day(createdAt).format('D MMM, YYYY');
@@ -54,7 +54,7 @@ const Product = ({
         <ProductInfo icon={<FaMoneyBill />} text={price + '€'} />
         <ProductInfo icon={<FaCalendarCheck />} text={date} />
         <ProductCategories tags={tags} />
-        {createdBy.email === user.email ? (
+        {createdBy.email !== user.email ? (
           <ProductButton
             link={`mailto:${createdBy.email}`}
             icon={<FaEnvelope />}

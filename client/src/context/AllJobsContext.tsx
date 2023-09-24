@@ -16,7 +16,6 @@ function AllProductsProvider({
   children: React.ReactNode;
 }): JSX.Element {
   const { data } = useLoaderData() as IProductResponse;
-  console.log(data);
 
   return (
     <AllProductsContext.Provider value={{ data }}>
