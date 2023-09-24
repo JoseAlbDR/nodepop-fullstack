@@ -1,11 +1,11 @@
 import { AxiosError } from 'axios';
 import StyledAllProducts from '../assets/wrappers/AllProductsPage';
-import { ProductsContainer, SearchContainer } from '../components';
+import { UserProductsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IProductResponse } from '../types/Products';
 ('react-router-dom');
-import { AllProductsProvider } from '../context/AllJobsContext';
+import { UserProductsProvider } from '../context/UserProductsContext';
 
 export const loader = async () => {
   try {
@@ -23,12 +23,12 @@ export const loader = async () => {
 
 const UserProducts = () => {
   return (
-    <AllProductsProvider>
+    <UserProductsProvider>
       <StyledAllProducts>
         <SearchContainer />
-        <ProductsContainer />
+        <UserProductsContainer />
       </StyledAllProducts>
-    </AllProductsProvider>
+    </UserProductsProvider>
   );
 };
 

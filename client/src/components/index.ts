@@ -9,3 +9,4 @@ export { default as ProductsContainer } from './ProductsContainer';
 export { default as SearchContainer } from './SearchContainer';
 export { default as Product } from './Product';
 export { default as ProductInfo } from './ProductInfo';
+export { default as UserProductsContainer } from './UserProductContainer';

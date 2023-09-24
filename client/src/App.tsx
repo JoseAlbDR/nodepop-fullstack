@@ -15,6 +15,7 @@ import {
   Profile,
   Admin,
   UserProducts,
+  EditProduct,
 } from './pages';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             element: <Admin />,
+          },
+          {
+            path: 'edit-product',
+            element: <EditProduct />,
           },
         ],
       },
