@@ -110,7 +110,7 @@ export const validateProductCreation = [
     .withMessage('image is required')
     .isString()
     .withMessage('image must be a string')
-    .isLength({ min: 3, max: 50 })
+    .isLength({ min: 3, max: 100 })
     .withMessage('image must be between 3 and 50 characters'),
 
   body('tags')
@@ -152,7 +152,7 @@ export const validateProductUpdate = [
     .withMessage('image is required')
     .isString()
     .withMessage('image must be a string')
-    .isLength({ min: 3, max: 50 })
+    .isLength({ min: 3, max: 100 })
     .withMessage('image must be between 3 and 50 characters'),
 
   body('tags')

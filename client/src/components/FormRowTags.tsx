@@ -1,8 +1,15 @@
 import { ITags } from '../../../src/types/productInterfaces';
 import { useTags } from '../hooks/useTags';
 
-const FormRowTags = () => {
+interface FormRowTagsProps {
+  tags?: ITags[] | null;
+}
+
+const FormRowTags = ({ tags = null }: FormRowTagsProps) => {
   const { data, isLoading: isLoadingTags } = useTags();
+
+  console.log(tags);
+
   if (isLoadingTags) return;
   return (
     <div className="form-row">
@@ -15,7 +22,7 @@ const FormRowTags = () => {
               name="tags"
               value={tag}
               className="input-check"
-              defaultChecked={index === 0}
+              defaultChecked={tags ? tags.includes(tag) : index === 0}
             />
             {tag}
           </label>
