@@ -17,8 +17,9 @@ import {
 } from './pages';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
-import { loader as dashboardLoader } from './pages/DashboardLayout';
 import { action as addProductAction } from './pages/AddProduct';
+import { loader as dashboardLoader } from './pages/DashboardLayout';
+import { loader as allProductsLoader } from './pages/AllProducts';
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
   document.body.classList.toggle('dark-theme', isDarkTheme);
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
           {
             path: 'all-products',
             element: <AllProducts />,
+            loader: allProductsLoader,
           },
           {
             path: 'profile',
