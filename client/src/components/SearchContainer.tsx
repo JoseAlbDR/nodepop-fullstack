@@ -1,23 +1,12 @@
 import { Form, useNavigation } from 'react-router-dom';
 import StyledSearchContainer from '../assets/wrappers/DashboardFormPage';
 import { FormRow, FormRowSelect, FormRowTags } from '.';
-import { TYPE } from '../../../src/utils/constantsUtil';
-import { useProducts } from '../hooks/useProducts';
-import { getMinMaxPrices } from '../utils/getMinMaxPrice';
+import { SORT, TYPE } from '../../../src/utils/constantsUtil';
+import FormSearchPrices from './FormSearchPrices';
 
 const SearchContainer = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  const { data, isLoading } = useProducts();
-
-  if (isLoading) return;
-  if (!data) return;
-
-  const { products } = data;
-
-  const { minPrice, maxPrice } = getMinMaxPrices(products);
-
-  if (minPrice && maxPrice) console.log({ minPrice, maxPrice });
 
   return (
     <StyledSearchContainer>
@@ -32,14 +21,9 @@ const SearchContainer = () => {
               defaultValue="Play 5"
               disabled={isSubmitting}
             />
-            <FormRow
-              type="number"
-              name="price"
-              labelText="price"
-              defaultValue="300"
-              disabled={isSubmitting}
-            />
+            <FormSearchPrices />
             <FormRowSelect name="type" types={TYPE} />
+            <FormRowSelect name="sort" types={SORT} />
             <FormRowTags />
             <button type="reset" className="btn btn-block form-btn">
               reset search values
