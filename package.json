@@ -39,7 +39,11 @@
   },
   "homepage": "https://github.com/JoseAlbDR/nodepop-backend-ts#readme",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@faker-js/faker": "^8.1.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.10",
     "@types/cookie-parser": "^1.4.4",
     "@types/jsonwebtoken": "^9.0.3",
     "bcrypt": "^5.1.1",
