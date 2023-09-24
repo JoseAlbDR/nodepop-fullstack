@@ -27,7 +27,6 @@ const FormSearchPrices = () => {
       <Typography gutterBottom>Price</Typography>
       <Slider
         // defaultValue={minPrice}
-        aria-label="Default"
         min={minPrice}
         max={maxPrice}
         value={value}
