@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ProductInfo } from '.';
 import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 interface ProductButtonProps {
   icon: React.ReactNode;
@@ -9,8 +11,20 @@ interface ProductButtonProps {
   id?: string;
 }
 const ProductButton = ({ link, icon, text, id = '' }: ProductButtonProps) => {
+  const navigate = useNavigate();
+
   const handleDeleteProduct = async () => {
-    await customFetch.delete(`/products/${id}`);
+    try {
+      await customFetch.delete(`/products/${id}`);
+      toast.success(`Product deleted successfully`);
+      navigate('../user-products');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      console.log(error);
+      return error;
+    }
   };
 
   const component =
