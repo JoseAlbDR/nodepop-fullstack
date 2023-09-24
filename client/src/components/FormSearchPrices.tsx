@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useProducts } from '../hooks/useProducts';
@@ -24,7 +23,9 @@ const FormSearchPrices = () => {
         marginRight: '1rem',
       }}
     >
-      <Typography gutterBottom>Price</Typography>
+      <label className="form-label" htmlFor="price">
+        price
+      </label>
       <Slider
         // defaultValue={minPrice}
         min={minPrice}
@@ -33,7 +34,7 @@ const FormSearchPrices = () => {
         step={1}
         onChange={handleChange}
         valueLabelDisplay="auto"
-        sx={{ marginLeft: 1 }}
+        sx={{ marginLeft: 1, color: '#8b5cf6' }}
       />
     </Box>
   );
