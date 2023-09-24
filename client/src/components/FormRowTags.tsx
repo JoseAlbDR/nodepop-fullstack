@@ -1,21 +1,23 @@
 import { ITags } from '../../../src/types/productInterfaces';
+import { TAGS } from '../../../src/utils/constantsUtil';
 import { useTags } from '../hooks/useTags';
 
 interface FormRowTagsProps {
   tags?: ITags[] | null;
+  page?: string;
 }
 
-const FormRowTags = ({ tags = null }: FormRowTagsProps) => {
+const FormRowTags = ({ tags = null, page = '' }: FormRowTagsProps) => {
   const { data, isLoading: isLoadingTags } = useTags();
 
-  console.log(tags);
+  const renderTags = page === 'add-product' ? TAGS : data?.tags;
 
   if (isLoadingTags) return;
   return (
     <div className="form-row">
       <label className="form-label">tags</label>
       <fieldset className="form-tags">
-        {data.tags.map((tag: ITags, index: number) => (
+        {renderTags.map((tag: ITags, index: number) => (
           <label key={tag}>
             <input
               type="checkbox"
