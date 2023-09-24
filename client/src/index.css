@@ -72,6 +72,7 @@ html {
 
   --background-color: var(--grey-50);
   --text-color: var(--grey-900);
+  --tag-color: var(--grey-900);
   --background-secondary-color: var(--white);
   --text-secondary-color: var(--grey-500);
 }
@@ -321,4 +322,15 @@ button:disabled {
   width: var(--fluid-width);
   max-width: var(--max-width);
   margin: 0 auto;
+}
+
+/* Badges */
+.on-sale {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+.search {
+  background: #e0e8f9;
+  color: #647acb;
 }
