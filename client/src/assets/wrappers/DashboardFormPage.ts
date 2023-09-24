@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
+  width: 100%;
   .dashboard-page {
     background: var(--background-secondary-color);
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 4rem;
     border-radius: var(--border-radius);
   }
   h4 {
