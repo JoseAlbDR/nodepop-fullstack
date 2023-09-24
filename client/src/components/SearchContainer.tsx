@@ -23,8 +23,8 @@ const SearchContainer = () => {
             />
             <FormSearchPrices />
             <FormRowSelect name="type" types={TYPE} />
-            <FormRowSelect name="sort" types={SORT} />
             <FormRowTags />
+            <FormRowSelect name="sort" types={SORT} />
             <button type="reset" className="btn btn-block form-btn">
               reset search values
             </button>

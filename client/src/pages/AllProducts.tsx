@@ -1,6 +1,5 @@
 import StyledAllProducts from '../assets/wrappers/AllProductsPage';
-import SearchContainer from '../components/SearchContainer';
-import ProductsContainer from '../components/ProductsContainer';
+import { ProductsContainer, SearchContainer } from '../components';
 
 const AllProducts = () => {
   return (
