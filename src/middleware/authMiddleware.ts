@@ -27,7 +27,7 @@ const authorizePermissions = (...roles: Role[]) => {
   return (req: Request, _res: Response, next: NextFunction) => {
     const { role } = req.user;
     if (!roles.includes(role))
-      throw new UnauthorizedError('Unauthorized to view this route');
+      throw new UnauthorizedError('Unauthorized to view this page');
     next();
   };
 };

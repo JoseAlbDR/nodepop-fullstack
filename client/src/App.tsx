@@ -26,6 +26,7 @@ import { loader as userProductsLoader } from './pages/UserProducts';
 import { loader as editProductLoader } from './pages/EditProduct';
 import { action as editProductAction } from './pages/EditProduct';
 import { action as deleteProductAction } from './pages/DeleteProduct';
+import { loader as adminLoader } from './pages/Admin';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
           {
             path: 'admin',
             element: <Admin />,
+            loader: adminLoader,
           },
           {
             path: 'edit-product/:id',
