@@ -66,7 +66,7 @@ const AddProduct = () => {
               disabled={isSubmitting}
             />
             <FormRowSelect name="type" types={TYPE} />
-            <FormRowTags />
+            <FormRowTags page="add-product" />
             <FormRow
               type="text"
               name="image"
