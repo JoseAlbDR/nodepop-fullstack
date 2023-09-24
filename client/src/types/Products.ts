@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { ITags } from '../../../src/types/productInterfaces';
 
 export interface ICreatedBy {
   email: string;
@@ -8,13 +9,14 @@ export interface ICreatedBy {
 
 export interface IProduct {
   _id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   createdBy: ICreatedBy;
   image: string;
   name: string;
   onSale: boolean;
   price: number;
+  tags: ITags[];
 }
 
 export interface IProductResponse extends AxiosResponse {
