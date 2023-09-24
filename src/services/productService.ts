@@ -18,7 +18,10 @@ const productService = {
   getUserProducts: async (
     userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
   ) => {
-    const products = await Product.find({ createdBy: userId });
+    const products = await Product.find({ createdBy: userId }).populate({
+      path: 'createdBy',
+      select: 'name email',
+    });
     return products;
   },
 
