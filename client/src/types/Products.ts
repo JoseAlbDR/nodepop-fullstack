@@ -7,6 +7,7 @@ export interface ICreatedBy {
 }
 
 export interface IProduct {
+  _id: string;
   createdAt: string;
   updatedAt: string;
   createdBy: ICreatedBy;

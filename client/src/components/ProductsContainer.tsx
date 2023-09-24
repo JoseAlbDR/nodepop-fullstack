@@ -1,9 +1,26 @@
 import { useAllProducts } from '../context/AllJobsContext';
-
+import StyledProductsContainer from '../assets/wrappers/ProductsContainer';
+import Product from './Product';
 const ProductsContainer = () => {
   const { data } = useAllProducts();
-  console.log(data);
-  return <h2>ProductsContainer</h2>;
+  const { products } = data;
+
+  if (products.length === 0) {
+    return (
+      <StyledProductsContainer>
+        <h2>No products to display...</h2>
+      </StyledProductsContainer>
+    );
+  }
+  return (
+    <StyledProductsContainer>
+      <div className="products">
+        {products.map((product) => {
+          return <Product key={product._id} {...products} />;
+        })}
+      </div>
+    </StyledProductsContainer>
+  );
 };
 
 export default ProductsContainer;
