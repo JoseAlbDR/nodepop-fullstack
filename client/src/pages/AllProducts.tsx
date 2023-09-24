@@ -1,12 +1,13 @@
-import { useProducts } from '../hooks/useProducts';
 import StyledAllProducts from '../assets/wrappers/AllProductsPage';
+import SearchContainer from '../components/SearchContainer';
+import ProductsContainer from '../components/ProductsContainer';
+
 const AllProducts = () => {
-  const { data, isLoading } = useProducts();
-
-  if (isLoading) return;
-
-  console.log(data);
-
-  return <StyledAllProducts></StyledAllProducts>;
+  return (
+    <StyledAllProducts>
+      <SearchContainer />
+      <ProductsContainer />
+    </StyledAllProducts>
+  );
 };
 export default AllProducts;
