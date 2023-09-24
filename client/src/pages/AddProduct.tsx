@@ -1,4 +1,9 @@
-import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 // import { useDashboard } from '../context/DashboardContext';
 import { FormRow, FormRowSelect, FormRowTags } from '../components';
@@ -26,7 +31,7 @@ export const action = async (data: ActionFunctionArgs) => {
       tags,
     });
     toast.success(msg);
-    return null;
+    return redirect('all-products');
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
