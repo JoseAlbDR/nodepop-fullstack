@@ -7,3 +7,5 @@ export { default as FormRowSelect } from './FormRowSelect';
 export { default as FormRowTags } from './FormRowTags';
 export { default as ProductsContainer } from './ProductsContainer';
 export { default as SearchContainer } from './SearchContainer';
+export { default as Product } from './Product';
+export { default as ProductInfo } from './ProductInfo';

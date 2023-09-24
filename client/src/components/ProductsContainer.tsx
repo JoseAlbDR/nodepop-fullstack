@@ -1,6 +1,6 @@
 import { useAllProducts } from '../context/AllJobsContext';
 import StyledProductsContainer from '../assets/wrappers/ProductsContainer';
-import Product from './Product';
+import { Product } from '.';
 const ProductsContainer = () => {
   const { data } = useAllProducts();
   const { products } = data;
@@ -16,7 +16,7 @@ const ProductsContainer = () => {
     <StyledProductsContainer>
       <div className="products">
         {products.map((product) => {
-          return <Product key={product._id} {...products} />;
+          return <Product key={product._id} {...product} />;
         })}
       </div>
     </StyledProductsContainer>
