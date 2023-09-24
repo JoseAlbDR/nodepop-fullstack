@@ -1,13 +1,20 @@
-import { useParams } from 'react-router-dom';
-import { IProductResponse } from '../types/Products';
-import { AxiosError } from 'axios';
+import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+
+import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
+import { IProduct } from '../types/Products';
 
-export const loader = async () => {
+export interface IProductResponse extends AxiosResponse {
+  product: IProduct;
+}
+export const loader = async (data: LoaderFunctionArgs) => {
+  const { params } = data;
   try {
-    const { data }: IProductResponse = await customFetch('/products');
-    return { data };
+    const { data }: IProductResponse = await customFetch(
+      `/products/${params.id}`
+    );
+    return data;
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
@@ -21,8 +28,8 @@ export const action = async () => {
 };
 
 const EditJob = () => {
-  const param = useParams();
-  console.log(param);
+  const { product } = useLoaderData() as IProductResponse;
+  console.log(product);
 
   return <h1>Edit Product</h1>;
 };

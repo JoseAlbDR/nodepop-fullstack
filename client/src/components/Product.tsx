@@ -7,7 +7,6 @@ import {
 import { ProductInfo } from '.';
 import search from '../assets/images/search.svg';
 import sale from '../assets/images/Sell.svg';
-import noImg from '../assets/images/No-Image-Placeholder.svg';
 import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import day from 'dayjs';
@@ -34,7 +33,7 @@ const Product = ({
     e: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const imgElement = e.currentTarget;
-    imgElement.src = noImg;
+    imgElement.src = '../src/assets/images/no-image-icon.png';
   };
 
   const date = day(createdAt).format('D MMM, YYYY');

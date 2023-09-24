@@ -20,6 +20,13 @@ const Wrapper = styled.section`
     row-gap: 2rem;
   }
 
+  @media (width > 768px) {
+    .products {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
   @media (width > 992px) {
     width: 90%;
   }
