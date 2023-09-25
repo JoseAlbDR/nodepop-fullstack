@@ -11,6 +11,7 @@ import Login from './Login';
 import ErrorPage from './ErrorPage';
 import Stats from './Stats';
 import UserProducts from './UserProducts';
+import DeleteProduct from './DeleteProduct';
 
 export {
   DashboardLayout,
@@ -26,4 +27,5 @@ export {
   ErrorPage,
   Stats,
   UserProducts,
+  DeleteProduct,
 };
