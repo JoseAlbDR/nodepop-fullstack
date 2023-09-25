@@ -16,6 +16,7 @@ import {
   Admin,
   UserProducts,
   EditProduct,
+  DeleteProduct,
 } from './pages';
 import { action as registerAction } from './pages/Register';
 import { action as loginAction } from './pages/Login';
@@ -99,6 +100,7 @@ const router = createBrowserRouter([
           },
           {
             path: 'delete-product/:id',
+            element: <DeleteProduct />,
             action: deleteProductAction,
           },
         ],
