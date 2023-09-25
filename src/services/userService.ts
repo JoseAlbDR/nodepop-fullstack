@@ -10,12 +10,7 @@ const userService = {
   ) => {
     const response = await User.findById(userId).select('-password');
 
-    if (!response)
-      throw new NotFoundError(
-        `User with ${(
-          userId as mongoose.Types.ObjectId
-        ).toString()} does not found`
-      );
+    if (!response) throw new NotFoundError(`User not found`);
 
     return response;
   },
@@ -29,10 +24,7 @@ const userService = {
       new: true,
     }).select('-password');
 
-    if (!result)
-      throw new NotFoundError(
-        `User ${(userId as mongoose.Types.ObjectId).toString()} does not exist`
-      );
+    if (!result) throw new NotFoundError(`User not found`);
 
     return result;
   },
