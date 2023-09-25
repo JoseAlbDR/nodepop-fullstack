@@ -1,9 +1,11 @@
-import fs from 'fs';
+import * as fs from 'node:fs/promises';
 import path from 'path';
 
-export const deleteFile = (filePath: string) => {
-  fs.unlink(path.join('src', 'public', filePath), (err) => {
-    if (err) throw err;
-    console.log(err);
-  });
+export const deleteFile = async (filePath: string) => {
+  try {
+    await fs.unlink(path.join('src', 'public', filePath));
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };

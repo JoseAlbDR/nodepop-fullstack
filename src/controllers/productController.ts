@@ -62,7 +62,7 @@ const productController = {
     console.log(removedProduct?.image.split('/').at(-1));
     const imagePath = removedProduct?.image.split('/').at(-1);
 
-    if (imagePath) deleteFile(imagePath);
+    if (imagePath) await deleteFile(imagePath);
 
     res
       .status(StatusCodes.OK)
