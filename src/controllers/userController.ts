@@ -12,12 +12,13 @@ const userController = {
 
   updateUser: async (req: UpdateUserDTO, res: Response) => {
     // Remove password just in case...
+    console.log(req.file);
     const obj = { ...req.body };
     delete obj.password;
 
-    const user = await userService.updateUser(req.user.userId, obj);
+    await userService.updateUser(req.user.userId, obj);
 
-    res.status(StatusCodes.OK).json({ msg: user });
+    res.status(StatusCodes.OK).json({ msg: 'user updated' });
   },
 
   getApplicationStats: async (_req: Request, res: Response) => {

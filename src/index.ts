@@ -3,7 +3,7 @@ import 'express-async-errors';
 import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
-import fileUpload from 'express-fileupload';
+// import fileUpload from 'express-fileupload';
 // import cors from 'cors';
 import debug from 'debug';
 const serverDebug = debug('nodepop-ts:server');
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(express.static('./src/public'));
-app.use(fileUpload());
+// app.use(fileUpload());
 
 app.get('/api/v1/test', (_req, res) => {
   res.json({ msg: 'test route' });
