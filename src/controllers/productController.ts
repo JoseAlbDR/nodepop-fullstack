@@ -47,14 +47,24 @@ const productController = {
   },
 
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
-    const updatedProduct = await productService.updateProduct(
-      req.params.id,
-      req.body
-    );
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const port = process.env.PORT;
+    const filePath = req.file!.path;
 
-    const imagePath = updatedProduct?.image.split('/').at(-1);
+    const image = getImagePath(protocol, host, port, filePath);
 
+    // Delete Previous image
+    const product = await productService.getOneProduct(req.params.id);
+
+    const imagePath = product?.image.split('/').at(-1);
     if (imagePath) await deleteFile(imagePath);
+
+    // Update product
+    const updatedProduct = await productService.updateProduct(req.params.id, {
+      ...req.body,
+      image,
+    });
 
     res
       .status(StatusCodes.OK)
@@ -65,6 +75,8 @@ const productController = {
     const removedProduct = await productService.deleteProduct(req.params.id);
     console.log(removedProduct?.image.split('/').at(-1));
     const imagePath = removedProduct?.image.split('/').at(-1);
+
+    console.log(imagePath);
 
     if (imagePath) await deleteFile(imagePath);
 

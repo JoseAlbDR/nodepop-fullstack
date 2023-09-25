@@ -13,6 +13,7 @@ import customFetch from '../utils/customFetch';
 import { IProduct } from '../types/Products';
 import { FormRow, FormRowSelect, FormRowTags } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
+import FormRowInput from '../components/FormRowInput';
 
 export interface IProductResponse extends AxiosResponse {
   product: IProduct;
@@ -37,22 +38,21 @@ export const action = async (data: ActionFunctionArgs) => {
   const { request, params } = data;
   const formData = await request.formData();
   const tags = formData.getAll('tags');
-  const type = formData.get('type');
+  const type = formData.get('onSale');
+
+  formData.set('onSale', String(String(type) === 'on sale'));
+
   if (tags.length === 0) {
     toast.error('Select at least one tag!');
     return null;
   }
-  const addProductData = Object.fromEntries(formData);
+
   try {
     const {
       data: { msg },
-    } = await customFetch.patch(`/products/${params.id}`, {
-      ...addProductData,
-      onSale: type === 'on sale',
-      tags,
-    });
+    } = await customFetch.patch(`/products/${params.id}`, formData);
     toast.success(msg);
-    return redirect('../user-products');
+    return redirect('../all-products');
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
@@ -62,6 +62,35 @@ export const action = async (data: ActionFunctionArgs) => {
   }
 };
 
+// export const action = async (data: ActionFunctionArgs) => {
+//   const { request, params } = data;
+//   const formData = await request.formData();
+//   const tags = formData.getAll('tags');
+//   const type = formData.get('type');
+//   if (tags.length === 0) {
+//     toast.error('Select at least one tag!');
+//     return null;
+//   }
+//   const addProductData = Object.fromEntries(formData);
+//   try {
+//     const {
+//       data: { msg },
+//     } = await customFetch.patch(`/products/${params.id}`, {
+//       ...addProductData,
+//       onSale: type === 'on sale',
+//       tags,
+//     });
+//     toast.success(msg);
+//     return redirect('../user-products');
+//   } catch (error) {
+//     if (error instanceof AxiosError) {
+//       toast.error(error?.response?.data?.msg);
+//     }
+//     console.log(error);
+//     return error;
+//   }
+// };
+
 const EditJob = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
@@ -70,9 +99,15 @@ const EditJob = () => {
   return (
     <StyledAddProduct>
       <div className="dashboard-page">
-        <Form method="post">
+        <Form method="post" encType="multipart/form-data">
           <h4>edit product</h4>
           <div className="form-center">
+            <FormRowInput
+              labelText="select an image file (max 0.5MB)"
+              type="file"
+              id="image"
+              name="image"
+            />
             <FormRow
               type="text"
               name="name"
@@ -93,13 +128,7 @@ const EditJob = () => {
               selected={product.onSale ? 'on sale' : 'search'}
             />
             <FormRowTags tags={product.tags} page="all" />
-            <FormRow
-              type="text"
-              name="image"
-              labelText="image"
-              defaultValue={product.image}
-              disabled={isSubmitting}
-            />
+
             <button
               type="submit"
               className="btn btn-block form-btn"

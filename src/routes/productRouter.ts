@@ -47,6 +47,8 @@ router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)
   .patch(
+    upload.single('image'),
+    validateUploadedFiles,
     validateProductUpdate,
     validateIdParam,
     productController.updateProduct
