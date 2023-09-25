@@ -92,7 +92,7 @@ const EditJob = () => {
               types={TYPE}
               selected={product.onSale ? 'on sale' : 'search'}
             />
-            <FormRowTags tags={product.tags} />
+            <FormRowTags tags={product.tags} page="all" />
             <FormRow
               type="text"
               name="image"

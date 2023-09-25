@@ -18,6 +18,7 @@ export const action = async (data: ActionFunctionArgs) => {
   const formData = await request.formData();
   const tags = formData.getAll('tags');
   const type = formData.get('onSale');
+
   formData.set('onSale', String(String(type) === 'on sale'));
 
   if (tags.length === 0) {
@@ -71,7 +72,7 @@ const AddProduct = () => {
               disabled={isSubmitting}
             />
             <FormRowSelect name="onSale" types={TYPE} />
-            <FormRowTags page="add-product" />
+            <FormRowTags page="all" />
 
             <button
               type="submit"

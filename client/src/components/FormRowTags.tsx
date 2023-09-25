@@ -10,7 +10,7 @@ interface FormRowTagsProps {
 const FormRowTags = ({ tags = null, page = '' }: FormRowTagsProps) => {
   const { data, isLoading: isLoadingTags } = useTags();
 
-  const renderTags = page === 'add-product' ? TAGS : data?.tags;
+  const renderTags = page === 'all' ? TAGS : data?.tags;
 
   if (isLoadingTags) return;
   return (
