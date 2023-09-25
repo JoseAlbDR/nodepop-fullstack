@@ -1,8 +1,35 @@
-import { Form, useNavigation } from 'react-router-dom';
+import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
 import StyledProfile from '../assets/wrappers/DashboardFormPage';
 import { FormRow } from '../components';
 import { useDashboardContext } from '../context/DashboardContext';
 import FormRowInput from '../components/FormRowInput';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import customFetch from '../utils/customFetch';
+
+export const action = async (data: ActionFunctionArgs) => {
+  const { request } = data;
+  const formData = await request.formData();
+  const file = formData.get('avatar');
+
+  if (file instanceof File && file.size > 500000) {
+    console.log(file.size);
+    toast.error('Image size too large');
+    return null;
+  }
+
+  try {
+    const response = await customFetch.patch('/users/update-user', formData);
+    toast.success(response.data.msg);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      toast.error(error?.response?.data?.msg);
+    }
+    console.log(error);
+    return error;
+  }
+  return null;
+};
 
 const Profile = () => {
   const { user } = useDashboardContext();
@@ -12,7 +39,7 @@ const Profile = () => {
   return (
     <StyledProfile>
       <div className="dashboard-page">
-        <Form method="post">
+        <Form method="post" encType="multipart/form-data">
           <h4>Edit {user.name} Profile</h4>
           <div className="form-center">
             <FormRowInput
