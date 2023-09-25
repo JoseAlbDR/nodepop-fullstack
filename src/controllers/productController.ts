@@ -9,6 +9,7 @@ import productService from '../services/productService';
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
 import { getImagePath } from '../utils/getImagePath';
+import { deleteFile } from '../utils/deleteImageUtil';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
@@ -40,7 +41,6 @@ const productController = {
   },
 
   getOneProduct: async (req: Request, res: Response) => {
-
     const product = await productService.getOneProduct(req.params.id);
 
     res.status(StatusCodes.OK).json({ product });
@@ -59,6 +59,10 @@ const productController = {
 
   deleteProduct: async (req: Request, res: Response) => {
     const removedProduct = await productService.deleteProduct(req.params.id);
+    console.log(removedProduct?.image.split('/').at(-1));
+    const imagePath = removedProduct?.image.split('/').at(-1);
+
+    if (imagePath) deleteFile(imagePath);
 
     res
       .status(StatusCodes.OK)
