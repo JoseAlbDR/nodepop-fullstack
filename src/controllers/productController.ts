@@ -26,6 +26,8 @@ const productController = {
   createProduct: async (req: CreateProductDTO, res: Response) => {
     req.body.createdBy = req.user.userId;
 
+    console.log(req.body.tags);
+
     const protocol = req.protocol;
     const host = req.hostname;
     const port = process.env.PORT;
@@ -38,7 +40,7 @@ const productController = {
   },
 
   getOneProduct: async (req: Request, res: Response) => {
-    console.log({ id: req.params.id });
+
     const product = await productService.getOneProduct(req.params.id);
 
     res.status(StatusCodes.OK).json({ product });
