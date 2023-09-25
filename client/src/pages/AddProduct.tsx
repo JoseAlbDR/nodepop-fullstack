@@ -11,6 +11,7 @@ import { TYPE } from '../../../src/utils/constantsUtil';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
+import FormRowInput from '../components/FormRowInput';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
@@ -51,6 +52,12 @@ const AddProduct = () => {
         <Form method="post">
           <h4>Add Product</h4>
           <div className="form-center">
+            <FormRowInput
+              labelText="select an image file (max 0.5MB)"
+              type="file"
+              id="productImage"
+              name="image"
+            />
             <FormRow
               type="text"
               name="name"
@@ -67,13 +74,7 @@ const AddProduct = () => {
             />
             <FormRowSelect name="type" types={TYPE} />
             <FormRowTags page="add-product" />
-            <FormRow
-              type="text"
-              name="image"
-              labelText="image"
-              defaultValue="play5.jpg"
-              disabled={isSubmitting}
-            />
+
             <button
               type="submit"
               className="btn btn-block form-btn"
