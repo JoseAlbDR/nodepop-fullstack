@@ -2,6 +2,7 @@ import { Form, useNavigation } from 'react-router-dom';
 import StyledProfile from '../assets/wrappers/DashboardFormPage';
 import { FormRow } from '../components';
 import { useDashboardContext } from '../context/DashboardContext';
+import FormRowInput from '../components/FormRowInput';
 
 const Profile = () => {
   const { user } = useDashboardContext();
@@ -14,6 +15,12 @@ const Profile = () => {
         <Form method="post">
           <h4>Edit {user.name} Profile</h4>
           <div className="form-center">
+            <FormRowInput
+              labelText="select an image file (max 0.5MB)"
+              type="file"
+              id="avatar"
+              name="avatar"
+            />
             <FormRow
               type="text"
               name="name"
