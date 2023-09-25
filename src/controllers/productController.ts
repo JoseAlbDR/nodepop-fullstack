@@ -52,6 +52,10 @@ const productController = {
       req.body
     );
 
+    const imagePath = updatedProduct?.image.split('/').at(-1);
+
+    if (imagePath) await deleteFile(imagePath);
+
     res
       .status(StatusCodes.OK)
       .json({ msg: 'product updated', product: updatedProduct });
