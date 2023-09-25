@@ -1,4 +1,4 @@
-import { Form, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ProductInfo } from '.';
 
 interface ProductButtonProps {
@@ -8,13 +8,16 @@ interface ProductButtonProps {
   id?: string;
 }
 const ProductButton = ({ link, icon, text, id = '' }: ProductButtonProps) => {
+  const navigate = useNavigate();
   const component =
     text === 'DELETE' ? (
-      <Form method="post" action={`../delete-product/${id}`}>
-        <button className="btn btn-block btn-delete" type="submit">
-          <ProductInfo icon={icon} text={text} />
-        </button>
-      </Form>
+      <button
+        type="button"
+        className="btn btn-block btn-delete"
+        onClick={() => navigate(`../delete-product/${id}`)}
+      >
+        <ProductInfo icon={icon} text={text} />
+      </button>
     ) : (
       <Link className="btn btn-block btn-contact" to={link}>
         <ProductInfo icon={icon} text={text} />
