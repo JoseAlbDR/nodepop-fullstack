@@ -1,8 +1,8 @@
 import StyledProductsContainer from '../assets/wrappers/ProductsContainer';
 import { Product } from '.';
-import { useUserProducts } from '../context/UserProductsContext';
+import { useUserProductsContext } from '../context/UserProductsContext';
 const UserProductsContainer = () => {
-  const { data } = useUserProducts();
+  const { data } = useUserProductsContext();
   const { products } = data;
 
   if (products.length === 0) {

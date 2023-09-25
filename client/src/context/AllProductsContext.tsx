@@ -24,7 +24,7 @@ function AllProductsProvider({
   );
 }
 
-function useAllProducts() {
+function useAllProductsContext() {
   const context = useContext(AllProductsContext);
 
   if (context === undefined)
@@ -34,4 +34,4 @@ function useAllProducts() {
   return context;
 }
 
-export { AllProductsProvider, useAllProducts };
+export { AllProductsProvider, useAllProductsContext };

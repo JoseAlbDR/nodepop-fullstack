@@ -1,11 +1,11 @@
 import { FaTimes } from 'react-icons/fa';
 import StyledSmallSidebar from '../assets/wrappers/SmallSideBar';
-import { useDashboard } from '../context/DashboardContext';
+import { useDashboardContext } from '../context/DashboardContext';
 import { Logo } from '.';
 import NavLinks from './NavLinks';
 
 const SmallSidebar = () => {
-  const { showSidebar, toggleSidebar } = useDashboard();
+  const { showSidebar, toggleSidebar } = useDashboardContext();
 
   return (
     <StyledSmallSidebar>
@@ -21,7 +21,7 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-          <NavLinks />
+          <NavLinks isBigSidebar={false} />
         </div>
       </div>
     </StyledSmallSidebar>

@@ -1,8 +1,8 @@
-import { useDashboard } from '../context/DashboardContext';
+import { useDashboardContext } from '../context/DashboardContext';
 import StyledThemeToggle from '../assets/wrappers/ThemeToggle';
 import { FaMoon, FaSun } from 'react-icons/fa';
 const ThemeToggle = () => {
-  const { isDarkTheme, toggleDarkTheme } = useDashboard();
+  const { isDarkTheme, toggleDarkTheme } = useDashboardContext();
 
   return (
     <StyledThemeToggle type="button" onClick={toggleDarkTheme}>

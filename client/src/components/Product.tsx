@@ -13,7 +13,7 @@ import { IProduct } from '../types/Products';
 import day from 'dayjs';
 import ProductCategories from './ProductCategories';
 import React from 'react';
-import { useDashboard } from '../context/DashboardContext';
+import { useDashboardContext } from '../context/DashboardContext';
 interface ProductProps extends IProduct {}
 
 const Product = ({
@@ -27,7 +27,7 @@ const Product = ({
   price,
   tags,
 }: ProductProps) => {
-  const { user } = useDashboard();
+  const { user } = useDashboardContext();
 
   const handleImageError = (
     e: React.SyntheticEvent<HTMLImageElement, Event>

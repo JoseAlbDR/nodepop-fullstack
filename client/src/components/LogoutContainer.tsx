@@ -1,13 +1,13 @@
 import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useState } from 'react';
-import { useDashboard } from '../context/DashboardContext';
+import { useDashboardContext } from '../context/DashboardContext';
 import StyledLogout from '../assets/wrappers/Logout';
 import { useNavigate } from 'react-router-dom';
 
 const LogoutContainer = () => {
   const [showLogout, setShowLogut] = useState(false);
-  const { user, logoutUser } = useDashboard();
+  const { user, logoutUser } = useDashboardContext();
   const navigate = useNavigate();
 
   return (

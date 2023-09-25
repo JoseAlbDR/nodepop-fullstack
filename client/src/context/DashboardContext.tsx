@@ -68,7 +68,7 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-function useDashboard() {
+function useDashboardContext() {
   const context = useContext(DashboardContext);
 
   if (context === undefined) {
@@ -77,4 +77,4 @@ function useDashboard() {
   return context;
 }
 
-export { DashboardProvider, useDashboard };
+export { DashboardProvider, useDashboardContext };
