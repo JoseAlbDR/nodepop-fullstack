@@ -171,6 +171,7 @@ ul {
   width: 100%;
   display: block;
   object-fit: cover;
+  height: 30vh;
 }
 /* buttons */
 
