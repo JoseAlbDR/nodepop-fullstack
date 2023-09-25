@@ -10,6 +10,10 @@ const LogoutContainer = () => {
   const { user, logoutUser } = useDashboardContext();
   const navigate = useNavigate();
 
+  const avatar = (
+    <img src={user.avatar} alt={`${user.name} avatar`} className="img" />
+  );
+
   return (
     <StyledLogout>
       <button
@@ -17,8 +21,8 @@ const LogoutContainer = () => {
         className="btn logout-btn"
         onClick={() => setShowLogut(!showLogout)}
       >
-        <BsFillPersonFill />
-        {user?.name}
+        {user.avatar ? avatar : <BsFillPersonFill />}
+        {user.name}
         <IoIosArrowDown />
       </button>
       <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
