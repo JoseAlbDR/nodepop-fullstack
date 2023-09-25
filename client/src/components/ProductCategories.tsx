@@ -1,11 +1,11 @@
+import { FaTag } from 'react-icons/fa';
 import { ITags } from '../../../src/types/productInterfaces';
-import tag from '../assets/images/tag-solid.svg';
 const ProductCategories = ({ tags }: { tags: ITags[] }) => {
   return (
     <div className="categories">
       <h3 className="title">
         Categories
-        <img src={tag} alt="tag" />
+        <FaTag />
       </h3>
       <div className="tags">
         {tags.map((tag) => (
