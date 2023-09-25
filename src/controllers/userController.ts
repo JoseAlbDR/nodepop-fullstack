@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
+import { getImagePath } from '../utils/getImagePath';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -12,9 +13,15 @@ const userController = {
 
   updateUser: async (req: UpdateUserDTO, res: Response) => {
     // Remove password just in case...
-    console.log(req.file);
     const obj = { ...req.body };
     delete obj.password;
+
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const port = process.env.PORT;
+    const filePath = req.file!.path;
+
+    obj.avatar = getImagePath(protocol, host, port, filePath);
 
     await userService.updateUser(req.user.userId, obj);
 

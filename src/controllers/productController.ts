@@ -8,6 +8,7 @@ import productService from '../services/productService';
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
+import { getImagePath } from '../utils/getImagePath';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
@@ -24,7 +25,15 @@ const productController = {
 
   createProduct: async (req: CreateProductDTO, res: Response) => {
     req.body.createdBy = req.user.userId;
-    const product = await productService.createProduct(req.body);
+
+    const protocol = req.protocol;
+    const host = req.hostname;
+    const port = process.env.PORT;
+    const filePath = req.file!.path;
+
+    const image = getImagePath(protocol, host, port, filePath);
+
+    const product = await productService.createProduct({ ...req.body, image });
     res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
   },
 

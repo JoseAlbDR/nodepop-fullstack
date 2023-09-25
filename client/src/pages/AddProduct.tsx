@@ -17,20 +17,18 @@ export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
   const formData = await request.formData();
   const tags = formData.getAll('tags');
-  const type = formData.get('type');
+  const type = formData.get('onSale');
+  formData.set('onSale', String(String(type) === 'on sale'));
+
   if (tags.length === 0) {
     toast.error('Select at least one tag!');
     return null;
   }
-  const addProductData = Object.fromEntries(formData);
+
   try {
     const {
       data: { msg },
-    } = await customFetch.post('/products', {
-      ...addProductData,
-      onSale: type === 'on sale',
-      tags,
-    });
+    } = await customFetch.post('/products', formData);
     toast.success(msg);
     return redirect('all-products');
   } catch (error) {
@@ -49,13 +47,13 @@ const AddProduct = () => {
   return (
     <StyledAddProduct>
       <div className="dashboard-page">
-        <Form method="post">
+        <Form method="post" encType="multipart/form-data">
           <h4>Add Product</h4>
           <div className="form-center">
             <FormRowInput
               labelText="select an image file (max 0.5MB)"
               type="file"
-              id="productImage"
+              id="image"
               name="image"
             />
             <FormRow
@@ -72,7 +70,7 @@ const AddProduct = () => {
               defaultValue="300"
               disabled={isSubmitting}
             />
-            <FormRowSelect name="type" types={TYPE} />
+            <FormRowSelect name="onSale" types={TYPE} />
             <FormRowTags page="add-product" />
 
             <button

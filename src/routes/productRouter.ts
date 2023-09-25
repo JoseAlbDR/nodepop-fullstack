@@ -8,6 +8,7 @@ import {
   validateProductUpdate,
 } from '../middleware/validationMiddleware';
 import { authorizePermissions } from '../middleware/authMiddleware';
+import upload from '../middleware/multerMiddleware';
 
 const router = express.Router();
 
@@ -19,6 +20,8 @@ router
   ])
   .post(
     authorizePermissions('user', 'admin'),
+    upload.single('image'),
+    validateUploadedFiles,
     validateProductCreation,
     productController.createProduct
   );

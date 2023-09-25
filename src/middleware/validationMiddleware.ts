@@ -54,6 +54,8 @@ export const validateUploadedFiles = (
     throw new BadRequestError('File has to be smaller than 1MB');
   }
 
+  req.file = image;
+
   next();
 };
 
@@ -103,15 +105,6 @@ export const validateProductCreation = [
     .isFloat({ min: 0 })
     .withMessage('price must be a positive number'),
 
-  body('image')
-    .trim()
-    .notEmpty()
-    .withMessage('image is required')
-    .isString()
-    .withMessage('image must be a string')
-    .isLength({ min: 3, max: 100 })
-    .withMessage('image must be between 3 and 50 characters'),
-
   body('tags')
     .notEmpty()
     .withMessage('tags is required')
@@ -144,15 +137,6 @@ export const validateProductUpdate = [
     .withMessage('price is required')
     .isFloat({ min: 0 })
     .withMessage('price must be a positive number'),
-
-  body('image')
-    .trim()
-    .notEmpty()
-    .withMessage('image is required')
-    .isString()
-    .withMessage('image must be a string')
-    .isLength({ min: 3, max: 100 })
-    .withMessage('image must be between 3 and 50 characters'),
 
   body('tags')
     .notEmpty()

@@ -10,6 +10,7 @@ export interface IUser {
   lastName: string;
   location: string;
   role: Role;
+  avatar?: string;
 }
 
 export type ILoginUser = Omit<IUser, 'name' | 'lastName' | 'location' | 'role'>;

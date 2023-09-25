@@ -8,6 +8,7 @@ export interface IUser {
   lastName: string;
   location: string;
   role: Role;
+  avatar?: string;
 }
 
 export interface IUserData extends AxiosResponse {
