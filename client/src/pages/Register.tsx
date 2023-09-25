@@ -33,7 +33,6 @@ export const action = async (data: ActionFunctionArgs) => {
 
 const Register = () => {
   const navigation = useNavigation();
-  console.log(navigation);
   const isSubmitting = navigation.state === 'submitting';
   return (
     <StyledRegister>
