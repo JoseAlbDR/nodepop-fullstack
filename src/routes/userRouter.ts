@@ -1,6 +1,9 @@
 import express from 'express';
 import userController from '../controllers/userController';
-import { validateUpdateUser } from '../middleware/validationMiddleware';
+import {
+  validateUpdateUser,
+  validateUploadedFiles,
+} from '../middleware/validationMiddleware';
 import { authorizePermissions } from '../middleware/authMiddleware';
 import upload from '../middleware/multerMiddleware';
 
@@ -10,6 +13,7 @@ router.get('/current-user', userController.getCurrentUser);
 router.patch(
   '/update-user',
   upload.single('avatar'),
+  validateUploadedFiles,
   validateUpdateUser,
   userController.updateUser
 );

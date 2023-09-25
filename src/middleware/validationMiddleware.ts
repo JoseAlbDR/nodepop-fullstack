@@ -1,7 +1,6 @@
 import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
-import { UploadedFile } from 'express-fileupload';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
 import {
   tagsValidationMessage,
@@ -38,11 +37,11 @@ export const validateUploadedFiles = (
   _res: Response,
   next: NextFunction
 ) => {
-  if (!req.files || Object.keys(req.files).length === 0) {
+  if (!req.file || Object.keys(req.file).length === 0) {
     throw new BadRequestError('No file uploaded');
   }
 
-  const image = req.files.image as UploadedFile;
+  const image = req.file;
 
   if (!image.mimetype.startsWith('image')) {
     throw new BadRequestError('File has to be an image');
