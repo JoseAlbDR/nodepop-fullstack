@@ -6,6 +6,7 @@ import { DashboardProvider } from '../context/DashboardContext';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { DarkThemeProvider } from '../context/ToggleDarkThemeContext';
 
 export const loader = async () => {
   try {
@@ -22,18 +23,20 @@ export const loader = async () => {
 const DashboardLayout = () => {
   return (
     <DashboardProvider>
-      <StyledDashboard>
-        <main className="dashboard">
-          <SmallSideBar />
-          <BigSidebar />
-          <div>
-            <NavBar />
-            <div className="dashboard-page">
-              <Outlet />
+      <DarkThemeProvider>
+        <StyledDashboard>
+          <main className="dashboard">
+            <SmallSideBar />
+            <BigSidebar />
+            <div>
+              <NavBar />
+              <div className="dashboard-page">
+                <Outlet />
+              </div>
             </div>
-          </div>
-        </main>
-      </StyledDashboard>
+          </main>
+        </StyledDashboard>
+      </DarkThemeProvider>
     </DashboardProvider>
   );
 };

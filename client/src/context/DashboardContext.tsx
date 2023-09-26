@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import { checkDefaultTheme } from '../App';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import customFetch from '../utils/customFetch';
@@ -9,8 +8,6 @@ import { IUser, IUserData } from '../types/UserInterface';
 interface DashboardContextValues {
   user: IUser;
   showSidebar: boolean;
-  isDarkTheme: boolean;
-  toggleDarkTheme: () => void;
   toggleSidebar: () => void;
   logoutUser: (navigate: NavigateFunction) => Promise<void>;
   editProfile: (navigate: NavigateFunction) => void;
@@ -22,16 +19,7 @@ const DashboardContext = createContext<DashboardContextValues | undefined>(
 
 function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(checkDefaultTheme());
   const { user } = useLoaderData() as IUserData;
-
-  const toggleDarkTheme = () => {
-    const ligthTheme = !isDarkTheme;
-    setIsDarkTheme(ligthTheme);
-    console.log(isDarkTheme);
-
-    localStorage.setItem('darkTheme', ligthTheme + '');
-  };
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -62,8 +50,6 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         showSidebar,
-        isDarkTheme,
-        toggleDarkTheme,
         toggleSidebar,
         logoutUser,
         editProfile,
