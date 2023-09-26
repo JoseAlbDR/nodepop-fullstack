@@ -3,6 +3,7 @@ import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IStatsResponse } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
+import { ChartsContainer, StatsContainer } from '../components';
 
 export const loader = async () => {
   try {
@@ -19,7 +20,13 @@ export const loader = async () => {
 const Stats = () => {
   const { data } = useLoaderData() as IStatsResponse;
   const { resultStats, monthlyProducts } = data;
-  console.log(resultStats, monthlyProducts);
-  return <h1>Stats</h1>;
+  return (
+    <>
+      <StatsContainer defaultStats={resultStats} />
+      {monthlyProducts?.length > 1 && (
+        <ChartsContainer data={monthlyProducts} />
+      )}
+    </>
+  );
 };
 export default Stats;

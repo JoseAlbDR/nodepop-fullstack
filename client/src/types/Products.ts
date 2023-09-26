@@ -23,16 +23,20 @@ export interface IProductResponse extends AxiosResponse {
   data: { products: IProduct[] };
 }
 
+export interface IResultStats {
+  onSale: number;
+  search: number;
+  userTotal: number;
+}
+
+export interface IMonthlyProducts {
+  date: string;
+  count: number;
+}
+
 export interface IStatsResponse extends AxiosResponse {
   data: {
-    resultStats: {
-      onSale: number;
-      search: number;
-      userTotal: number;
-    };
-    monthlyProducts: {
-      date: string;
-      count: number;
-    }[];
+    resultStats: IResultStats;
+    monthlyProducts: IMonthlyProducts[];
   };
 }
