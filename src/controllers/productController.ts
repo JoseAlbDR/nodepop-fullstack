@@ -34,7 +34,7 @@ const productController = {
     const port = process.env.PORT;
     const filePath = req.file!.path;
 
-    const image = getImagePath(protocol, host, port, filePath);
+    const image = getImagePath(protocol, host, port, filePath, 'products');
 
     const product = await productService.createProduct({ ...req.body, image });
     res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
@@ -52,13 +52,16 @@ const productController = {
     const port = process.env.PORT;
     const filePath = req.file!.path;
 
-    const image = getImagePath(protocol, host, port, filePath);
+    // Generate image path to store in server
+    const image = getImagePath(protocol, host, port, filePath, 'products');
 
     // Delete Previous image
     const product = await productService.getOneProduct(req.params.id);
-
-    const imagePath = product?.image.split('/').at(-1);
-    if (imagePath) await deleteFile(imagePath);
+    // Check if image is from populate (not uploaded in server)
+    if (!product?.image.startsWith('https')) {
+      const imagePath = product?.image.split('/').at(-1);
+      if (imagePath) await deleteFile(imagePath);
+    }
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
@@ -72,13 +75,13 @@ const productController = {
   },
 
   deleteProduct: async (req: Request, res: Response) => {
+    // Delete previus image
     const removedProduct = await productService.deleteProduct(req.params.id);
-    console.log(removedProduct?.image.split('/').at(-1));
-    const imagePath = removedProduct?.image.split('/').at(-1);
-
-    console.log(imagePath);
-
-    if (imagePath) await deleteFile(imagePath);
+    // Check if image is from populate (not uploaded in server)
+    if (!removedProduct?.image.startsWith('https')) {
+      const imagePath = removedProduct?.image.split('/').at(-1);
+      if (imagePath) await deleteFile(imagePath);
+    }
 
     res
       .status(StatusCodes.OK)

@@ -4,9 +4,10 @@ export const getImagePath = (
   protocol: string,
   host: string,
   port: string,
-  filePath: string
+  filePath: string,
+  folder: string
 ) => {
-  const relativePath = path.join('uploads', path.basename(filePath));
+  const relativePath = path.join('uploads', folder, path.basename(filePath));
 
   return `${protocol}://${host}:${port}/${relativePath}`;
 };
