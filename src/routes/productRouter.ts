@@ -20,7 +20,7 @@ router
   ])
   .post(
     authorizePermissions('user', 'admin'),
-    upload.single('image'),
+    upload('products').single('image'),
     validateUploadedFiles,
     validateProductCreation,
     productController.createProduct
@@ -47,7 +47,7 @@ router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)
   .patch(
-    upload.single('image'),
+    upload('products').single('image'),
     validateUploadedFiles,
     validateProductUpdate,
     validateIdParam,

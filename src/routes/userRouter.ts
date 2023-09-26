@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/current-user', userController.getCurrentUser);
 router.patch(
   '/update-user',
-  upload.single('avatar'),
+  upload('users').single('avatar'),
   validateUploadedFiles,
   validateUpdateUser,
   userController.updateUser
