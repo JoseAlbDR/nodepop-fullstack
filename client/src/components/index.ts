@@ -12,3 +12,4 @@ export { default as ProductInfo } from './ProductInfo';
 export { default as UserProductsContainer } from './UserProductContainer';
 export { default as ProductButton } from './ProductButton';
 export { default as StatItem } from './StatItem';
+export { default as SubmitBtn } from './SubmitBtn';
