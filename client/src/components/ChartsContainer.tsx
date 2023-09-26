@@ -1,8 +1,7 @@
 import { IMonthlyProducts } from '../types/Products';
 import StyledChartsContainer from '../assets/wrappers/ChartsContainer';
 import { useState } from 'react';
-import BarChart from './BarChart';
-import { AreaChart } from '.';
+import { AreaChart, BarChart } from '.';
 
 const ChartsContainer = ({ data }: { data: IMonthlyProducts[] }) => {
   const [barChart, setBarchart] = useState(true);
