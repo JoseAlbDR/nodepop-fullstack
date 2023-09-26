@@ -46,6 +46,8 @@ router.post(
   uploadsController.uploadProductImage
 );
 
+router.route('/stats').get(productController.showStats);
+
 router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)

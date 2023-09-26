@@ -92,6 +92,12 @@ const productController = {
 
     res.status(StatusCodes.OK).json({ tags });
   },
+
+  showStats: async (_req: Request, res: Response) => {
+    const stats = await productService.showStats();
+
+    res.send(stats);
+  },
 };
 
 export default productController;

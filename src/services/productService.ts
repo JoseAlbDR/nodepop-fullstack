@@ -56,6 +56,10 @@ const productService = {
     const uniqueTags = _.uniq(result.flatMap((item) => item.tags));
     return uniqueTags;
   },
+
+  showStats: async () => {
+    return 'show stats';
+  },
 };
 
 export default productService;
