@@ -13,3 +13,7 @@ export { default as UserProductsContainer } from './UserProductContainer';
 export { default as ProductButton } from './ProductButton';
 export { default as StatItem } from './StatItem';
 export { default as SubmitBtn } from './SubmitBtn';
+export { default as AreaChart } from './AreaChart';
+export { default as BarChart } from './BarChart';
+export { default as ChartsContainer } from './ChartsContainer';
+export { default as StatsContainer } from './StatsContainer';
