@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 // import { verifyJWT } from '../utils/jwtUtils';
 import { UnauthenticatedError, UnauthorizedError } from '../errors';
-import { verifyJWT } from '../utils/jwtUtils';
+import { verifyJWT } from '../utils';
 import { ITokenPayload, Role } from '../types/authInterfaces';
 
 const authenticateUser = async (

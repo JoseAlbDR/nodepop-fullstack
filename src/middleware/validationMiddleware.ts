@@ -2,10 +2,7 @@ import { body, param, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
-import {
-  tagsValidationMessage,
-  validateTags,
-} from '../utils/validateTagsUtils';
+import { tagsValidationMessage, validateTags } from '../utils';
 
 export const requestValidator = (
   req: Request,

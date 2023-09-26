@@ -3,7 +3,7 @@ import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { getImagePath } from '../utils/getImagePath';
-import { deleteFile } from '../utils/deleteImageUtil';
+import { deleteFile } from '../utils';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {

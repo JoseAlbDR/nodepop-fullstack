@@ -8,8 +8,7 @@ import productService from '../services/productService';
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
-import { getImagePath } from '../utils/getImagePath';
-import { deleteFile } from '../utils/deleteImageUtil';
+import { deleteFile, getImagePath } from '../utils';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {

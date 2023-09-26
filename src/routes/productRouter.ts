@@ -9,6 +9,7 @@ import {
 } from '../middleware/validationMiddleware';
 import { authorizePermissions } from '../middleware/authMiddleware';
 import upload from '../middleware/multerMiddleware';
+import { checkTestUser } from '../middleware/checkTestUserMiddleware';
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router
     productController.getAllProducts,
   ])
   .post(
+    checkTestUser,
     authorizePermissions('user', 'admin'),
     upload('products').single('image'),
     validateUploadedFiles,
@@ -38,6 +40,7 @@ router.get('/tags', [
 
 router.post(
   '/uploadImage',
+  checkTestUser,
   authorizePermissions('user', 'admin'),
   validateUploadedFiles,
   uploadsController.uploadProductImage
@@ -47,6 +50,7 @@ router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)
   .patch(
+    checkTestUser,
     authorizePermissions('user', 'admin'),
     upload('products').single('image'),
     validateUploadedFiles,
@@ -55,6 +59,7 @@ router
     productController.updateProduct
   )
   .delete(
+    checkTestUser,
     authorizePermissions('user', 'admin'),
     validateIdParam,
     productController.deleteProduct
