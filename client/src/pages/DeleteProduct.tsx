@@ -17,10 +17,11 @@ export const action = async (data: ActionFunctionArgs) => {
     toast.success(`Product deleted successfully`);
     return redirect('../user-products');
   } catch (error) {
+    console.log(error);
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
+      return redirect('../user-products');
     }
-    console.log(error);
     return error;
   }
 };
