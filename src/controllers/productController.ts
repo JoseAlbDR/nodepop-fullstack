@@ -96,7 +96,7 @@ const productController = {
   showStats: async (req: Request, res: Response) => {
     const defaultStats = await productService.showStats(req.user.userId);
 
-    res.status(StatusCodes.OK).json({ defaultStats });
+    res.status(StatusCodes.OK).json(defaultStats);
   },
 };
 
