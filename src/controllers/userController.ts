@@ -7,27 +7,32 @@ import { deleteFile } from '../utils';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
-    const user = await userService.getCurrentUser(req.user.userId);
+    const { userId } = req.user;
+
+    const user = await userService.getCurrentUser(userId);
 
     res.status(StatusCodes.OK).json({ user });
   },
 
   updateUser: async (req: UpdateUserDTO, res: Response) => {
+    const { userId } = req.user;
+
     // Remove password just in case...
-    const obj = { ...req.body };
-    delete obj.password;
+    const updates = { ...req.body };
+    delete updates.password;
 
-    const protocol = req.protocol;
-    const host = req.hostname;
-    const port = process.env.PORT;
-    const filePath = req.file!.path;
-
-    const user = await userService.getCurrentUser(req.user.userId);
+    // Delete previous image
+    const user = await userService.getCurrentUser(userId);
     const imagePath = user.avatar?.split('/').at(-1);
     if (imagePath) await deleteFile(imagePath);
 
-    obj.avatar = getImagePath(protocol, host, port, filePath, 'users');
-    await userService.updateUser(req.user.userId, obj);
+    // New image path
+    const protocol = req.protocol;
+    const host = req.get('host')!;
+    const filePath = req.file!.path;
+    updates.avatar = getImagePath(protocol, host, filePath, 'users');
+
+    await userService.updateUser(req.user.userId, updates);
 
     res.status(StatusCodes.OK).json({ msg: 'user updated' });
   },

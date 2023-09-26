@@ -6,13 +6,17 @@ import { LoginUserDTO } from '../dtos/loginUserDto';
 
 export const authController = {
   register: async (req: RegisterUserDTO, res: Response) => {
-    await authService.register(req.body);
+    const user = req.body;
+
+    await authService.register(user);
 
     res.status(StatusCodes.CREATED).json({ msg: 'user created' });
   },
 
   login: async (req: LoginUserDTO, res: Response) => {
-    const token = await authService.login(req.body);
+    const loginData = req.body;
+
+    const token = await authService.login(loginData);
 
     const oneDay = 1000 * 60 * 60 * 24;
 

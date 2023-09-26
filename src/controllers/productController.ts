@@ -18,44 +18,55 @@ const productController = {
   },
 
   getUserProducts: async (req: Request, res: Response) => {
-    const products = await productService.getUserProducts(req.user.userId);
+    const { userId } = req.user;
+
+    const products = await productService.getUserProducts(userId);
 
     res.status(StatusCodes.OK).json({ products });
   },
 
   createProduct: async (req: CreateProductDTO, res: Response) => {
-    req.body.createdBy = req.user.userId;
+    const product = req.body;
 
-    console.log(req.body.tags);
+    product.createdBy = req.user.userId;
 
     const protocol = req.protocol;
-    const host = req.hostname;
-    const port = process.env.PORT;
+    const host = req.get('host')!;
     const filePath = req.file!.path;
 
-    const image = getImagePath(protocol, host, port, filePath, 'products');
+    const image = getImagePath(protocol, host, filePath, 'products');
 
-    const product = await productService.createProduct({ ...req.body, image });
-    res.status(StatusCodes.CREATED).json({ msg: 'product created', product });
+    const newProduct = await productService.createProduct({
+      ...product,
+      image,
+    });
+
+    res
+      .status(StatusCodes.CREATED)
+      .json({ msg: 'product created', newProduct });
   },
 
   getOneProduct: async (req: Request, res: Response) => {
-    const product = await productService.getOneProduct(req.params.id);
+    const { id: productId } = req.params;
+
+    const product = await productService.getOneProduct(productId);
 
     res.status(StatusCodes.OK).json({ product });
   },
 
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
+    const { id: productId } = req.params;
+    const updates = req.body;
+
     const protocol = req.protocol;
     const host = req.hostname;
-    const port = process.env.PORT;
     const filePath = req.file!.path;
 
     // Generate image path to store in server
-    const image = getImagePath(protocol, host, port, filePath, 'products');
+    const image = getImagePath(protocol, host, filePath, 'products');
 
     // Delete Previous image
-    const product = await productService.getOneProduct(req.params.id);
+    const product = await productService.getOneProduct(productId);
     // Check if image is from populate (not uploaded in server)
     if (!product?.image.startsWith('https')) {
       const imagePath = product?.image.split('/').at(-1);
@@ -64,7 +75,7 @@ const productController = {
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
-      ...req.body,
+      ...updates,
       image,
     });
 
@@ -74,8 +85,10 @@ const productController = {
   },
 
   deleteProduct: async (req: Request, res: Response) => {
+    const { id: productId } = req.params;
+
     // Delete previus image
-    const removedProduct = await productService.deleteProduct(req.params.id);
+    const removedProduct = await productService.deleteProduct(productId);
     // Check if image is from populate (not uploaded in server)
     if (!removedProduct?.image.startsWith('https')) {
       const imagePath = removedProduct?.image.split('/').at(-1);
