@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
 import StyledProfile from '../assets/wrappers/DashboardFormPage';
-import { FormRow } from '../components';
+import { FormRow, SubmitBtn } from '../components';
 import { useDashboardContext } from '../context/DashboardContext';
 import FormRowInput from '../components/FormRowInput';
 import { toast } from 'react-toastify';
@@ -76,13 +76,7 @@ const Profile = () => {
               defaultValue={user.location || 'hot dog food truck'}
               disabled={isSubmitting}
             />
-            <button
-              type="submit"
-              className="btn btn-block form-btn"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'saving changes...' : 'save changes'}
-            </button>
+            <SubmitBtn formBtn />
           </div>
         </Form>
       </div>

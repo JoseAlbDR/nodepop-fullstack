@@ -6,7 +6,7 @@ import {
   useNavigation,
 } from 'react-router-dom';
 import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
-import { Logo, FormRow } from '../components';
+import { Logo, FormRow, SubmitBtn } from '../components';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -52,9 +52,7 @@ const Login = () => {
           defaultValue="M5e5k5i57."
           disabled={isSubmitting}
         />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-          {isSubmitting ? 'submitting...' : 'submit'}
-        </button>
+        <SubmitBtn />
         <button type="submit" className="btn btn-block" disabled={isSubmitting}>
           explore the app
         </button>

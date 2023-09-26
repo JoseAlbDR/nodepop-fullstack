@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 // import { useDashboard } from '../context/DashboardContext';
-import { FormRow, FormRowSelect, FormRowTags } from '../components';
+import { FormRow, FormRowSelect, FormRowTags, SubmitBtn } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
@@ -73,14 +73,7 @@ const AddProduct = () => {
             />
             <FormRowSelect name="onSale" types={TYPE} />
             <FormRowTags page="all" />
-
-            <button
-              type="submit"
-              className="btn btn-block form-btn"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'submitting...' : 'submit'}
-            </button>
+            <SubmitBtn formBtn />
           </div>
         </Form>
       </div>

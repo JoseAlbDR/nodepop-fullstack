@@ -6,7 +6,7 @@ import {
   useNavigation,
 } from 'react-router-dom';
 import StyledRegister from '../assets/wrappers/RegisterAndLoginPage';
-import { Logo, FormRow } from '../components';
+import { Logo, FormRow, SubmitBtn } from '../components';
 import customFetch from '../utils/customFetch.ts';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
@@ -74,9 +74,7 @@ const Register = () => {
           defaultValue="M5e5k5i57."
           disabled={isSubmitting}
         />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
-          {isSubmitting ? 'submitting...' : 'submit'}
-        </button>
+        <SubmitBtn />
         <p>
           Already a member?
           <Link to="/login" className="member-btn">
