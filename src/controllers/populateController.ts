@@ -17,7 +17,7 @@ export const populateController = {
       const image = faker.image.urlLoremFlickr({ category: name });
       const price = Math.floor(Math.random() * (1000 - 1 + 1)) + 1;
       const onSale = randomBoolean();
-      const tags = getRandomTags(2);
+      const tags = getRandomTags(Math.floor(Math.random() * 4) + 1);
       const product = {
         name,
         onSale,
