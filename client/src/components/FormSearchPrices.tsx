@@ -1,18 +1,15 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { useProducts } from '../hooks/useProducts';
 import { getMinMaxPrices } from '../utils/getMinMaxPrice';
 import { useState } from 'react';
+import { useAllProductsContext } from '../context/AllProductsContext';
 const FormSearchPrices = () => {
-  const { data, isLoading } = useProducts();
+  const { data } = useAllProductsContext();
   const [value, setValue] = useState<number[]>([0, 100000]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
-
-  if (isLoading) return;
-  if (!data) return;
 
   const { products } = data;
   const { minPrice, maxPrice } = getMinMaxPrices(products);

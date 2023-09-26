@@ -4,8 +4,9 @@ import { UserProductsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IProductResponse } from '../types/Products';
-('react-router-dom');
 import { UserProductsProvider } from '../context/UserProductsContext';
+import { AllProductsProvider } from '../context/AllProductsContext';
+('react-router-dom');
 
 export const loader = async () => {
   try {
@@ -23,12 +24,14 @@ export const loader = async () => {
 
 const UserProducts = () => {
   return (
-    <UserProductsProvider>
-      <StyledAllProducts>
+    <StyledAllProducts>
+      <AllProductsProvider>
         <SearchContainer />
+      </AllProductsProvider>
+      <UserProductsProvider>
         <UserProductsContainer />
-      </StyledAllProducts>
-    </UserProductsProvider>
+      </UserProductsProvider>
+    </StyledAllProducts>
   );
 };
 
