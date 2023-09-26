@@ -17,5 +17,5 @@ export const validateProductGetDeleteUpdate = async (
 
   if (!result) throw new NotFoundError(`Product not found`);
 
-  checkPermissions(req.user as JWTPayload, result.createdBy);
+  checkPermissions(req.user as JWTPayload, result.createdBy!);
 };

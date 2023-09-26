@@ -2,6 +2,7 @@ import { User } from '../models/UserModel';
 import { ILoginUser, IUser } from '../types/authInterfaces';
 import { UnauthenticatedError } from '../errors/unauthenticatedError';
 import { createJWT } from '../utils';
+import populateService from './populateService';
 
 export const authService = {
   register: async (user: IUser) => {
@@ -22,6 +23,9 @@ export const authService = {
       throw new UnauthenticatedError(
         `User with email ${loginData.email} not found`
       );
+
+    if (user?.role === 'tester')
+      await populateService.populateDatabase(50, user._id);
 
     const isPasswordCorrect = await user.checkPassword(password);
 

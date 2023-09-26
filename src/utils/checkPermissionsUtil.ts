@@ -16,7 +16,7 @@ export const checkPermissions = (
   // Check if the user created the resourze
 
   const userId = resourceUserId as mongoose.Types.ObjectId;
-  if (requestUser.userId === userId.toString()) return;
+  if (requestUser.userId.toString() === userId.toString()) return;
 
   throw new UnauthorizedError('Not authorized to access this resource');
 };
