@@ -93,10 +93,10 @@ const productController = {
     res.status(StatusCodes.OK).json({ tags });
   },
 
-  showStats: async (_req: Request, res: Response) => {
-    const stats = await productService.showStats();
+  showStats: async (req: Request, res: Response) => {
+    const defaultStats = await productService.showStats(req.user.userId);
 
-    res.send(stats);
+    res.status(StatusCodes.OK).json({ defaultStats });
   },
 };
 
