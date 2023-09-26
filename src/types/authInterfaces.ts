@@ -1,7 +1,7 @@
 import { JwtPayload } from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-export type Role = 'admin' | 'user';
+export type Role = 'admin' | 'user' | 'tester';
 
 export interface IUser {
   name: string;

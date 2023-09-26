@@ -15,7 +15,7 @@ const router = express.Router();
 router
   .route('/')
   .get([
-    authorizePermissions('user', 'admin'),
+    authorizePermissions('user', 'admin', 'tester'),
     productController.getAllProducts,
   ])
   .post(
@@ -27,12 +27,12 @@ router
   );
 
 router.get('/userProducts', [
-  authorizePermissions('user', 'admin'),
+  authorizePermissions('user', 'admin', 'tester'),
   productController.getUserProducts,
 ]);
 
 router.get('/tags', [
-  authorizePermissions('user', 'admin'),
+  authorizePermissions('user', 'admin', 'tester'),
   productController.getAllTags,
 ]);
 
@@ -47,12 +47,17 @@ router
   .route('/:id')
   .get(validateIdParam, productController.getOneProduct)
   .patch(
+    authorizePermissions('user', 'admin'),
     upload('products').single('image'),
     validateUploadedFiles,
     validateProductUpdate,
     validateIdParam,
     productController.updateProduct
   )
-  .delete(validateIdParam, productController.deleteProduct);
+  .delete(
+    authorizePermissions('user', 'admin'),
+    validateIdParam,
+    productController.deleteProduct
+  );
 
 export default router;

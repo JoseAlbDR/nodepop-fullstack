@@ -1,11 +1,16 @@
 import express from 'express';
 import { populateController } from '../controllers/populateController';
 import { validatePopulateParam } from '../middleware/validationMiddleware';
+import { authorizePermissions } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 router
   .route('/:n?')
-  .post(validatePopulateParam, populateController.populateDatabase);
+  .post(
+    authorizePermissions('user', 'admin'),
+    validatePopulateParam,
+    populateController.populateDatabase
+  );
 
 export default router;

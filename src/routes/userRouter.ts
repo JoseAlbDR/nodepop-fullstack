@@ -12,6 +12,7 @@ const router = express.Router();
 router.get('/current-user', userController.getCurrentUser);
 router.patch(
   '/update-user',
+  authorizePermissions('user', 'admin'),
   upload('users').single('avatar'),
   validateUploadedFiles,
   validateUpdateUser,

@@ -3,6 +3,7 @@ import {
   Form,
   Link,
   redirect,
+  useNavigate,
   useNavigation,
 } from 'react-router-dom';
 import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
@@ -31,8 +32,28 @@ export const action = async (data: ActionFunctionArgs) => {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+
+  const loginDemoUser = async () => {
+    const data = {
+      email: 'spongebob@gmail.com',
+      password: 'mauricio',
+    };
+    try {
+      await customFetch.post('/auth/login', data);
+      toast.success('Take a test drive');
+      navigate('/dashboard');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      console.log(error);
+      throw error;
+    }
+  };
+
   return (
     <StyledLogin>
       <Form method="post" className="form">
@@ -53,7 +74,12 @@ const Login = () => {
           disabled={isSubmitting}
         />
         <SubmitBtn />
-        <button type="submit" className="btn btn-block" disabled={isSubmitting}>
+        <button
+          type="button"
+          className="btn btn-block"
+          disabled={isSubmitting}
+          onClick={loginDemoUser}
+        >
           explore the app
         </button>
         <p>
