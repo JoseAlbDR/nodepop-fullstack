@@ -16,7 +16,7 @@ export interface IUser {
 export type ILoginUser = Omit<IUser, 'name' | 'lastName' | 'location' | 'role'>;
 
 export interface ITokenPayload extends JwtPayload {
-  userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
+  userId: mongoose.Types.ObjectId;
   role: Role;
   email: string;
   iat: number;
@@ -24,7 +24,7 @@ export interface ITokenPayload extends JwtPayload {
 }
 
 export type JWTPayload = {
-  userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
+  userId: mongoose.Types.ObjectId;
   role: Role;
   email: string;
 };
