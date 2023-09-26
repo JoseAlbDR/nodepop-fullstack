@@ -13,6 +13,7 @@ interface DashboardContextValues {
   toggleDarkTheme: () => void;
   toggleSidebar: () => void;
   logoutUser: (navigate: NavigateFunction) => Promise<void>;
+  editProfile: (navigate: NavigateFunction) => void;
 }
 
 const DashboardContext = createContext<DashboardContextValues | undefined>(
@@ -52,6 +53,10 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const editProfile = (navigate: NavigateFunction) => {
+    navigate('/dashboard/profile');
+  };
+
   return (
     <DashboardContext.Provider
       value={{
@@ -61,6 +66,7 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
         toggleDarkTheme,
         toggleSidebar,
         logoutUser,
+        editProfile,
       }}
     >
       {children}

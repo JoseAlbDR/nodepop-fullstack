@@ -42,6 +42,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     cursor: pointer;
+    border-bottom: 2px solid var(--background-color);
   }
 
   .dropdown:hover {

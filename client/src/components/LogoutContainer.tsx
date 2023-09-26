@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LogoutContainer = () => {
   const [showLogout, setShowLogut] = useState(false);
-  const { user, logoutUser } = useDashboardContext();
+  const { user, logoutUser, editProfile } = useDashboardContext();
   const navigate = useNavigate();
 
   const avatar = (
@@ -25,7 +25,15 @@ const LogoutContainer = () => {
         {user.name}
         <IoIosArrowDown />
       </button>
+
       <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
+        <button
+          type="button"
+          className="dropdown-btn"
+          onClick={() => editProfile(navigate)}
+        >
+          edit profile
+        </button>
         <button
           type="button"
           className="dropdown-btn"
