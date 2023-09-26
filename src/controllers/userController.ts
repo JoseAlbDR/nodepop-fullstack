@@ -3,6 +3,7 @@ import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { getImagePath } from '../utils/getImagePath';
+import { deleteFile } from '../utils/deleteImageUtil';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -21,8 +22,11 @@ const userController = {
     const port = process.env.PORT;
     const filePath = req.file!.path;
 
-    obj.avatar = getImagePath(protocol, host, port, filePath);
+    const user = await userService.getCurrentUser(req.user.userId);
+    const imagePath = user.avatar?.split('/').at(-1);
+    if (imagePath) await deleteFile(imagePath);
 
+    obj.avatar = getImagePath(protocol, host, port, filePath, 'users');
     await userService.updateUser(req.user.userId, obj);
 
     res.status(StatusCodes.OK).json({ msg: 'user updated' });
