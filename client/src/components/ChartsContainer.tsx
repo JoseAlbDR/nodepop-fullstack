@@ -8,7 +8,11 @@ const ChartsContainer = ({ data }: { data: IMonthlyProducts[] }) => {
   return (
     <StyledChartsContainer>
       <h4>Monthly Products</h4>
-      <button type="button" onClick={() => setBarchart(!barChart)}>
+      <button
+        className="btn"
+        type="button"
+        onClick={() => setBarchart(!barChart)}
+      >
         {barChart ? 'Area Chart' : 'Bar Chart'}
       </button>
       {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
