@@ -3,7 +3,7 @@ import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { getImagePath } from '../utils/getImagePath';
-import { deleteFile } from '../utils';
+import { removeImage } from '../utils';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -23,8 +23,7 @@ const userController = {
 
     // Delete previous image
     const user = await userService.getCurrentUser(userId);
-    const imagePath = user.avatar?.split('/').at(-1);
-    if (imagePath) await deleteFile(imagePath);
+    await removeImage(user.avatar!);
 
     // New image path
     const protocol = req.protocol;

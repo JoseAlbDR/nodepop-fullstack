@@ -8,7 +8,7 @@ import productService from '../services/productService';
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
-import { deleteFile, getImagePath } from '../utils';
+import { getImagePath, removeImage } from '../utils';
 
 const productController = {
   getAllProducts: async (_req: Request, res: Response) => {
@@ -68,10 +68,8 @@ const productController = {
     // Delete Previous image
     const product = await productService.getOneProduct(productId);
     // Check if image is from populate (not uploaded in server)
-    if (!product?.image.startsWith('https')) {
-      const imagePath = product?.image.split('/').at(-1);
-      if (imagePath) await deleteFile(imagePath);
-    }
+
+    if (product) await removeImage(product.image);
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
@@ -89,11 +87,8 @@ const productController = {
 
     // Delete previus image
     const removedProduct = await productService.deleteProduct(productId);
-    // Check if image is from populate (not uploaded in server)
-    if (!removedProduct?.image.startsWith('https')) {
-      const imagePath = removedProduct?.image.split('/').at(-1);
-      if (imagePath) await deleteFile(imagePath);
-    }
+
+    if (removedProduct) await removeImage(removedProduct.image);
 
     res
       .status(StatusCodes.OK)
