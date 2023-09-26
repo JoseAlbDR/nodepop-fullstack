@@ -22,3 +22,17 @@ export interface IProduct {
 export interface IProductResponse extends AxiosResponse {
   data: { products: IProduct[] };
 }
+
+export interface IStatsResponse extends AxiosResponse {
+  data: {
+    resultStats: {
+      onSale: number;
+      search: number;
+      userTotal: number;
+    };
+    monthlyProducts: {
+      date: string;
+      count: number;
+    }[];
+  };
+}
