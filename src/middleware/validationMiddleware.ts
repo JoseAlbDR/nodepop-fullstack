@@ -84,8 +84,6 @@ export const validateQueryParam = [
   query('name')
     .trim()
     .optional()
-    .notEmpty()
-    .withMessage('name can not be empty')
     .isString()
     .withMessage('name must be a string'),
 
@@ -98,8 +96,6 @@ export const validateQueryParam = [
   query('price')
     .trim()
     .optional()
-    .notEmpty()
-    .withMessage('price can not be empty')
     .matches(priceRegex)
     .withMessage(
       (value) =>
