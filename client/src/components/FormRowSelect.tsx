@@ -10,7 +10,7 @@ const FormRowSelect = ({ name, types, selected = '' }: IFormSelectProps) => {
         {name === 'onSale' ? 'type' : name}
       </label>
       <select
-        name={name}
+        name={name === 'category' ? 'tags' : name}
         id={name}
         className="form-input"
         defaultValue={selected}
