@@ -1,9 +1,17 @@
+import { SubmitFunction } from 'react-router-dom';
+
 interface IFormSelectProps {
   name: string;
   types: string[];
   selected?: string;
+  onChange: SubmitFunction;
 }
-const FormRowSelect = ({ name, types, selected = '' }: IFormSelectProps) => {
+const FormRowSelect = ({
+  name,
+  types,
+  selected = '',
+  onChange,
+}: IFormSelectProps) => {
   return (
     <div className="form-row">
       <label className="form-label" htmlFor={name}>
@@ -14,6 +22,7 @@ const FormRowSelect = ({ name, types, selected = '' }: IFormSelectProps) => {
         id={name}
         className="form-input"
         defaultValue={selected}
+        onChange={(e) => onChange(e.currentTarget.form)}
       >
         {types.map((type) => (
           <option key={type} value={type}>
