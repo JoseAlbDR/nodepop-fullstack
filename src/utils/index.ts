@@ -1,3 +1,4 @@
+export { validateSort } from './validateSortUtil';
 export { checkPermissions } from './checkPermissionsUtil';
 export { getImagePath } from './getImagePath';
 export { deleteFile } from './deleteImageUtil';
