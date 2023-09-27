@@ -1,11 +1,12 @@
 import { Form, useNavigation } from 'react-router-dom';
 import StyledSearchContainer from '../assets/wrappers/DashboardFormPage';
-import { FormRow, FormRowSelect } from '.';
+import { FormRow, FormRowSelect, SubmitBtn } from '.';
 import { SORT, TYPE } from '../../../src/utils/constantsUtil';
 import FormSearchPrices from './FormSearchPrices';
 import { useTags } from '../hooks/useTags';
+import { Link } from 'react-router-dom';
 
-const SearchContainer = () => {
+const SearchContainer = ({ page }: { page: string }) => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const { data, isLoading: isLoadingTags } = useTags();
@@ -28,12 +29,19 @@ const SearchContainer = () => {
               disabled={isSubmitting}
             />
             <FormSearchPrices />
-            <FormRowSelect name="type" types={TYPE} />
-            <FormRowSelect name="category" types={tags} />
-            <FormRowSelect name="sort" types={SORT} />
-            <button type="reset" className="btn btn-block form-btn">
-              reset search values
-            </button>
+            <FormRowSelect
+              name="type"
+              types={['all', ...TYPE]}
+              selected="all"
+            />
+            <FormRowSelect
+              name="category"
+              types={['all', ...tags]}
+              selected="all"
+            />
+            <FormRowSelect name="sort" types={SORT} selected="newest" />
+            <Link to={`/dashboard/${page}`}>Reset Search Values</Link>
+            <SubmitBtn formBtn />
           </div>
         </Form>
       </div>

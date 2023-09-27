@@ -23,7 +23,7 @@ const AllProducts = () => {
   return (
     <StyledAllProducts>
       <AllProductsProvider>
-        <SearchContainer />
+        <SearchContainer page="all-products" />
         <ProductsContainer />
       </AllProductsProvider>
     </StyledAllProducts>

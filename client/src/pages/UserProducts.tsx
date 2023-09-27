@@ -26,7 +26,7 @@ const UserProducts = () => {
   return (
     <StyledAllProducts>
       <AllProductsProvider>
-        <SearchContainer />
+        <SearchContainer page="user-products" />
       </AllProductsProvider>
       <UserProductsProvider>
         <UserProductsContainer />
