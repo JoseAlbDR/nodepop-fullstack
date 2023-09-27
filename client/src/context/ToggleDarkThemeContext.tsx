@@ -37,7 +37,7 @@ function useDarkThemeContext() {
 
   if (context === undefined)
     throw new Error(
-      'Toggle Dark Theme context was used outside of AllProductsProvider'
+      'Toggle Dark Theme context was used outside of DarkThemeProvider'
     );
   return context;
 }
