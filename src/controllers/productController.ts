@@ -52,8 +52,6 @@ const productController = {
 
     let result = productService.getAllProducts(queryObject);
 
-    console.log(result);
-
     // Sort results
     if (sort) {
       switch (sort) {

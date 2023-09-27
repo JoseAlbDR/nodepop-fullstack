@@ -1,4 +1,4 @@
-import { body, param, validationResult } from 'express-validator';
+import { body, param, query, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
@@ -75,6 +75,69 @@ export const validateIdParam = [
       async (value: string, { req }) =>
         await validateProductGetDeleteUpdate(value, req)
     ),
+  requestValidator,
+];
+
+const priceRegex = /^(?:-?\d+-\d+|-?\d+|\d+-|\d+)$/;
+
+export const validateQueryParam = [
+  query('name')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('name can not be empty')
+    .isString()
+    .withMessage('name must be a string'),
+
+  query('onSale')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('onSale can not be empty'),
+
+  query('price')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('price can not be empty')
+    .matches(priceRegex)
+    .withMessage(
+      (value) =>
+        `Incorrect price: ${value}. Price should be in the format: price=number-number, price=number, price=-number, or price=number-`
+    ),
+
+  query('tags')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('tags can not be empty')
+    .custom((tags: string[]) => validateTags(tags))
+    .withMessage(tagsValidationMessage),
+
+  query('sort')
+    .trim()
+    .optional()
+    .notEmpty()
+    .withMessage('sort can not be empty')
+    .custom((sort: string) => {
+      const allowedSortValues = [
+        'oldest',
+        'latest',
+        'a-z',
+        'z-a',
+        'lowest',
+        'highest',
+      ];
+      if (!allowedSortValues.includes(sort)) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage(
+      (value) =>
+        `Incorrect sort: ${value}. Allowed values: oldest, latest, a-z, z-a, lowest, highest `
+    ),
+
   requestValidator,
 ];
 

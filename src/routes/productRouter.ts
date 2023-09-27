@@ -1,7 +1,10 @@
 import express from 'express';
 import productController from '../controllers/productController';
 import uploadsController from '../controllers/uploadsController';
-import { validateUploadedFiles } from '../middleware/validationMiddleware';
+import {
+  validateQueryParam,
+  validateUploadedFiles,
+} from '../middleware/validationMiddleware';
 import {
   validateProductCreation,
   validateIdParam,
@@ -15,10 +18,11 @@ const router = express.Router();
 
 router
   .route('/')
-  .get([
+  .get(
     authorizePermissions('user', 'admin', 'tester'),
-    productController.getAllProducts,
-  ])
+    validateQueryParam,
+    productController.getAllProducts
+  )
   .post(
     checkTestUser,
     authorizePermissions('user', 'admin'),
