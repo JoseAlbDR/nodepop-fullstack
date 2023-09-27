@@ -4,12 +4,12 @@ export type ProductName = {
 };
 
 export type TagsArray = {
-  $in: string;
+  $in: string[];
 };
 
 export interface IProductQuery {
   name?: string | ProductName;
-  tag?: string | string[] | TagsArray;
+  tags?: string | string[] | TagsArray;
   price?: string | { [x: string]: string };
   onSale?: string | boolean;
   sort?: string;
