@@ -12,3 +12,4 @@ export { validateProductGetDeleteUpdate } from './validateProductGetDeleteUpdate
 export { validateTags, tagsValidationMessage } from './validateTagsUtils';
 export { removeImage } from './removeImageUtil';
 export { getQueryParams } from './getQueryParams';
+export { getMinMaxPrices } from './getMinMaxPrices';
