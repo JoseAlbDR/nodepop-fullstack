@@ -13,7 +13,7 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    const { name, tag, onSale } = req.query as IProductQuery;
+    const { name, tag, onSale, price } = req.query as IProductQuery;
 
     const queryObject: IProductQuery = {};
 
@@ -33,6 +33,14 @@ const productController = {
     if (onSale && typeof onSale === 'string') {
       queryObject.onSale = onSale === 'true' ? true : false;
       console.log(queryObject.onSale);
+    }
+
+    if (price && typeof price === 'string') {
+      const [min, max] = price.split('-');
+      if (min && max) queryObject.price = { $gte: min, $lte: max };
+      if (price.startsWith('-')) queryObject.price = { $lte: max };
+      if (price.endsWith('-')) queryObject.price = { $gte: min };
+      if (max === undefined) queryObject.price = { $eq: min };
     }
 
     const products = await productService.getAllProducts(queryObject);

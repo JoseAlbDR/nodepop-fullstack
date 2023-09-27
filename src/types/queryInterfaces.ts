@@ -10,7 +10,7 @@ export type TagsArray = {
 export interface IProductQuery {
   name?: string | ProductName;
   tag?: string | string[] | TagsArray;
-  price?: number;
+  price?: string | { [x: string]: string };
   onSale?: string | boolean;
   sort?: string;
   limit?: number;
