@@ -13,11 +13,16 @@ import { getQueryParams } from '../utils/getQueryParams';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    const { result, queryObject, page, limit } = getQueryParams(req.query);
+    const {
+      result: queryResult,
+      queryObject,
+      page,
+      limit,
+    } = getQueryParams(req.query);
 
     const totalProducts = await productService.countProducts(queryObject);
 
-    const products = await result;
+    const products = await queryResult;
     const numOfPages = Math.ceil(totalProducts / limit);
 
     res.status(StatusCodes.OK).json({
@@ -30,17 +35,20 @@ const productController = {
 
   getUserProducts: async (req: Request, res: Response) => {
     const { userId } = req.user;
-    const { result, queryObject, page, limit } = getQueryParams(
-      req.query,
-      userId
-    );
+
+    const {
+      result: queryResult,
+      queryObject,
+      page,
+      limit,
+    } = getQueryParams(req.query, userId);
 
     const totalProducts = await productService.countProducts(
       queryObject,
       userId
     );
 
-    const products = await result;
+    const products = await queryResult;
     const numOfPages = Math.ceil(totalProducts / limit);
 
     res.status(StatusCodes.OK).json({
