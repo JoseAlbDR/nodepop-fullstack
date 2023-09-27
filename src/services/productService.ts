@@ -9,9 +9,9 @@ import mongoose from 'mongoose';
 import { IProductQuery } from '../types/queryInterfaces';
 
 const productService = {
-  getAllProducts: async (query: IProductQuery) => {
+  getAllProducts: (query: IProductQuery) => {
     console.log(query);
-    const results = await Product.find(query).populate({
+    const results = Product.find(query).populate({
       path: 'createdBy',
       select: 'name email',
     });

@@ -15,6 +15,8 @@ const productController = {
   getAllProducts: async (req: Request, res: Response) => {
     const { name, tag, onSale, price } = req.query as IProductQuery;
 
+    let { skip, limit } = req.query as IProductQuery;
+
     const queryObject: IProductQuery = {};
 
     if (name && typeof name === 'string') {
@@ -43,8 +45,16 @@ const productController = {
       if (max === undefined) queryObject.price = { $eq: min };
     }
 
-    const products = await productService.getAllProducts(queryObject);
+    let result = productService.getAllProducts(queryObject);
 
+    // Pagination
+    const page = +skip! || 1;
+    limit = +limit! || 10;
+    skip = (page - 1) * limit;
+
+    result = result.skip(skip).limit(limit);
+
+    const products = await result;
     res.status(StatusCodes.OK).json({ products });
   },
 
