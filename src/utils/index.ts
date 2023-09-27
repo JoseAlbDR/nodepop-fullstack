@@ -11,3 +11,4 @@ export { getRandomDateLast6Months } from './randomDateUtil';
 export { validateProductGetDeleteUpdate } from './validateProductGetDeleteUpdate';
 export { validateTags, tagsValidationMessage } from './validateTagsUtils';
 export { removeImage } from './removeImageUtil';
+export { getQueryParams } from './getQueryParams';
