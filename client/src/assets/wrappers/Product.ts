@@ -16,7 +16,9 @@ const Wrapper = styled.div`
   .content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin: 1rem;
+    height: 100%;
     gap: 1rem;
   }
 
@@ -83,6 +85,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    align-self: flex-end;
     svg {
       color: #fff;
     }
