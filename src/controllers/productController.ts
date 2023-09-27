@@ -9,8 +9,8 @@ import productService from '../services/productService';
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
 import { getImagePath, getMinMaxPrices, removeImage } from '../utils';
-import { getQueryParams } from '../utils/getQueryParams';
-import { MinMax } from '../utils/getMinMaxPrices';
+import { getQueryParams } from '../utils/getQueryParamsUtil';
+import { MinMax } from '../utils/getMinMaxPricesUtil';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {

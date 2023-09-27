@@ -24,7 +24,7 @@ export const getMinMaxPrices = async (userId?: mongoose.Types.ObjectId) => {
       },
       {
         $project: {
-          _id: 0, // Excluye el campo _id del resultado
+          _id: 0,
         },
       },
     ]);
@@ -35,8 +35,8 @@ export const getMinMaxPrices = async (userId?: mongoose.Types.ObjectId) => {
     } else {
       return { minPrice: 0, maxPrice: 0 };
     }
-  } catch (e) {
-    console.log(e);
-    return e;
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
 };

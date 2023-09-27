@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
-import { getImagePath } from '../utils/getImagePath';
+import { getImagePath } from '../utils/getImagePathUtil';
 import { removeImage } from '../utils';
 
 const userController = {

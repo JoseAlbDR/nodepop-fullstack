@@ -1,6 +1,6 @@
 export { validateSort } from './validateSortUtil';
 export { checkPermissions } from './checkPermissionsUtil';
-export { getImagePath } from './getImagePath';
+export { getImagePath } from './getImagePathUtil';
 export { deleteFile } from './deleteImageUtil';
 export { hashPassword } from './hashPasswordUtil';
 export { createJWT } from './jwtUtils';
@@ -11,5 +11,5 @@ export { getRandomDateLast6Months } from './randomDateUtil';
 export { validateProductGetDeleteUpdate } from './validateProductGetDeleteUpdate';
 export { validateTags, tagsValidationMessage } from './validateTagsUtils';
 export { removeImage } from './removeImageUtil';
-export { getQueryParams } from './getQueryParams';
-export { getMinMaxPrices } from './getMinMaxPrices';
+export { getQueryParams } from './getQueryParamsUtil';
+export { getMinMaxPrices } from './getMinMaxPricesUtil';
