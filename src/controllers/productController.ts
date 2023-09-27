@@ -13,7 +13,7 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    const { name, tag } = req.query as IProductQuery;
+    const { name, tag, onSale } = req.query as IProductQuery;
 
     const queryObject: IProductQuery = {};
 
@@ -25,10 +25,14 @@ const productController = {
     }
 
     if (tag && typeof tag === 'string') {
-      console.log(tag);
       queryObject.tag = {
         $in: tag,
       };
+    }
+
+    if (onSale && typeof onSale === 'string') {
+      queryObject.onSale = onSale === 'true' ? true : false;
+      console.log(queryObject.onSale);
     }
 
     const products = await productService.getAllProducts(queryObject);

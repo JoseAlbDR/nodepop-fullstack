@@ -11,7 +11,7 @@ export interface IProductQuery {
   name?: string | ProductName;
   tag?: string | string[] | TagsArray;
   price?: number;
-  sale?: string;
+  onSale?: string | boolean;
   sort?: string;
   limit?: number;
   skip?: number;
