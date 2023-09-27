@@ -93,7 +93,7 @@ const productController = {
     const updates = req.body;
 
     const protocol = req.protocol;
-    const host = req.hostname;
+    const host = req.get('host')!;
     const filePath = req.file!.path;
 
     // Generate image path to store in server
