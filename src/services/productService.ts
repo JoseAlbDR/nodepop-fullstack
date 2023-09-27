@@ -18,6 +18,10 @@ const productService = {
     return results;
   },
 
+  countProducts: async (query: IProductQuery) => {
+    return await Product.countDocuments(query);
+  },
+
   getUserProducts: async (
     userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
   ) => {

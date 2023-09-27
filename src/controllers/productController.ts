@@ -83,12 +83,19 @@ const productController = {
     limit = +limit! || 10;
     const skip = (page - 1) * limit;
 
+    const totalProducts = await productService.countProducts(queryObject);
+
     result = result.skip(skip).limit(limit);
 
-    console.log(result);
-
     const products = await result;
-    res.status(StatusCodes.OK).json({ totalJobs: products.length, products });
+    const numOfPages = Math.ceil(totalProducts / limit);
+
+    res.status(StatusCodes.OK).json({
+      totalProducts: totalProducts,
+      numOfPages,
+      currentPage: page,
+      products,
+    });
   },
 
   getUserProducts: async (req: Request, res: Response) => {
