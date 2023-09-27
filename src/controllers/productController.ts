@@ -8,8 +8,9 @@ import productService from '../services/productService';
 // DTOS, Interfaces
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
-import { getImagePath, removeImage } from '../utils';
+import { getImagePath, getMinMaxPrices, removeImage } from '../utils';
 import { getQueryParams } from '../utils/getQueryParams';
+import { MinMax } from '../utils/getMinMaxPrices';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
@@ -25,8 +26,12 @@ const productController = {
     const products = await queryResult;
     const numOfPages = Math.ceil(totalProducts / limit);
 
+    const { minPrice, maxPrice } = (await getMinMaxPrices()) as MinMax;
+
     res.status(StatusCodes.OK).json({
       totalProducts,
+      minPrice,
+      maxPrice,
       numOfPages,
       currentPage: page,
       products,
@@ -51,8 +56,12 @@ const productController = {
     const products = await queryResult;
     const numOfPages = Math.ceil(totalProducts / limit);
 
+    const { minPrice, maxPrice } = (await getMinMaxPrices(userId)) as MinMax;
+
     res.status(StatusCodes.OK).json({
       totalProducts,
+      minPrice,
+      maxPrice,
       numOfPages,
       currentPage: page,
       products,
