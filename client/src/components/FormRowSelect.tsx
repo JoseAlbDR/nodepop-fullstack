@@ -7,7 +7,7 @@ const FormRowSelect = ({ name, types, selected = '' }: IFormSelectProps) => {
   return (
     <div className="form-row">
       <label className="form-label" htmlFor={name}>
-        {name}
+        {name === 'onSale' ? 'type' : name}
       </label>
       <select
         name={name}

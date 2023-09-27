@@ -12,25 +12,24 @@ const SearchContainer = ({ page }: { page: string }) => {
   const { data, isLoading: isLoadingTags } = useTags();
 
   if (isLoadingTags) return;
-
   const { tags } = data;
 
   return (
     <StyledSearchContainer>
       <div className="dashboard-page">
-        <Form method="post">
+        <Form>
           <h4>Search</h4>
           <div className="form-center">
             <FormRow
               type="text"
               name="name"
               labelText="name"
-              defaultValue="Play 5"
+              defaultValue=""
               disabled={isSubmitting}
             />
             <FormSearchPrices />
             <FormRowSelect
-              name="type"
+              name="onSale"
               types={['all', ...TYPE]}
               selected="all"
             />
@@ -40,7 +39,9 @@ const SearchContainer = ({ page }: { page: string }) => {
               selected="all"
             />
             <FormRowSelect name="sort" types={SORT} selected="newest" />
-            <Link to={`/dashboard/${page}`}>Reset Search Values</Link>
+            <Link className="btn btn-block form-btn" to={`/dashboard/${page}`}>
+              Reset Search Values
+            </Link>
             <SubmitBtn formBtn />
           </div>
         </Form>

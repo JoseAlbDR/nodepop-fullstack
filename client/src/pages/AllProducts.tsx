@@ -5,11 +5,24 @@ import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IProductResponse } from '../types/Products';
 import { AllProductsProvider } from '../context/AllProductsContext';
+import { LoaderFunctionArgs } from 'react-router-dom';
 ('react-router-dom');
 
-export const loader = async () => {
+export const loader = async (data: LoaderFunctionArgs) => {
+  const { request } = data;
+
+  console.log(request.url);
+
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
+
+  console.log(params);
+
   try {
-    const { data }: IProductResponse = await customFetch('/products');
+    const { data }: IProductResponse = await customFetch('/products', {
+      params,
+    });
     return { data };
   } catch (error) {
     if (error instanceof AxiosError) {

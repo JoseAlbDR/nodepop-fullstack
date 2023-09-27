@@ -25,6 +25,9 @@ const Wrapper = styled.section`
   .form-btn {
     align-self: end;
     height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .form-tags {
