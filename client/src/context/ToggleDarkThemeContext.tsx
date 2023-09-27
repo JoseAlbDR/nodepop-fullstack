@@ -20,7 +20,6 @@ function DarkThemeProvider({
   const toggleDarkTheme = () => {
     const ligthTheme = !isDarkTheme;
     setIsDarkTheme(ligthTheme);
-    console.log(isDarkTheme);
 
     localStorage.setItem('darkTheme', ligthTheme + '');
   };
