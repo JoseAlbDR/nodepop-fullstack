@@ -1,6 +1,6 @@
 export const validateSort = (sort: string) => {
   const allowedSortValues = [
-    'latest',
+    'oldest',
     'newest',
     'a-z',
     'z-a',

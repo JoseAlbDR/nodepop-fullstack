@@ -20,7 +20,7 @@ export const getQueryParams = (
   }
 
   // Filter by tag
-  if (tags && typeof tags === 'string') {
+  if (tags && typeof tags === 'string' && tags !== 'all') {
     const tagArray = tags.split(',');
     queryObject.tags = {
       $in: tagArray,
@@ -28,8 +28,8 @@ export const getQueryParams = (
   }
 
   // Filter by sale type
-  if (onSale && typeof onSale === 'string') {
-    queryObject.onSale = onSale === 'true' ? true : false;
+  if (onSale && typeof onSale === 'string' && onSale !== 'all') {
+    queryObject.onSale = onSale === 'on sale' ? true : false;
     console.log(queryObject.onSale);
   }
 
@@ -52,7 +52,7 @@ export const getQueryParams = (
       case 'oldest':
         result = result.sort('createdAt');
         break;
-      case 'latest':
+      case 'newest':
         result = result.sort('-createdAt');
         break;
       case 'a-z':
