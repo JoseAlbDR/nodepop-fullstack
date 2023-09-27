@@ -13,7 +13,7 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    const { name, tag, onSale, price } = req.query as IProductQuery;
+    const { name, tag, onSale, price, sort } = req.query as IProductQuery;
 
     let { skip, limit } = req.query as IProductQuery;
 
@@ -46,6 +46,32 @@ const productController = {
     }
 
     let result = productService.getAllProducts(queryObject);
+
+    // Sort results
+    if (sort) {
+      switch (sort) {
+        case 'oldest':
+          result = result.sort('createdAt');
+          break;
+        case 'latest':
+          result = result.sort('-createdAt');
+          break;
+        case 'a-z':
+          result = result.sort('name');
+          break;
+        case 'z-a':
+          result = result.sort('-name');
+          break;
+        case 'lowest':
+          result = result.sort('price');
+          break;
+        case 'highest':
+          result = result.sort('-price');
+          break;
+        default:
+          result = result.sort('createdAt');
+      }
+    }
 
     // Pagination
     const page = +skip! || 1;
