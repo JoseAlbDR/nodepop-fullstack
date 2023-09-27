@@ -41,6 +41,7 @@ const Wrapper = styled.div`
   }
 
   .categories {
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -80,7 +81,7 @@ const Wrapper = styled.div`
   .btn-delete {
     width: 80%;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0.5rem;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -92,8 +93,22 @@ const Wrapper = styled.div`
   }
 
   .btn-delete {
-    background: var(--red-dark);
+    color: var(--red-dark);
+    background: var(--red-light);
     font-weight: bold;
+  }
+
+  .btn-delete:hover {
+    color: var(--white);
+    background: var(--red-dark);
+  }
+
+  .update-delete-btn {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
   }
 
   h2 {

@@ -61,7 +61,8 @@ const Product = ({
             text={'CONTACT'}
           />
         ) : (
-          <>
+
+          <div className='update-delete-btn'>
             <ProductButton
               link={`../edit-product/${_id}`}
               icon={<FaPencilRuler />}
@@ -73,7 +74,7 @@ const Product = ({
               text={'DELETE'}
               id={_id}
             />
-          </>
+          </div>
         )}
       </div>
     </StyledProduct>
