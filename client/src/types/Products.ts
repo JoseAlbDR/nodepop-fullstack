@@ -20,7 +20,14 @@ export interface IProduct {
 }
 
 export interface IProductResponse extends AxiosResponse {
-  data: { products: IProduct[] };
+  data: {
+    currentPage: number;
+    maxPrice: number;
+    minPrice: number;
+    numOfPages: number;
+    totalProducts: number;
+    products: IProduct[];
+  };
 }
 
 export interface IResultStats {
