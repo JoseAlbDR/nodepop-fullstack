@@ -10,7 +10,7 @@ import { faker } from '@faker-js/faker';
 
 const populateService = {
   populateDatabase: async (n: number, userId: mongoose.Types.ObjectId) => {
-    await Product.deleteMany();
+    await Product.deleteMany({ createdBy: userId });
 
     const products: IProduct[] = [];
 
