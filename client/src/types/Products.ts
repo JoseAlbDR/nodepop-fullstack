@@ -19,15 +19,17 @@ export interface IProduct {
   tags: ITags[];
 }
 
-export interface IProductResponse extends AxiosResponse {
-  data: {
-    currentPage: number;
-    maxPrice: number;
-    minPrice: number;
-    numOfPages: number;
-    totalProducts: number;
-    products: IProduct[];
-  };
+export interface IProductResponse {
+  currentPage: number;
+  maxPrice: number;
+  minPrice: number;
+  numOfPages: number;
+  totalProducts: number;
+  products: IProduct[];
+}
+
+export interface IAxiosResponse extends AxiosResponse {
+  data: IProductResponse;
 }
 
 export interface IResultStats {

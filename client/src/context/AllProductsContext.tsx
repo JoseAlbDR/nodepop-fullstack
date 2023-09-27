@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { IProduct, IProductResponse } from '../types/Products';
+import { IProduct } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
 
 interface AllProductsContextValues {
@@ -11,6 +11,7 @@ interface AllProductsContextValues {
     totalProducts: number;
     products: IProduct[];
   };
+  searchValues: { [k: string]: string };
 }
 
 const AllProductsContext = createContext<AllProductsContextValues | undefined>(
@@ -22,10 +23,20 @@ function AllProductsProvider({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const { data } = useLoaderData() as IProductResponse;
+  const { data, searchValues } = useLoaderData() as {
+    data: {
+      currentPage: number;
+      maxPrice: number;
+      minPrice: number;
+      numOfPages: number;
+      totalProducts: number;
+      products: IProduct[];
+    };
+    searchValues: { [k: string]: string };
+  };
 
   return (
-    <AllProductsContext.Provider value={{ data }}>
+    <AllProductsContext.Provider value={{ data, searchValues }}>
       {children}
     </AllProductsContext.Provider>
   );

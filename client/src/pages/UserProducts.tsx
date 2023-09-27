@@ -3,14 +3,14 @@ import StyledAllProducts from '../assets/wrappers/AllProductsPage';
 import { UserProductsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
-import { IProductResponse } from '../types/Products';
+import { IAxiosResponse } from '../types/Products';
 import { UserProductsProvider } from '../context/UserProductsContext';
 import { AllProductsProvider } from '../context/AllProductsContext';
 ('react-router-dom');
 
 export const loader = async () => {
   try {
-    const { data }: IProductResponse = await customFetch(
+    const { data }: IAxiosResponse = await customFetch(
       '/products/userProducts'
     );
     return { data };
