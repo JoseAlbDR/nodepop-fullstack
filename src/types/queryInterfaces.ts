@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export type ProductName = {
   $regex: string;
   $options: string;
@@ -15,4 +17,5 @@ export interface IProductQuery {
   sort?: string;
   limit?: number;
   page?: number;
+  createdBy?: mongoose.Types.ObjectId;
 }
