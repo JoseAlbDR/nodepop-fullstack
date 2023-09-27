@@ -3,7 +3,14 @@ import { IProduct, IProductResponse } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
 
 interface AllProductsContextValues {
-  data: { products: IProduct[] };
+  data: {
+    currentPage: number;
+    maxPrice: number;
+    minPrice: number;
+    numOfPages: number;
+    totalProducts: number;
+    products: IProduct[];
+  };
 }
 
 const AllProductsContext = createContext<AllProductsContextValues | undefined>(
