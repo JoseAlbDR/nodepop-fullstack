@@ -2,7 +2,7 @@ import { body, param, query, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
-import { tagsValidationMessage, validateTags } from '../utils';
+import { tagsValidationMessage, validateSort, validateTags } from '../utils';
 
 export const requestValidator = (
   req: Request,
@@ -117,22 +117,8 @@ export const validateQueryParam = [
   query('sort')
     .trim()
     .optional()
-    .notEmpty()
-    .withMessage('sort can not be empty')
-    .custom((sort: string) => {
-      const allowedSortValues = [
-        'oldest',
-        'latest',
-        'a-z',
-        'z-a',
-        'lowest',
-        'highest',
-      ];
-      if (!allowedSortValues.includes(sort)) {
-        return false;
-      }
-      return true;
-    })
+    .default('latest')
+    .custom((sort: string) => validateSort(sort))
     .withMessage(
       (value) =>
         `Incorrect sort: ${value}. Allowed values: oldest, latest, a-z, z-a, lowest, highest `
