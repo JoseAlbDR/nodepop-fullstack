@@ -1,5 +1,5 @@
-import day from 'dayjs';
 // Packages
+import day from 'dayjs';
 import _ from 'lodash';
 
 // Model, interfaces
@@ -10,7 +10,6 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productService = {
   getAllProducts: (query: IProductQuery) => {
-    console.log(query);
     const results = Product.find(query).populate({
       path: 'createdBy',
       select: 'name email',
@@ -18,14 +17,23 @@ const productService = {
     return results;
   },
 
-  countProducts: async (query: IProductQuery) => {
+  countProducts: async (
+    query: IProductQuery,
+    userId?: mongoose.Types.ObjectId
+  ) => {
+    if (userId) query.createdBy = userId;
+
     return await Product.countDocuments(query);
   },
 
-  getUserProducts: async (
-    userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
+  getUserProducts: (
+    userId: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>,
+    query: IProductQuery
   ) => {
-    const products = await Product.find({ createdBy: userId }).populate({
+    const products = Product.find({
+      createdBy: userId,
+      ...query,
+    }).populate({
       path: 'createdBy',
       select: 'name email',
     });
