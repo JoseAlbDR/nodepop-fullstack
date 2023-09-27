@@ -9,10 +9,29 @@ import productService from '../services/productService';
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
 import { getImagePath, removeImage } from '../utils';
+import { IProductQuery } from '../types/queryInterfaces';
 
 const productController = {
-  getAllProducts: async (_req: Request, res: Response) => {
-    const products = await productService.getAllProducts();
+  getAllProducts: async (req: Request, res: Response) => {
+    const { name, tag } = req.query as IProductQuery;
+
+    const queryObject: IProductQuery = {};
+
+    if (name && typeof name === 'string') {
+      queryObject.name = {
+        $regex: name,
+        $options: 'i',
+      };
+    }
+
+    if (tag && typeof tag === 'string') {
+      console.log(tag);
+      queryObject.tag = {
+        $in: tag,
+      };
+    }
+
+    const products = await productService.getAllProducts(queryObject);
 
     res.status(StatusCodes.OK).json({ products });
   },

@@ -6,10 +6,12 @@ import _ from 'lodash';
 import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
 import mongoose from 'mongoose';
+import { IProductQuery } from '../types/queryInterfaces';
 
 const productService = {
-  getAllProducts: async () => {
-    const results = await Product.find({}).populate({
+  getAllProducts: async (query: IProductQuery) => {
+    console.log(query);
+    const results = await Product.find(query).populate({
       path: 'createdBy',
       select: 'name email',
     });
@@ -125,7 +127,6 @@ const productService = {
         return { date, count };
       })
       .reverse();
-    console.log(monthlyProducts);
 
     return { resultStats, monthlyProducts };
   },
