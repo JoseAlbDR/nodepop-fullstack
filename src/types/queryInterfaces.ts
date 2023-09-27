@@ -14,5 +14,5 @@ export interface IProductQuery {
   onSale?: string | boolean;
   sort?: string;
   limit?: number;
-  skip?: number;
+  page?: number;
 }

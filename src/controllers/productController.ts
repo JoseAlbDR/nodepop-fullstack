@@ -15,7 +15,7 @@ const productController = {
   getAllProducts: async (req: Request, res: Response) => {
     const { name, tags, onSale, price, sort } = req.query as IProductQuery;
 
-    let { skip, limit } = req.query as IProductQuery;
+    let { page, limit } = req.query as IProductQuery;
 
     const queryObject: IProductQuery = {};
 
@@ -79,14 +79,16 @@ const productController = {
     }
 
     // Pagination
-    const page = +skip! || 1;
+    page = +page! || 1;
     limit = +limit! || 10;
-    skip = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
     result = result.skip(skip).limit(limit);
 
+    console.log(result);
+
     const products = await result;
-    res.status(StatusCodes.OK).json({ products });
+    res.status(StatusCodes.OK).json({ totalJobs: products.length, products });
   },
 
   getUserProducts: async (req: Request, res: Response) => {
