@@ -13,12 +13,13 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    const { name, tag, onSale, price, sort } = req.query as IProductQuery;
+    const { name, tags, onSale, price, sort } = req.query as IProductQuery;
 
     let { skip, limit } = req.query as IProductQuery;
 
     const queryObject: IProductQuery = {};
 
+    // Filter by name
     if (name && typeof name === 'string') {
       queryObject.name = {
         $regex: name,
@@ -26,17 +27,21 @@ const productController = {
       };
     }
 
-    if (tag && typeof tag === 'string') {
-      queryObject.tag = {
-        $in: tag,
+    // Filter by tag
+    if (tags && typeof tags === 'string') {
+      const tagArray = tags.split(',');
+      queryObject.tags = {
+        $in: tagArray,
       };
     }
 
+    // Filter by sale type
     if (onSale && typeof onSale === 'string') {
       queryObject.onSale = onSale === 'true' ? true : false;
       console.log(queryObject.onSale);
     }
 
+    // Filter by price
     if (price && typeof price === 'string') {
       const [min, max] = price.split('-');
       if (min && max) queryObject.price = { $gte: min, $lte: max };
@@ -46,6 +51,8 @@ const productController = {
     }
 
     let result = productService.getAllProducts(queryObject);
+
+    console.log(result);
 
     // Sort results
     if (sort) {
