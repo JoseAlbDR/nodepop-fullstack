@@ -4,13 +4,13 @@ interface IFormSelectProps {
   name: string;
   types: string[];
   selected?: string;
-  onChange: SubmitFunction;
+  onChange?: SubmitFunction;
 }
 const FormRowSelect = ({
   name,
   types,
   selected = '',
-  onChange,
+  onChange = () => {},
 }: IFormSelectProps) => {
   return (
     <div className="form-row">
