@@ -6,8 +6,8 @@ import { useProductsContext } from '../context/ProductsContext';
 
 const FormSearchPrices = ({ onChange }: { onChange: SubmitFunction }) => {
   const { data } = useProductsContext();
-  const [value, setValue] = useState<number[]>([0, Infinity]);
   const { minPrice, maxPrice } = data;
+  const [value, setValue] = useState<number[]>([minPrice, maxPrice]);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
