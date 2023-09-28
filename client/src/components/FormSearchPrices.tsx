@@ -30,18 +30,9 @@ const FormSearchPrices = ({ onChange }: { onChange: SubmitFunction }) => {
         step={1}
         name="price"
         onChange={handleChange}
-        onChangeCommitted={(e, newValue) => {
-          const [min, max] = newValue as number[];
-          let price = '';
-          if (min === minPrice && max === maxPrice) {
-            price = `${minPrice}-${maxPrice}`;
-          }
-          if (min > minPrice!) price = `${min}-`;
-          if (max < maxPrice!) price = `-${max}`;
-          if (min > minPrice! && max < maxPrice!) price = `${min}-${max}`;
-          if (min === max) price = `${min}`;
-
-          onChange({ price });
+        onChangeCommitted={() => {
+          const form = document.getElementById('search-form');
+          onChange(form as HTMLFormElement);
         }}
         valueLabelDisplay="auto"
         sx={{ marginLeft: 1, color: '#8b5cf6' }}
