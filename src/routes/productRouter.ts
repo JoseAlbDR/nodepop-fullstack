@@ -32,7 +32,7 @@ router
     productController.createProduct
   );
 
-router.get('/userProducts', [
+router.get('/user-products', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getUserProducts,
 ]);
@@ -43,7 +43,7 @@ router.get('/tags', [
 ]);
 
 router.post(
-  '/uploadImage',
+  '/upload-image',
   checkTestUser,
   authorizePermissions('user', 'admin'),
   validateUploadedFiles,
