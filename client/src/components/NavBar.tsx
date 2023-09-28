@@ -4,6 +4,7 @@ import LogoutContainer from './LogoutContainer';
 import { useDashboardContext } from '../context/DashboardContext';
 import { Logo } from '.';
 import ThemeToggle from './ThemeToggle';
+import { DarkThemeProvider } from '../context/ToggleDarkThemeContext';
 const NavBar = () => {
   const { toggleSidebar } = useDashboardContext();
 
@@ -18,7 +19,9 @@ const NavBar = () => {
           <h3 className="logo-text">Dashboard</h3>
         </div>
         <div className="btn-container">
-          <ThemeToggle />
+          <DarkThemeProvider>
+            <ThemeToggle />
+          </DarkThemeProvider>
           <LogoutContainer />
         </div>
       </div>
