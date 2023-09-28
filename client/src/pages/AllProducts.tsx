@@ -13,6 +13,13 @@ export const loader = async (data: LoaderFunctionArgs) => {
     ...new URL(request.url).searchParams.entries(),
   ]);
 
+  const [minPrice, maxPrice] = request.url
+    .split('&')
+    .filter((item) => item.startsWith('price='))
+    .map((item) => item.split('=')[1]);
+
+  if (params.price) params.price = `${minPrice}-${maxPrice}`;
+
   try {
     const { data }: IAxiosResponse = await customFetch('/products', {
       params,
