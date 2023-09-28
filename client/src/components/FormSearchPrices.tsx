@@ -1,16 +1,15 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { useState } from 'react';
-import { useAllProductsContext } from '../context/AllProductsContext';
 import { SubmitFunction } from 'react-router-dom';
+import { useProductsContext } from '../context/ProductsContext';
 
 const FormSearchPrices = ({ onChange }: { onChange: SubmitFunction }) => {
-  const { data } = useAllProductsContext();
-  const [value, setValue] = useState<number[]>([0, 100000]);
+  const { data } = useProductsContext();
+  const [value, setValue] = useState<number[]>([0, Infinity]);
   const { minPrice, maxPrice } = data;
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    console.log('new value: ' + newValue);
     setValue(newValue as number[]);
   };
 
@@ -37,10 +36,10 @@ const FormSearchPrices = ({ onChange }: { onChange: SubmitFunction }) => {
           if (min === minPrice && max === maxPrice) {
             price = `${minPrice}-${maxPrice}`;
           }
-          if (min === max) price = `${min}`;
           if (min > minPrice!) price = `${min}-`;
           if (max < maxPrice!) price = `-${max}`;
           if (min > minPrice! && max < maxPrice!) price = `${min}-${max}`;
+          if (min === max) price = `${min}`;
 
           onChange({ price });
         }}
