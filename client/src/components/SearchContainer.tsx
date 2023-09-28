@@ -18,7 +18,7 @@ const SearchContainer = ({ page }: { page: string }) => {
   return (
     <StyledSearchContainer>
       <div className="dashboard-page">
-        <Form>
+        <Form id="search-form">
           <h4>Search</h4>
           <div className="form-center">
             <FormRow
