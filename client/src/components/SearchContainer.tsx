@@ -1,6 +1,6 @@
 import { Form, useNavigation, useSubmit } from 'react-router-dom';
 import StyledSearchContainer from '../assets/wrappers/DashboardFormPage';
-import { FormRow, FormRowSelect, SubmitBtn } from '.';
+import { FormRow, FormRowSelect } from '.';
 import { SORT, TYPE } from '../../../src/utils/constantsUtil';
 import FormSearchPrices from './FormSearchPrices';
 import { useTags } from '../hooks/useTags';
@@ -62,7 +62,6 @@ const SearchContainer = ({ page }: { page: string }) => {
             <Link className="btn btn-block form-btn" to={`/dashboard/${page}`}>
               Reset Search Values
             </Link>
-            <SubmitBtn formBtn />
           </div>
         </Form>
       </div>
