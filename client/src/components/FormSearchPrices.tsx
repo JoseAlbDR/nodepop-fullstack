@@ -4,13 +4,19 @@ import { useState } from 'react';
 import { SubmitFunction } from 'react-router-dom';
 import { useProductsContext } from '../context/ProductsContext';
 
-const FormSearchPrices = ({ onChange }: { onChange: SubmitFunction }) => {
+const FormSearchPrices = ({
+  onChange,
+  defaultValue,
+}: {
+  onChange: SubmitFunction;
+  defaultValue: [number, number];
+}) => {
   const { data } = useProductsContext();
   const { minPrice, maxPrice } = data;
-  const [value, setValue] = useState<number[]>([minPrice, maxPrice]);
+  const [value, setValue] = useState<[number, number]>(defaultValue);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number[]);
+    setValue(newValue as [number, number]);
   };
 
   return (
