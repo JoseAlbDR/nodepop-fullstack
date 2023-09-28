@@ -1,6 +1,6 @@
 import React from 'react';
 
-import StyledAllProducts from '../assets/wrappers/AllProductsPage';
+import StyledProductsPage from '../assets/wrappers/AllProductsPage';
 import {
   SearchContainer,
   ProductsContainer,
@@ -15,19 +15,21 @@ interface ProductsPageProps {
 
 const ProductsPage: React.FC<ProductsPageProps> = ({ pageType }) => {
   return (
-    <StyledAllProducts>
-      {pageType === 'all' ? (
-        <ProductsProvider>
-          <SearchContainer page="all-products" />
-          <ProductsContainer />
-        </ProductsProvider>
-      ) : (
-        <ProductsProvider>
-          <SearchContainer page="user-products" />
-          <UserProductsContainer />
-        </ProductsProvider>
-      )}
-    </StyledAllProducts>
+    <StyledProductsPage>
+      <ProductsProvider>
+        {pageType === 'all' ? (
+          <>
+            <SearchContainer page="all-products" />
+            <ProductsContainer />
+          </>
+        ) : (
+          <>
+            <SearchContainer page="user-products" />
+            <UserProductsContainer />
+          </>
+        )}
+      </ProductsProvider>
+    </StyledProductsPage>
   );
 };
 

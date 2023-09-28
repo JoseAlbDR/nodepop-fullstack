@@ -1,11 +1,9 @@
 import { AxiosError } from 'axios';
-import StyledAllProducts from '../assets/wrappers/AllProductsPage';
-import { ProductsContainer, SearchContainer } from '../components';
 import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { IAxiosResponse } from '../types/Products';
-import { AllProductsProvider } from '../context/AllProductsContext';
 import { LoaderFunctionArgs } from 'react-router-dom';
+import ProductsPage from './ProductsPage';
 ('react-router-dom');
 
 export const loader = async (data: LoaderFunctionArgs) => {
@@ -30,13 +28,6 @@ export const loader = async (data: LoaderFunctionArgs) => {
 };
 
 const AllProducts = () => {
-  return (
-    <StyledAllProducts>
-      <AllProductsProvider>
-        <SearchContainer page="all-products" />
-        <ProductsContainer />
-      </AllProductsProvider>
-    </StyledAllProducts>
-  );
+  return <ProductsPage pageType="all" />;
 };
 export default AllProducts;

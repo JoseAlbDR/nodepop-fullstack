@@ -23,17 +23,7 @@ function ProductsProvider({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const { data, searchValues } = useLoaderData() as {
-    data: {
-      currentPage: number;
-      maxPrice: number;
-      minPrice: number;
-      numOfPages: number;
-      totalProducts: number;
-      products: IProduct[];
-    };
-    searchValues: { [k: string]: string };
-  };
+  const { data, searchValues } = useLoaderData() as ProductsContextValues;
 
   return (
     <ProductsContext.Provider value={{ data, searchValues }}>

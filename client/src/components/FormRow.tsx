@@ -6,7 +6,7 @@ const FormRow = ({
   labelText,
   defaultValue,
   disabled,
-  onChange,
+  onChange = () => {},
 }: IFormRowProps) => {
   return (
     <div className="form-row">

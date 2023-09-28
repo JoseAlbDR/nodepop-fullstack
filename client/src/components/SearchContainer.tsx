@@ -5,11 +5,11 @@ import { SORT, TYPE } from '../../../src/utils/constantsUtil';
 import FormSearchPrices from './FormSearchPrices';
 import { useTags } from '../hooks/useTags';
 import { Link } from 'react-router-dom';
-
 const SearchContainer = ({ page }: { page: string }) => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   const { data, isLoading: isLoadingTags } = useTags();
+
   const submit = useSubmit();
 
   if (isLoadingTags) return;

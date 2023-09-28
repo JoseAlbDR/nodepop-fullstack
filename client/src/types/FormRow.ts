@@ -6,5 +6,5 @@ export interface IFormRowProps {
   labelText: string;
   defaultValue: string;
   disabled?: boolean;
-  onChange: SubmitFunction;
+  onChange?: SubmitFunction;
 }
