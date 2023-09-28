@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, useNavigation, useSubmit } from 'react-router-dom';
 import StyledSearchContainer from '../assets/wrappers/DashboardFormPage';
 import { FormRow, FormRowSelect } from '.';
@@ -26,13 +27,11 @@ const SearchContainer = ({ page }: { page: string }) => {
   if (isLoadingTags) return;
   const { tags } = data;
 
-  const debounce = (
-    onChange: (e: React.FormEvent<HTMLFormElement>) => void
-  ) => {
+  const debounce = (onChange: (e: any) => void) => {
     let timeout: NodeJS.Timeout | undefined;
-    return (e: React.ChangeEvent<HTMLInputElement>) => {
-      const form = e.currentTarget.form as HTMLFormElement;
-      clearTimeout(timeout as NodeJS.Timeout);
+    return (e: { currentTarget: { form: any } }) => {
+      const form = e.currentTarget.form;
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
         onChange(form);
       }, 1000);
