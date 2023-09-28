@@ -26,6 +26,19 @@ const SearchContainer = ({ page }: { page: string }) => {
   if (isLoadingTags) return;
   const { tags } = data;
 
+  const debounce = (
+    onChange: (e: React.FormEvent<HTMLFormElement>) => void
+  ) => {
+    let timeout: NodeJS.Timeout | undefined;
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      const form = e.currentTarget.form as HTMLFormElement;
+      clearTimeout(timeout as NodeJS.Timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 1000);
+    };
+  };
+
   return (
     <StyledSearchContainer>
       <div className="dashboard-page">
@@ -33,8 +46,10 @@ const SearchContainer = ({ page }: { page: string }) => {
           <h4>Search</h4>
           <div className="form-center">
             <FormRow
-              onChange={submit}
-              type="text"
+              onChange={debounce((form) => {
+                submit(form);
+              })}
+              type="search"
               name="name"
               labelText="name"
               defaultValue={name}

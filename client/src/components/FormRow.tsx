@@ -21,7 +21,7 @@ const FormRow = ({
         name={name}
         defaultValue={defaultValue || ''}
         disabled={disabled}
-        onChange={(e) => onChange(e.currentTarget.form)}
+        onChange={(e) => onChange(e)}
         required
       />
     </div>
