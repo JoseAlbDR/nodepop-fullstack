@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-  height: 6rem;
+  height: 100%;
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem;
+  margin: 2rem 0;
 
   .page-btn {
     font-size: 1.5rem;
@@ -17,6 +18,12 @@ const Wrapper = styled.section`
     font-weight: 700;
     width: 50px;
     height: 40px;
+  }
+
+  .dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .prev-btn,
