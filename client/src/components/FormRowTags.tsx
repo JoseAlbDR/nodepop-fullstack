@@ -3,11 +3,11 @@ import { TAGS } from '../../../src/utils/constantsUtil';
 import { useTags } from '../hooks/useTags';
 
 interface FormRowTagsProps {
-  tags?: ITags[] | null;
+  tags?: ITags[] | undefined;
   page?: string;
 }
 
-const FormRowTags = ({ page = '' }: FormRowTagsProps) => {
+const FormRowTags = ({ tags = undefined, page = '' }: FormRowTagsProps) => {
   const { data, isLoading: isLoadingTags } = useTags();
 
   const renderTags = page === 'all' ? TAGS : data?.tags;
@@ -24,7 +24,7 @@ const FormRowTags = ({ page = '' }: FormRowTagsProps) => {
               name="tags"
               value={tag}
               className="input-check"
-              // defaultChecked={tags ? tags.includes(tag) : index === 0}
+              defaultChecked={tags && tags.includes(tag)}
             />
             {tag}
           </label>

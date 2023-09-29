@@ -22,6 +22,7 @@ import notFoundMiddleware from './middleware/notFoundMiddleware';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 import cookieParser from 'cookie-parser';
 import { authenticateUser } from './middleware/authMiddleware';
+import path from 'path';
 
 const app = express();
 
@@ -29,7 +30,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
-app.use(express.static('./src/public'));
+app.use(express.static(path.resolve(__dirname, './public')));
 // app.use(fileUpload());
 
 app.get('/api/v1/test', (_req, res) => {
@@ -41,6 +42,10 @@ app.use('/api/v1/products', authenticateUser, productsRouter);
 app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+});
 
 // Middlewares
 app.use(notFoundMiddleware);
