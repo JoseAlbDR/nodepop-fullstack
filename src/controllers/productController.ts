@@ -66,6 +66,7 @@ const productController = {
       numOfPages,
       currentPage: page,
       products,
+      limit: limit || 10,
     });
   },
 
