@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa';
 import { ProductButton, ProductInfo } from '.';
 import search from '../assets/images/search.svg';
-import sale from '../assets/images/Sell.svg';
+import sale from '../assets/images/sell.svg';
 import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import day from 'dayjs';

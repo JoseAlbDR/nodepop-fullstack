@@ -12,11 +12,11 @@ pids
 logs
 results
 tmp
-build
 
 # Build
 public/css/main.css
 src/public/uploads/*
+build
 
 # Coverage reports
 coverage
