@@ -16,7 +16,11 @@ const SearchContainer = ({ page }: { page: string }) => {
     data: { maxPrice, minPrice },
   } = useProductsContext();
 
+  console.log(searchValues);
+
   const { name, price, onSale, tags: searchTags, sort } = searchValues;
+
+  console.log(name, price, onSale, searchTags, sort);
 
   const [max, min] = price
     ? (price.split('-') as [string, string])
