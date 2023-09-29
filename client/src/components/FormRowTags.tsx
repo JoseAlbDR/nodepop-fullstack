@@ -7,7 +7,7 @@ interface FormRowTagsProps {
   page?: string;
 }
 
-const FormRowTags = ({ tags = null, page = '' }: FormRowTagsProps) => {
+const FormRowTags = ({ page = '' }: FormRowTagsProps) => {
   const { data, isLoading: isLoadingTags } = useTags();
 
   const renderTags = page === 'all' ? TAGS : data?.tags;
@@ -17,14 +17,14 @@ const FormRowTags = ({ tags = null, page = '' }: FormRowTagsProps) => {
     <div className="form-row">
       <label className="form-label">tags</label>
       <fieldset className="form-tags">
-        {renderTags.map((tag: ITags, index: number) => (
+        {renderTags.map((tag: ITags) => (
           <label key={tag}>
             <input
               type="checkbox"
               name="tags"
               value={tag}
               className="input-check"
-              defaultChecked={tags ? tags.includes(tag) : index === 0}
+              // defaultChecked={tags ? tags.includes(tag) : index === 0}
             />
             {tag}
           </label>

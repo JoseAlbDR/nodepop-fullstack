@@ -61,14 +61,14 @@ const AddProduct = () => {
               type="text"
               name="name"
               labelText="name"
-              defaultValue="Play 5"
+              defaultValue=""
               disabled={isSubmitting}
             />
             <FormRow
               type="number"
               name="price"
               labelText="price"
-              defaultValue="300"
+              defaultValue=""
               disabled={isSubmitting}
             />
             <FormRowSelect name="onSale" types={TYPE} />

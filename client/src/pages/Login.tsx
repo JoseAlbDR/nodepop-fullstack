@@ -63,14 +63,14 @@ const Login = () => {
           type="email"
           name="email"
           labelText="email"
-          defaultValue="jaderodev@gmail.com"
+          defaultValue=""
           disabled={isSubmitting}
         />
         <FormRow
           type="password"
           name="password"
           labelText="password"
-          defaultValue="M5e5k5i57."
+          defaultValue=""
           disabled={isSubmitting}
         />
         <SubmitBtn />
