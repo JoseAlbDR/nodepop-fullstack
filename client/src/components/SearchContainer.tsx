@@ -13,10 +13,12 @@ const SearchContainer = ({ page }: { page: string }) => {
   const { data, isLoading: isLoadingTags } = useTags();
   const {
     searchValues,
-    data: { maxPrice, minPrice },
+    data: { maxPrice, minPrice, limit: defaultLimit },
   } = useProductsContext();
 
-  const { name, price, onSale, tags: searchTags, sort } = searchValues;
+  const { name, price, onSale, tags: searchTags, sort, limit } = searchValues;
+
+  console.log(limit);
 
   const [max, min] = price
     ? (price.split('-') as [string, string])
@@ -71,6 +73,12 @@ const SearchContainer = ({ page }: { page: string }) => {
               name="sort"
               types={SORT}
               selected={sort}
+              onChange={submit}
+            />
+            <FormRowSelect
+              name="limit"
+              types={['5', '10', '20', '50']}
+              selected={limit || String(defaultLimit)}
               onChange={submit}
             />
             <Link className="btn btn-block form-btn" to={`/dashboard/${page}`}>

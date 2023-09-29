@@ -1,16 +1,9 @@
 import React, { createContext, useContext } from 'react';
-import { IProduct } from '../types/Products';
+import { IProductResponse } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
 
 interface ProductsContextValues {
-  data: {
-    currentPage: number;
-    maxPrice: number;
-    minPrice: number;
-    numOfPages: number;
-    totalProducts: number;
-    products: IProduct[];
-  };
+  data: IProductResponse;
   searchValues: { [k: string]: string };
 }
 

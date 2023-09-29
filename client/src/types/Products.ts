@@ -26,6 +26,7 @@ export interface IProductResponse {
   numOfPages: number;
   totalProducts: number;
   products: IProduct[];
+  limit: number;
 }
 
 export interface IAxiosResponse extends AxiosResponse {
