@@ -70,14 +70,19 @@ const productController = {
 
   createProduct: async (req: CreateProductDTO, res: Response) => {
     const product = req.body;
+    let image;
 
     product.createdBy = req.user.userId;
 
-    const protocol = req.protocol;
-    const host = req.get('host')!;
-    const filePath = req.file!.path;
+    if (!req.file) {
+      image = '/src/public/no-image-available.webp';
+    } else {
+      const protocol = req.protocol;
+      const host = req.get('host')!;
+      const filePath = req.file.path;
 
-    const image = getImagePath(protocol, host, filePath, 'products');
+      image = getImagePath(protocol, host, filePath, 'products');
+    }
 
     const newProduct = await productService.createProduct({
       ...product,
@@ -100,19 +105,22 @@ const productController = {
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
     const { id: productId } = req.params;
     const updates = req.body;
+    let image;
 
-    const protocol = req.protocol;
-    const host = req.get('host')!;
-    const filePath = req.file!.path;
+    if (req.file) {
+      const protocol = req.protocol;
+      const host = req.get('host')!;
+      const filePath = req.file.path;
 
-    // Generate image path to store in server
-    const image = getImagePath(protocol, host, filePath, 'products');
+      // Generate image path to store in server
+      image = getImagePath(protocol, host, filePath, 'products');
+    }
 
     // Delete Previous image
     const product = await productService.getOneProduct(productId);
     // Check if image is from populate (not uploaded in server)
 
-    if (product) await removeImage(product.image);
+    if (product) await removeImage(product.image!);
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
@@ -131,7 +139,7 @@ const productController = {
     // Delete previus image
     const removedProduct = await productService.deleteProduct(productId);
 
-    if (removedProduct) await removeImage(removedProduct.image);
+    if (removedProduct) await removeImage(removedProduct.image!);
 
     res
       .status(StatusCodes.OK)

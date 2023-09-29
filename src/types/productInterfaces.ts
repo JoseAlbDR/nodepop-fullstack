@@ -6,7 +6,7 @@ export interface IProduct {
   name: string;
   onSale: boolean;
   price: number;
-  image: string;
+  image: string | null;
   tags: ITags[];
   createdBy: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
 }

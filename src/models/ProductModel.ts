@@ -6,21 +6,24 @@ const ProductSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'Name is required'],
+      index: true,
     },
     onSale: {
       type: Boolean,
       default: false,
+      index: true,
     },
     price: {
       type: Number,
       required: [true, 'Price is required'],
+      index: true,
     },
     image: {
       type: String,
-      required: [true, 'Photo is required'],
     },
     tags: {
       type: [String],
+      index: true,
       required: [true, 'Tag is required'],
       validate: {
         validator: (tags: string[]) => {

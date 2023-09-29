@@ -35,7 +35,8 @@ export const validateUploadedFiles = (
   next: NextFunction
 ) => {
   if (!req.file || Object.keys(req.file).length === 0) {
-    throw new BadRequestError('No file uploaded');
+    return next();
+    // throw new BadRequestError('No file uploaded');
   }
 
   const image = req.file;
