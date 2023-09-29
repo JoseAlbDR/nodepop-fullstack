@@ -1,11 +1,7 @@
 import React from 'react';
 
 import StyledProductsPage from '../assets/wrappers/AllProductsPage';
-import {
-  SearchContainer,
-  ProductsContainer,
-  UserProductsContainer,
-} from '../components';
+import { SearchContainer, ProductsContainer } from '../components';
 
 import { ProductsProvider } from '../context/ProductsContext';
 
@@ -25,7 +21,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ pageType }) => {
         ) : (
           <>
             <SearchContainer page="user-products" />
-            <UserProductsContainer />
+            <ProductsContainer />
           </>
         )}
       </ProductsProvider>
