@@ -12,7 +12,6 @@ import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import day from 'dayjs';
 import ProductCategories from './ProductCategories';
-import React from 'react';
 import { useDashboardContext } from '../context/DashboardContext';
 interface ProductProps extends IProduct {}
 
@@ -29,22 +28,10 @@ const Product = ({
 }: ProductProps) => {
   const { user } = useDashboardContext();
 
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {
-    const imgElement = e.currentTarget;
-    imgElement.src = '../src/assets/images/no-image-available.webp';
-  };
-
   const date = day(createdAt).format('D MMM, YYYY');
   return (
     <StyledProduct>
-      <img
-        className="img"
-        src={image}
-        alt={`${name} image`}
-        onError={handleImageError}
-      />
+      <img className="img" src={image} alt={`${name} image`} />
       <div className="content">
         <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
           {onSale ? 'on-sale' : 'search'}
@@ -61,8 +48,7 @@ const Product = ({
             text={'CONTACT'}
           />
         ) : (
-
-          <div className='update-delete-btn'>
+          <div className="update-delete-btn">
             <ProductButton
               link={`../edit-product/${_id}`}
               icon={<FaPencilRuler />}

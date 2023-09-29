@@ -1,6 +1,6 @@
 import express from 'express';
 import productController from '../controllers/productController';
-import uploadsController from '../controllers/uploadsController';
+
 import {
   validateQueryParam,
   validateUploadedFiles,
@@ -41,14 +41,6 @@ router.get('/tags', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getAllTags,
 ]);
-
-router.post(
-  '/upload-image',
-  checkTestUser,
-  authorizePermissions('user', 'admin'),
-  validateUploadedFiles,
-  uploadsController.uploadProductImage
-);
 
 router.route('/stats').get(productController.showStats);
 

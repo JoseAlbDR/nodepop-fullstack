@@ -77,7 +77,11 @@ const productController = {
     product.createdBy = req.user.userId;
 
     if (!req.file) {
-      image = '/src/public/no-image-available.webp';
+      image = `${
+        process.env.NODE_ENV === 'development'
+          ? '/src/public/no-image-available.webp'
+          : '/no-image-available.webp'
+      }`;
     } else {
       const protocol = req.protocol;
       const host = req.get('host')!;
@@ -113,6 +117,8 @@ const productController = {
       const protocol = req.protocol;
       const host = req.get('host')!;
       const filePath = req.file.path;
+
+      console.log(req.file);
 
       // Generate image path to store in server
       image = getImagePath(protocol, host, filePath, 'products');
