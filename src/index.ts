@@ -43,9 +43,10 @@ app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
 app.use('/api/v1/auth', authRouter);
 
-app.get('*', (_req, res) => {
-  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
-});
+if (process.env.NODE_ENV !== 'production')
+  app.get('*', (_req, res) => {
+    res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+  });
 
 // Middlewares
 app.use(notFoundMiddleware);
