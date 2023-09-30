@@ -30,3 +30,4 @@ export { default as StatItem } from './StatItem';
 
 export { default as ThemeToggle } from './ThemeToggle';
 export { default as Spinner } from './Spinner';
+export { default as ErrorComponent } from './ErrorComponent';
