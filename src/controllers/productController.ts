@@ -148,8 +148,10 @@ const productController = {
   deleteProduct: async (req: Request, res: Response) => {
     const { id: productId } = req.params;
 
-    // Delete previus image
+    // Delete previous image
     const removedProduct = await productService.deleteProduct(productId);
+
+    console.log('product image', removedProduct?.image);
 
     if (removedProduct) await removeImage(removedProduct.image!);
 
