@@ -1,12 +1,3 @@
-import { CSSProperties } from 'react';
-import { CircleLoader } from 'react-spinners';
-
-const override: CSSProperties = {
-  display: 'flex',
-  margin: '0 auto',
-  borderColor: 'red',
-};
-
 const Spinner = () => {
   return (
     <div
@@ -17,13 +8,7 @@ const Spinner = () => {
         height: '50vh',
       }}
     >
-      <CircleLoader
-        cssOverride={override}
-        size={150}
-        aria-label="Loading Spinner"
-        loading={true}
-        color="#fff"
-      />
+      <div className="loading"></div>
     </div>
   );
 };
