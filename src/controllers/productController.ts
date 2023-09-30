@@ -123,15 +123,17 @@ const productController = {
 
       console.log(req.file);
 
+      const product = await productService.getOneProduct(productId);
+      // Check if image is from populate (not uploaded in server)
+
+      if (product) await removeImage(product.image!, 'products');
       // Generate image path to store in server
       image = getImagePath(protocol, host, filePath, 'products');
+    } else {
+      image = updates.image;
     }
 
     // Delete Previous image
-    const product = await productService.getOneProduct(productId);
-    // Check if image is from populate (not uploaded in server)
-
-    if (product) await removeImage(product.image!, 'products');
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
