@@ -5,11 +5,11 @@ const fileUpload = (folder: string) => {
     destination: (_req, _file, cb) => {
       let newPath = '';
       if (process.env.NODE_ENV === 'render')
-        newPath = '/opt/render/project/src/build/public/uploads/';
+        newPath = 'opt/render/project/src/build/public/uploads/';
       if (process.env.NODE_ENV === 'development')
-        newPath = './src/public/uploads/';
+        newPath = 'src/public/uploads/';
       if (process.env.NODE_ENV === 'production')
-        newPath = './build/public/uploads/';
+        newPath = 'build/public/uploads/';
 
       cb(null, `${newPath}${folder}`);
     },
