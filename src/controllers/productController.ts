@@ -77,7 +77,7 @@ const productController = {
     product.createdBy = req.user.userId;
 
     let newPath = '';
-    if (process.env.NODE_ENV === 'render') newPath = 'no-image-available.webp';
+    if (process.env.NODE_ENV === 'render') newPath = '/no-image-available.webp';
     if (process.env.NODE_ENV === 'development')
       newPath = '/src/public/no-image-available.webp';
     if (process.env.NODE_ENV === 'production')
