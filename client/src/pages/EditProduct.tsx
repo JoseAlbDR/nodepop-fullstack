@@ -94,7 +94,7 @@ const EditJob = () => {
               disabled={isSubmitting}
             />
             <FormRowSelect
-              name="type"
+              name="onSale"
               types={TYPE}
               selected={product.onSale ? 'on sale' : 'search'}
             />

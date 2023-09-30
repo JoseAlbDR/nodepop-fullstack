@@ -18,8 +18,6 @@ const SearchContainer = ({ page }: { page: string }) => {
 
   const { name, price, onSale, tags: searchTags, sort, limit } = searchValues;
 
-  console.log(limit);
-
   const [max, min] = price
     ? (price.split('-') as [string, string])
     : [maxPrice, minPrice];
