@@ -29,3 +29,4 @@ export { default as BarChart } from './BarChart';
 export { default as StatItem } from './StatItem';
 
 export { default as ThemeToggle } from './ThemeToggle';
+export { default as Spinner } from './Spinner';
