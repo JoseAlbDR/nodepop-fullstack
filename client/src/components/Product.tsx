@@ -5,14 +5,15 @@ import {
   FaPencilRuler,
   FaTrash,
 } from 'react-icons/fa';
-import { ProductButton, ProductInfo } from '.';
+import day from 'dayjs';
+
+import { ProductButton, ProductInfo, ProductCategories } from '.';
 import search from '../assets/images/search.svg';
 import sale from '../assets/images/sell.svg';
 import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
-import day from 'dayjs';
-import ProductCategories from './ProductCategories';
 import { useDashboardContext } from '../context/DashboardContext';
+
 interface ProductProps extends IProduct {}
 
 const Product = ({

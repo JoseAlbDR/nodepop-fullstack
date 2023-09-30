@@ -1,6 +1,8 @@
-import StyledThemeToggle from '../assets/wrappers/ThemeToggle';
 import { FaMoon, FaSun } from 'react-icons/fa';
+
+import StyledThemeToggle from '../assets/wrappers/ThemeToggle';
 import { useDarkThemeContext } from '../context/ToggleDarkThemeContext';
+
 const ThemeToggle = () => {
   const { isDarkTheme, toggleDarkTheme } = useDarkThemeContext();
 

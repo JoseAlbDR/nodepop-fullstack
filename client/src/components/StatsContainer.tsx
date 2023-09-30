@@ -1,7 +1,9 @@
+import { FaCubes, FaMagnifyingGlass, FaMoneyBill } from 'react-icons/fa6';
+
 import { IResultStats } from '../types/Products';
 import StyledStats from '../assets/wrappers/StatsContainer';
 import { StatItem } from '.';
-import { FaCubes, FaMagnifyingGlass, FaMoneyBill } from 'react-icons/fa6';
+
 const StatsContainer = ({ defaultStats }: { defaultStats: IResultStats }) => {
   console.log(defaultStats);
   return (

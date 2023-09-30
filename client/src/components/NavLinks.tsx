@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useDashboardContext } from '../context/DashboardContext';
+
 import links from '../utils/links';
+
 const NavLinks = ({ isBigSidebar }: { isBigSidebar: boolean }) => {
   const { toggleSidebar, user } = useDashboardContext();
   return (

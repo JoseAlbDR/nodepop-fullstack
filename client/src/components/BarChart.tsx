@@ -1,4 +1,3 @@
-import { IMonthlyProducts } from '../types/Products';
 import {
   ResponsiveContainer,
   CartesianGrid,
@@ -8,6 +7,9 @@ import {
   BarChart,
   Bar,
 } from 'recharts';
+
+import { IMonthlyProducts } from '../types/Products';
+
 const BarChartComponent = ({ data }: { data: IMonthlyProducts[] }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>

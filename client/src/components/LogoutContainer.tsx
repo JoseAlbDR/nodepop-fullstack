@@ -1,10 +1,11 @@
 import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 import { useState } from 'react';
-import { useDashboardContext } from '../context/DashboardContext';
-import StyledLogout from '../assets/wrappers/Logout';
 import { useNavigate } from 'react-router-dom';
 import { ClickAwayListener } from '@mui/material';
+
+import { useDashboardContext } from '../context/DashboardContext';
+import StyledLogout from '../assets/wrappers/Logout';
 
 const LogoutContainer = () => {
   const [showLogout, setShowLogout] = useState(false);

@@ -1,7 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
+import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+
 import StyledPageBtnContainer from '../assets/wrappers/PageBtnContainer';
 import { useProductsContext } from '../context/ProductsContext';
-import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+
 const PageBtnContainer = () => {
   const {
     data: { numOfPages, currentPage },

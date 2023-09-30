@@ -1,7 +1,8 @@
 import StyledBigSidebar from '../assets/wrappers/BigSidebar';
+
 import { useDashboardContext } from '../context/DashboardContext';
-import Logo from './Logo';
-import NavLinks from './NavLinks';
+import { Logo, NavLinks } from '.';
+
 const BigSidebar = () => {
   const { showSidebar } = useDashboardContext();
   return (

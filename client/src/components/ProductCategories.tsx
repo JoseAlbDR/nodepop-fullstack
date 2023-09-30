@@ -1,5 +1,7 @@
 import { FaTag } from 'react-icons/fa';
+
 import { ITags } from '../../../src/types/productInterfaces';
+
 const ProductCategories = ({ tags }: { tags: ITags[] }) => {
   return (
     <div className="categories">

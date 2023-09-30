@@ -1,9 +1,8 @@
 import StyledNavBar from '../assets/wrappers/NavBar';
 import { FaAlignLeft } from 'react-icons/fa';
-import LogoutContainer from './LogoutContainer';
+
 import { useDashboardContext } from '../context/DashboardContext';
-import { Logo } from '.';
-import ThemeToggle from './ThemeToggle';
+import { ThemeToggle, Logo, LogoutContainer } from '.';
 
 const NavBar = () => {
   const { toggleSidebar } = useDashboardContext();

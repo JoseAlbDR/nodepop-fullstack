@@ -5,6 +5,7 @@ import { redirect, useLoaderData } from 'react-router-dom';
 import StyledStats from '../assets/wrappers/StatsContainer';
 import { StatItem } from '../components';
 import { FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
+
 interface StatsResponse extends AxiosResponse {
   users: number;
   products: number;

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Form, useNavigation, useSubmit } from 'react-router-dom';
+import { Link, Form, useNavigation, useSubmit } from 'react-router-dom';
+
 import StyledSearchContainer from '../assets/wrappers/DashboardFormPage';
-import { FormRow, FormRowSelect } from '.';
+import { FormRow, FormRowSelect, FormSearchPrices } from '.';
 import { SORT, TYPE } from '../../../src/utils/constantsUtil';
-import FormSearchPrices from './FormSearchPrices';
 import { useTags } from '../hooks/useTags';
-import { Link } from 'react-router-dom';
 import { useProductsContext } from '../context/ProductsContext';
+
 const SearchContainer = ({ page }: { page: string }) => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';

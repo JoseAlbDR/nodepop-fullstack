@@ -1,4 +1,3 @@
-import { IMonthlyProducts } from '../types/Products';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -8,6 +7,9 @@ import {
   Area,
   Tooltip,
 } from 'recharts';
+
+import { IMonthlyProducts } from '../types/Products';
+
 const AreaChartComponent = ({ data }: { data: IMonthlyProducts[] }) => {
   return (
     <ResponsiveContainer width="100%" height={300}>

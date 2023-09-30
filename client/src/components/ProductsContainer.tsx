@@ -1,7 +1,7 @@
 import StyledProductsContainer from '../assets/wrappers/ProductsContainer';
-import { Product } from '.';
+import { Product, PageBtnContainer } from '.';
 import { useProductsContext } from '../context/ProductsContext';
-import PageBtnContainer from './PageBtnContainer';
+
 const ProductsContainer = () => {
   const { data } = useProductsContext();
   const { products, totalProducts, numOfPages } = data;

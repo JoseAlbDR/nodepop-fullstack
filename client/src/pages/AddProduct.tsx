@@ -6,12 +6,17 @@ import {
 } from 'react-router-dom';
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 // import { useDashboard } from '../context/DashboardContext';
-import { FormRow, FormRowSelect, FormRowTags, SubmitBtn } from '../components';
+import {
+  FormRow,
+  FormRowSelect,
+  FormRowTags,
+  SubmitBtn,
+  FormRowInput,
+} from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
 import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
 import { AxiosError } from 'axios';
-import FormRowInput from '../components/FormRowInput';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
