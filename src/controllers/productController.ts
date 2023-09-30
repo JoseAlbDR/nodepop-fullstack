@@ -76,12 +76,16 @@ const productController = {
 
     product.createdBy = req.user.userId;
 
+    let newPath = '';
+    if (process.env.NODE_ENV === 'render')
+      newPath = '/opt/render/project/src/build/no-image-available.webp';
+    if (process.env.NODE_ENV === 'development')
+      newPath = '/src/public/no-image-available.webp';
+    if (process.env.NODE_ENV === 'production')
+      newPath = '/no-image-available.webp';
+
     if (!req.file) {
-      image = `${
-        process.env.NODE_ENV === 'development'
-          ? '/src/public/no-image-available.webp'
-          : '/no-image-available.webp'
-      }`;
+      image = `${newPath}`;
     } else {
       const protocol = req.protocol;
       const host = req.get('host')!;
