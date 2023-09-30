@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom';
+
 import StyledLanding from '../assets/wrappers/LandingPage';
 import main from '../assets/images/main.svg';
-import { Link } from 'react-router-dom';
-import { Logo } from '../components';
-import ThemeToggle from '../components/ThemeToggle';
+import { Logo, ThemeToggle } from '../components';
 
 const Landing = () => {
   return (

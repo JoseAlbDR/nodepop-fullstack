@@ -4,11 +4,12 @@ import {
   redirect,
   useNavigate,
 } from 'react-router-dom';
-import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import StyledDeleteProduct from '../assets/wrappers/DeleteProduct';
 import { ClickAwayListener } from '@mui/material';
+
+import customFetch from '../utils/customFetch';
+import StyledDeleteProduct from '../assets/wrappers/DeleteProduct';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { params } = data;

@@ -17,7 +17,7 @@ const LogoutContainer = () => {
   );
 
   return (
-    <ClickAwayListener onClickAway={() => setShowLogout(!showLogout)}>
+    <ClickAwayListener onClickAway={() => setShowLogout(false)}>
       <StyledLogout>
         <button
           type="button"

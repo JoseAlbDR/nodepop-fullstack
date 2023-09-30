@@ -5,11 +5,12 @@ import {
   redirect,
   useNavigation,
 } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+
 import StyledRegister from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow, SubmitBtn } from '../components';
 import customFetch from '../utils/customFetch.ts';
-import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;

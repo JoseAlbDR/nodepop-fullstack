@@ -1,8 +1,9 @@
 import { AxiosError } from 'axios';
-import customFetch from '../utils/customFetch';
 import { toast } from 'react-toastify';
-import { IStatsResponse } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
+
+import customFetch from '../utils/customFetch';
+import { IStatsResponse } from '../types/Products';
 import { ChartsContainer, StatsContainer } from '../components';
 
 export const loader = async () => {

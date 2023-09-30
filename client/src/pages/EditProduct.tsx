@@ -6,14 +6,20 @@ import {
   useLoaderData,
   useNavigation,
 } from 'react-router-dom';
-import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
+
+import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 import customFetch from '../utils/customFetch';
-import { IProduct } from '../types/Products';
-import { FormRow, FormRowSelect, FormRowTags, SubmitBtn } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
-import FormRowInput from '../components/FormRowInput';
+import { IProduct } from '../types/Products';
+import {
+  FormRow,
+  FormRowSelect,
+  FormRowTags,
+  SubmitBtn,
+  FormRowInput,
+} from '../components';
 
 export interface IProductResponse extends AxiosResponse {
   product: IProduct;

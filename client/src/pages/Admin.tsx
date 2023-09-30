@@ -1,10 +1,11 @@
-import { toast } from 'react-toastify';
-import customFetch from '../utils/customFetch';
 import { AxiosError, AxiosResponse } from 'axios';
 import { redirect, useLoaderData } from 'react-router-dom';
+import { FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
+
+import { toast } from 'react-toastify';
+import customFetch from '../utils/customFetch';
 import StyledStats from '../assets/wrappers/StatsContainer';
 import { StatItem } from '../components';
-import { FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
 
 interface StatsResponse extends AxiosResponse {
   users: number;

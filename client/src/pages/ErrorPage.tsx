@@ -1,4 +1,5 @@
 import { Link, useRouteError } from 'react-router-dom';
+
 import { getError } from '../utils/getError';
 import StyledErrorPage from '../assets/wrappers/ErrorPage';
 import notFound from '../assets/images/not-found.svg';

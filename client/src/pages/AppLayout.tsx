@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+
 import { DarkThemeProvider } from '../context/ToggleDarkThemeContext';
 
 const AppLayout = () => {

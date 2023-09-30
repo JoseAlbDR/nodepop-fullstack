@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
-import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import customFetch from '../utils/customFetch';
+import { toast } from 'react-toastify';
 import { NavigateFunction, useLoaderData } from 'react-router-dom';
+
+import customFetch from '../utils/customFetch';
 import { IUser, IUserData } from '../types/UserInterface';
 
 interface DashboardContextValues {

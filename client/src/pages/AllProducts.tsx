@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs } from 'react-router-dom';
+
 import ProductsPage from './ProductsPage';
 import { productsLoader } from '../utils/productsLoader';
-('react-router-dom');
 
 export const loader = async (data: LoaderFunctionArgs) => productsLoader(data);
 

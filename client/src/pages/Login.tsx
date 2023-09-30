@@ -6,10 +6,11 @@ import {
   useNavigate,
   useNavigation,
 } from 'react-router-dom';
-import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
-import { Logo, FormRow, SubmitBtn } from '../components';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+
+import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
+import { Logo, FormRow, SubmitBtn } from '../components';
 import customFetch from '../utils/customFetch';
 
 export const action = async (data: ActionFunctionArgs) => {

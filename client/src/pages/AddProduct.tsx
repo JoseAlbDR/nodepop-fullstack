@@ -4,8 +4,10 @@ import {
   redirect,
   useNavigation,
 } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
-// import { useDashboard } from '../context/DashboardContext';
 import {
   FormRow,
   FormRowSelect,
@@ -14,9 +16,7 @@ import {
   FormRowInput,
 } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
-import { toast } from 'react-toastify';
 import customFetch from '../utils/customFetch';
-import { AxiosError } from 'axios';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;

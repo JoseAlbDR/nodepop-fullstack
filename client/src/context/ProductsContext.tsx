@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { IProductResponse } from '../types/Products';
 import { useLoaderData } from 'react-router-dom';
+
+import { IProductResponse } from '../types/Products';
 
 interface ProductsContextValues {
   data: IProductResponse;
