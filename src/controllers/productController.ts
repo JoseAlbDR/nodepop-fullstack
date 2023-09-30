@@ -103,32 +103,24 @@ const productController = {
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
     const { id: productId } = req.params;
     const updates = req.body;
-    let image;
 
     if (req.file) {
+      // Remove previous image
+      const product = await productService.getOneProduct(productId);
+      if (product) await removeImage(product.image!, 'products');
+
+      // Create new image path
       const protocol = req.protocol;
       const host = req.get('host')!;
       const filePath = req.file.path;
-
-      console.log(req.file);
-
-      const product = await productService.getOneProduct(productId);
-      // Check if image is from populate (not uploaded in server)
-
-      if (product) await removeImage(product.image!, 'products');
-      // Generate image path to store in server
-      image = getImagePath(protocol, host, filePath, 'products');
-    } else {
-      image = updates.image;
+      updates.image = getImagePath(protocol, host, filePath, 'products');
     }
 
-    // Delete Previous image
-
     // Update product
-    const updatedProduct = await productService.updateProduct(req.params.id, {
-      ...updates,
-      image,
-    });
+    const updatedProduct = await productService.updateProduct(
+      req.params.id,
+      updates
+    );
 
     res
       .status(StatusCodes.OK)
@@ -140,8 +132,6 @@ const productController = {
 
     // Delete previous image
     const removedProduct = await productService.deleteProduct(productId);
-
-    console.log('product image', removedProduct?.image);
 
     if (removedProduct) await removeImage(removedProduct.image!, 'products');
 

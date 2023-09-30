@@ -21,16 +21,19 @@ const userController = {
     const updates = { ...req.body };
     delete updates.password;
 
-    // Delete previous image
-    const user = await userService.getCurrentUser(userId);
-    await removeImage(user.avatar!, 'users');
+    if (req.file) {
+      // Remove previous image
+      const user = await userService.getCurrentUser(userId);
+      await removeImage(user.avatar!, 'users');
 
-    // New image path
-    const protocol = req.protocol;
-    const host = req.get('host')!;
-    const filePath = req.file!.path;
-    updates.avatar = getImagePath(protocol, host, filePath, 'users');
+      // Generate new image path
+      const protocol = req.protocol;
+      const host = req.get('host')!;
+      const filePath = req.file.path;
+      updates.avatar = getImagePath(protocol, host, filePath, 'users');
+    }
 
+    // Update User
     await userService.updateUser(req.user.userId, updates);
 
     res.status(StatusCodes.OK).json({ msg: 'user updated' });
