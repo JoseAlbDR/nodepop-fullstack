@@ -5,6 +5,9 @@ export const removeImage = async (image: string) => {
 
   if (image.startsWith('https') || image.endsWith('.webp')) return;
   const aux = image.split('/');
-  const imagePath = '/uploads/products' + aux[aux.length - 1];
+  const imagePath =
+    process.env.NODE_ENV === 'render'
+      ? '/uploads/products/' + aux[aux.length - 1]
+      : aux[aux.length - 1];
   if (imagePath) await deleteFile(imagePath);
 };
