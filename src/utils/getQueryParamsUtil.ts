@@ -70,6 +70,8 @@ export const getQueryParams = (
       default:
         result = result.sort('createdAt');
     }
+  } else {
+    result = result.sort('-createdAt');
   }
 
   // Pagination
