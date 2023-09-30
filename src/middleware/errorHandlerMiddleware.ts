@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { CustomAPIError } from '../errors/customError';
 import { StatusCodes } from 'http-status-codes';
 import { MongoError } from 'mongodb';
+
+import { CustomAPIError } from '../errors/customError';
 
 const errorHandlerMiddleware = (
   err: Error,

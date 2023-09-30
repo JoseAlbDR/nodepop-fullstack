@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { faker } from '@faker-js/faker';
+
 import { Product } from '../models/ProductModel';
 import { IProduct } from '../types/productInterfaces';
 import {
@@ -6,7 +8,6 @@ import {
   getRandomDateLast6Months,
   getRandomTags,
 } from '../utils';
-import { faker } from '@faker-js/faker';
 
 const populateService = {
   populateDatabase: async (n: number, userId: mongoose.Types.ObjectId) => {

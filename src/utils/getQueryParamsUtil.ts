@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import productService from '../services/productService';
 import { IProductQuery } from '../types/queryInterfaces';
 

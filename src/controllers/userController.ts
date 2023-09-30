@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import userService from '../services/userService';
 import { StatusCodes } from 'http-status-codes';
+
+import userService from '../services/userService';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
-import { getImagePath } from '../utils/getImagePathUtil';
-import { removeImage } from '../utils';
+import { removeImage, getImagePath } from '../utils';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {

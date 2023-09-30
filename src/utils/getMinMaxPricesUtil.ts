@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { Product } from '../models/ProductModel';
 
 export interface MinMax {

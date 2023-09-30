@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import { User } from '../models/UserModel';
 import { IUpdateUser } from '../types/userInterfaces';
 import { NotFoundError } from '../errors';

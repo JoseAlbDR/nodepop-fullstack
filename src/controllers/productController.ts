@@ -1,11 +1,8 @@
-// Packages
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-// Services
 import productService from '../services/productService';
 
-// DTOS, Interfaces
 import { CreateProductDTO } from '../dtos/createProductDto';
 import { UpdateProductDTO } from '../dtos/updateProductDto';
 import { getImagePath, getMinMaxPrices, removeImage } from '../utils';

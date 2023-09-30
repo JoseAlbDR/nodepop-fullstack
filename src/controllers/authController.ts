@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+
 import { authService } from '../services/authService';
 import { RegisterUserDTO } from '../dtos/registerUserDto';
-import { StatusCodes } from 'http-status-codes';
 import { LoginUserDTO } from '../dtos/loginUserDto';
 
 export const authController = {

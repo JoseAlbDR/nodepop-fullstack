@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import populateService from '../services/populateService';
-import { StatusCodes } from 'http-status-codes';
 
 export const populateController = {
   populateDatabase: async (req: Request, res: Response) => {

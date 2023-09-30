@@ -1,11 +1,10 @@
 import express from 'express';
+
 import productController from '../controllers/productController';
 
 import {
   validateQueryParam,
   validateUploadedFiles,
-} from '../middleware/validationMiddleware';
-import {
   validateProductCreation,
   validateIdParam,
   validateProductUpdate,

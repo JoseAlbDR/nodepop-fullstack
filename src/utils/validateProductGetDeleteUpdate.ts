@@ -1,5 +1,6 @@
-import { JWTPayload } from '../types/authInterfaces';
 import mongoose from 'mongoose';
+
+import { JWTPayload } from '../types/authInterfaces';
 import { BadRequestError, NotFoundError } from '../errors';
 import { Product } from '../models/ProductModel';
 import { Request } from 'express-validator/src/base';

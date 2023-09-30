@@ -1,11 +1,9 @@
-// Packages
 import day from 'dayjs';
 import _ from 'lodash';
+import mongoose from 'mongoose';
 
-// Model, interfaces
 import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
-import mongoose from 'mongoose';
 import { IProductQuery } from '../types/queryInterfaces';
 
 const productService = {

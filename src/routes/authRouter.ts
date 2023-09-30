@@ -1,4 +1,5 @@
 import express from 'express';
+
 import { authController } from '../controllers/authController';
 import {
   validateRegisterUser,

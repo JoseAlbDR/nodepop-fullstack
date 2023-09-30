@@ -1,5 +1,6 @@
 import { body, param, query, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
+
 import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
 import { tagsValidationMessage, validateSort, validateTags } from '../utils';
