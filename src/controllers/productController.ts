@@ -75,21 +75,13 @@ const productController = {
     let image;
 
     product.createdBy = req.user.userId;
-
-    let newPath = '';
-    if (process.env.NODE_ENV === 'render') newPath = '/no-image-available.webp';
-    if (process.env.NODE_ENV === 'development')
-      newPath = '/src/public/no-image-available.webp';
-    if (process.env.NODE_ENV === 'production')
-      newPath = '/no-image-available.webp';
+    const protocol = req.protocol;
+    const host = req.get('host')!;
 
     if (!req.file) {
-      image = `${newPath}`;
+      image = 'http://localhost:3000/no-image-available.webp';
     } else {
-      const protocol = req.protocol;
-      const host = req.get('host')!;
       const filePath = req.file.path;
-
       image = getImagePath(protocol, host, filePath, 'products');
     }
 

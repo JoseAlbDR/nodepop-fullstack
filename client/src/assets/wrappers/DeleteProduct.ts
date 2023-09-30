@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   }
 
   .content {
+    min-width: 300px;
     padding: 2rem 1.5rem;
     display: flex;
     gap: 1rem;
