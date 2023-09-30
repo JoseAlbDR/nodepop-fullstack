@@ -3,6 +3,8 @@ import multer from 'multer';
 const fileUpload = (folder: string) => {
   const storage = multer.diskStorage({
     destination: (_req, _file, cb) => {
+      console.log('ENVIROMEEEEEEEEEEEEEEEENT', process.env.NODE_ENV);
+
       let newPath = '';
       if (process.env.NODE_ENV === 'render')
         newPath = '/opt/render/project/src/build/public/uploads/';
