@@ -1,4 +1,4 @@
-import { Outlet, redirect } from 'react-router-dom';
+import { Outlet, redirect, useNavigation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 
@@ -20,6 +20,10 @@ export const loader = async () => {
 };
 
 const DashboardLayout = () => {
+  const navigation = useNavigation();
+
+  const isLoading = navigation.state === 'loading';
+
   return (
     <DashboardProvider>
       <StyledDashboard>
@@ -29,7 +33,7 @@ const DashboardLayout = () => {
           <div>
             <NavBar />
             <div className="dashboard-page">
-              <Outlet />
+              <Outlet context={isLoading} />
             </div>
           </div>
         </main>
