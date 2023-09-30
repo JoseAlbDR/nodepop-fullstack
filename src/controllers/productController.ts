@@ -131,7 +131,7 @@ const productController = {
     const product = await productService.getOneProduct(productId);
     // Check if image is from populate (not uploaded in server)
 
-    if (product) await removeImage(product.image!);
+    if (product) await removeImage(product.image!, 'products');
 
     // Update product
     const updatedProduct = await productService.updateProduct(req.params.id, {
@@ -152,7 +152,7 @@ const productController = {
 
     console.log('product image', removedProduct?.image);
 
-    if (removedProduct) await removeImage(removedProduct.image!);
+    if (removedProduct) await removeImage(removedProduct.image!, 'products');
 
     res
       .status(StatusCodes.OK)

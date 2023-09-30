@@ -23,7 +23,7 @@ const userController = {
 
     // Delete previous image
     const user = await userService.getCurrentUser(userId);
-    await removeImage(user.avatar!);
+    await removeImage(user.avatar!, 'users');
 
     // New image path
     const protocol = req.protocol;

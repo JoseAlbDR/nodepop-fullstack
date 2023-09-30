@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { NotFoundError } from '../errors';
 
 export const deleteFile = async (filePath: string) => {
   let newPath = '';
@@ -19,7 +18,7 @@ export const deleteFile = async (filePath: string) => {
       (error as NodeJS.ErrnoException).code === 'ENOENT'
     ) {
       console.log(error);
-      throw new NotFoundError('Image not found');
+      return;
     }
     console.log(error);
     throw error;
