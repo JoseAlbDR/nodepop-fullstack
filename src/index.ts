@@ -23,6 +23,7 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 import cookieParser from 'cookie-parser';
 import { authenticateUser } from './middleware/authMiddleware';
 import path from 'path';
+import { createTestUser } from './utils/createTestUserUtil';
 
 const app = express();
 
@@ -57,6 +58,8 @@ const start = async () => {
   try {
     await dbConnect(process.env.MONGO_URL);
     console.log('Connected to db');
+    await createTestUser();
+    console.log('Test user created');
     app.listen(port, () => {
       serverDebug(`Server listening on port: ${port}`);
     });

@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useDashboardContext } from '../context/DashboardContext';
 import StyledLogout from '../assets/wrappers/Logout';
 import { useNavigate } from 'react-router-dom';
+import { ClickAwayListener } from '@mui/material';
 
 const LogoutContainer = () => {
-  const [showLogout, setShowLogut] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const { user, logoutUser, editProfile } = useDashboardContext();
   const navigate = useNavigate();
 
@@ -15,34 +16,39 @@ const LogoutContainer = () => {
   );
 
   return (
-    <StyledLogout>
-      <button
-        type="button"
-        className="btn logout-btn"
-        onClick={() => setShowLogut(!showLogout)}
-      >
-        {user.avatar ? avatar : <BsFillPersonFill />}
-        {user.name}
-        <IoIosArrowDown />
-      </button>
+    <ClickAwayListener onClickAway={() => setShowLogout(!showLogout)}>
+      <StyledLogout>
+        <button
+          type="button"
+          className="btn logout-btn"
+          onClick={() => setShowLogout(!showLogout)}
+        >
+          {user.avatar ? avatar : <BsFillPersonFill />}
+          {user.name}
+          <IoIosArrowDown />
+        </button>
 
-      <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
-        <button
-          type="button"
-          className="dropdown-btn"
-          onClick={() => editProfile(navigate)}
-        >
-          edit profile
-        </button>
-        <button
-          type="button"
-          className="dropdown-btn"
-          onClick={() => logoutUser(navigate)}
-        >
-          logout
-        </button>
-      </div>
-    </StyledLogout>
+        <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
+          <button
+            type="button"
+            className="dropdown-btn"
+            onClick={() => {
+              setShowLogout(!showLogout);
+              editProfile(navigate);
+            }}
+          >
+            edit profile
+          </button>
+          <button
+            type="button"
+            className="dropdown-btn"
+            onClick={() => logoutUser(navigate)}
+          >
+            logout
+          </button>
+        </div>
+      </StyledLogout>
+    </ClickAwayListener>
   );
 };
 
