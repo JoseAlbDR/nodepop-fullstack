@@ -25,11 +25,11 @@
     "client": "cd client && npm run dev",
     "dev": "concurrently --kill-others-on-fail \" npm run server\" \"npm run client\"",
     "build-server": "rm -rf build && tsc",
-    "build-client": "mkdirp build/public && cp -R src/public/* build/public && cd client && npm run build && cp -f dist/* ../build/public && cd .. && mkdirp build/public/uploads/products && mkdirp build/public/uploads/users",
+    "build-client": "mkdirp build/public && cp -R src/public/* build/public && cd client && npm run build && cp -fr dist/* ../build/public && cd .. && mkdirp build/public/uploads/products && mkdirp build/public/uploads/users",
     "lint": "eslint --ext .ts .",
     "start": "node build/index.js",
     "setup-project": "npm i && cd client && npm i",
-    "build": "npm i && cd client && npm i && cd .. && npm run build-server && npm run build-client"
+    "setup-production-app": "npm i && cd client && npm i && cd .. && npm run build-server && npm run build-client"
   },
   "repository": {
     "type": "git",

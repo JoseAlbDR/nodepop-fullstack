@@ -9,7 +9,7 @@ const fileUpload = (folder: string) => {
       if (process.env.NODE_ENV === 'development')
         newPath = './src/public/uploads/';
       if (process.env.NODE_ENV === 'production')
-        newPath = '/build/public/uploads/';
+        newPath = './build/public/uploads/';
 
       cb(null, `${newPath}${folder}`);
     },

@@ -76,7 +76,10 @@ const productController = {
     const host = req.get('host')!;
 
     if (!req.file) {
-      image = 'http://localhost:3000/no-image-available.webp';
+      image =
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000/no-image-available.webp'
+          : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
       image = getImagePath(protocol, host, filePath, 'products');
