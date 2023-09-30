@@ -29,6 +29,7 @@ import { action as deleteProductAction } from './pages/DeleteProduct';
 import { loader as adminLoader } from './pages/Admin';
 import { action as updateProfileAction } from './pages/Profile';
 import { loader as statsLoader } from './pages/Stats';
+import { ErrorComponent } from './components';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
             path: 'stats',
             element: <Stats />,
             loader: statsLoader,
+            errorElement: <ErrorComponent />,
           },
           {
             path: 'all-products',

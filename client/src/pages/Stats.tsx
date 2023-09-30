@@ -1,5 +1,5 @@
-import { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
+// import { AxiosError } from 'axios';
+// import { toast } from 'react-toastify';
 import { useLoaderData } from 'react-router-dom';
 
 import customFetch from '../utils/customFetch';
@@ -7,15 +7,8 @@ import { IStatsResponse } from '../types/Products';
 import { ChartsContainer, StatsContainer } from '../components';
 
 export const loader = async () => {
-  try {
-    const response: IStatsResponse = await customFetch.get('/products/stats');
-    return response;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
-    }
-    return error;
-  }
+  const response: IStatsResponse = await customFetch.get('/products/stats');
+  return response;
 };
 
 const Stats = () => {
