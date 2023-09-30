@@ -3,7 +3,7 @@ import { deleteFile } from './deleteImageUtil';
 export const removeImage = async (image: string) => {
   console.log('IMAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE', image);
 
-  if (image.startsWith('https') || image.endsWith('.webp')) return;
+  if (!image || image.startsWith('https') || image.endsWith('.webp')) return;
   const aux = image.split('/');
   const imagePath =
     process.env.NODE_ENV === 'render'
