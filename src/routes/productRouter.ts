@@ -36,15 +36,15 @@ router.get('/user-products', [
   productController.getUserProducts,
 ]);
 
+router.route('/stats').get(productController.showStats);
+
 router.get('/tags', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getAllTags,
 ]);
 
-router.route('/stats').get(productController.showStats);
-
 router
-  .route('/:id')
+  .route('/:id([0-9a-fA-F]{24})')
   .get(validateIdParam, productController.getOneProduct)
   .patch(
     checkTestUser,
