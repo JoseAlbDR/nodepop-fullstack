@@ -13,7 +13,9 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ pageType }) => {
   return (
     <StyledProductsPage>
       <ProductsProvider>
-        <SearchContainer page={`all-${pageType}`} />
+        <SearchContainer
+          page={pageType === 'all' ? 'all-products' : 'user-products'}
+        />
         <ProductsContainer />
       </ProductsProvider>
     </StyledProductsPage>
