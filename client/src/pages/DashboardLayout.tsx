@@ -3,14 +3,20 @@ import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 
 import StyledDashboard from '../assets/wrappers/Dashboard';
-import { BigSidebar, SmallSideBar, NavBar } from '../components';
+import { BigSidebar, SmallSideBar, NavBar, Spinner } from '../components';
 import { DashboardProvider } from '../context/DashboardContext';
-import customFetch from '../utils/customFetch';
+import { getCurrentUser } from '../services/getCurrentUser';
+import { QueryClient } from '@tanstack/react-query';
 
-export const loader = async () => {
+const currentUserQuery = {
+  queryKey: ['user'],
+  queryFn: getCurrentUser,
+};
+
+export const loader = (queryClient: QueryClient) => async () => {
   try {
-    const { data } = await customFetch('/users/current-user');
-    return data;
+    await queryClient.ensureQueryData(currentUserQuery);
+    return null;
   } catch (error) {
     if (error instanceof AxiosError) {
       toast.error(error?.response?.data?.msg);
@@ -21,7 +27,6 @@ export const loader = async () => {
 
 const DashboardLayout = () => {
   const navigation = useNavigation();
-
   const isLoading = navigation.state === 'loading';
 
   return (
@@ -33,7 +38,7 @@ const DashboardLayout = () => {
           <div>
             <NavBar />
             <div className="dashboard-page">
-              <Outlet context={isLoading} />
+              {isLoading ? <Spinner /> : <Outlet />}
             </div>
           </div>
         </main>
