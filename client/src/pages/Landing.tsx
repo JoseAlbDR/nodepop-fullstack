@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import StyledLanding from '../assets/wrappers/LandingPage';
 import main from '../assets/images/main.svg';
 import { Logo, ThemeToggle } from '../components';
+import { DarkThemeProvider } from '../context/ToggleDarkThemeContext';
 
 const Landing = () => {
   return (
     <StyledLanding>
       <nav>
         <Logo />
-        <ThemeToggle />
+        <DarkThemeProvider>
+          <ThemeToggle />
+        </DarkThemeProvider>
       </nav>
       <div className="container page">
         <div className="info">
