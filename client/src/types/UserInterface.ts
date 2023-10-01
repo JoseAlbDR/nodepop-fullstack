@@ -14,3 +14,7 @@ export interface IUser {
 export interface IUserData extends AxiosResponse {
   user: IUser;
 }
+
+export interface IUserResponse extends AxiosResponse {
+  data: { user: IUser };
+}
