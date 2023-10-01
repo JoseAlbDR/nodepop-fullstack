@@ -3,7 +3,6 @@ import { FaAlignLeft } from 'react-icons/fa';
 
 import { useDashboardContext } from '../context/DashboardContext';
 import { ThemeToggle, Logo, LogoutContainer } from '.';
-import { DarkThemeProvider } from '../context/ToggleDarkThemeContext';
 
 const NavBar = () => {
   const { toggleSidebar } = useDashboardContext();
@@ -19,9 +18,7 @@ const NavBar = () => {
           <h3 className="logo-text">Dashboard</h3>
         </div>
         <div className="btn-container">
-          <DarkThemeProvider>
-            <ThemeToggle />
-          </DarkThemeProvider>
+          <ThemeToggle />
           <LogoutContainer />
         </div>
       </div>
