@@ -1,38 +1,46 @@
-import { ActionFunctionArgs, Form, useNavigation } from 'react-router-dom';
+import {
+  ActionFunctionArgs,
+  Form,
+  redirect,
+  useNavigation,
+} from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 import StyledProfile from '../assets/wrappers/DashboardFormPage';
 import { FormRow, SubmitBtn, FormRowInput } from '../components';
-import { useDashboardContext } from '../context/DashboardContext';
 import customFetch from '../utils/customFetch';
+import { QueryClient } from '@tanstack/react-query';
+import { useDashboardContext } from '../context/DashboardContext';
 
-export const action = async (data: ActionFunctionArgs) => {
-  const { request } = data;
-  const formData = await request.formData();
-  const file = formData.get('avatar');
+export const action =
+  (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
+    const { request } = data;
+    const formData = await request.formData();
+    const file = formData.get('avatar');
 
-  if (file instanceof File && file.size > 500000) {
-    console.log(file.size);
-    toast.error('Image size too large');
-    return null;
-  }
-
-  try {
-    const response = await customFetch.patch('/users/update-user', formData);
-    toast.success(response.data.msg);
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
+    if (file instanceof File && file.size > 500000) {
+      toast.error('Image size too large');
+      return null;
     }
-    console.log(error);
-    return error;
-  }
-  return null;
-};
+
+    try {
+      const response = await customFetch.patch('/users/update-user', formData);
+      queryClient.invalidateQueries(['user']);
+      toast.success(response.data.msg);
+      return redirect('/dashboard');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      console.log(error);
+      return null;
+    }
+  };
 
 const Profile = () => {
   const { user } = useDashboardContext();
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 

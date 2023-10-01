@@ -7,6 +7,7 @@ import customFetch from '../utils/customFetch';
 
 import { IUser } from '../types/UserInterface';
 import { useUser } from '../hooks/useUser';
+import { QueryClient } from '@tanstack/react-query';
 
 interface DashboardContextValues {
   showSidebar: boolean;
@@ -20,7 +21,13 @@ const DashboardContext = createContext<DashboardContextValues | undefined>(
   undefined
 );
 
-function DashboardProvider({ children }: { children: React.ReactNode }) {
+function DashboardProvider({
+  children,
+  queryClient,
+}: {
+  children: React.ReactNode;
+  queryClient: QueryClient;
+}) {
   const [showSidebar, setShowSidebar] = useState(false);
   const user = useUser().data!.user;
 
@@ -35,6 +42,7 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
       const {
         data: { msg },
       } = await customFetch('/auth/logout');
+      queryClient.invalidateQueries();
       toast.success(msg);
       navigate('/');
     } catch (error) {

@@ -20,12 +20,12 @@ export const loader = (queryClient: QueryClient) => async () => {
   }
 };
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ queryClient }: { queryClient: QueryClient }) => {
   const navigation = useNavigation();
   const isLoading = navigation.state === 'loading';
 
   return (
-    <DashboardProvider>
+    <DashboardProvider queryClient={queryClient}>
       <StyledDashboard>
         <main className="dashboard">
           <SmallSideBar />

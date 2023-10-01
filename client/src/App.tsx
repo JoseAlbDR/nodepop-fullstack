@@ -30,6 +30,7 @@ import { loader as adminLoader } from './pages/Admin';
 import { action as updateProfileAction } from './pages/Profile';
 import { loader as statsLoader } from './pages/Stats';
 import { ErrorComponent } from './components';
+import { DarkThemeProvider } from './context/ToggleDarkThemeContext';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -42,7 +43,7 @@ checkDefaultTheme();
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5,
+      staleTime: 0,
     },
   },
 });
@@ -65,11 +66,11 @@ const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
-        action: loginAction,
+        action: loginAction(queryClient),
       },
       {
         path: 'dashboard',
-        element: <DashboardLayout />,
+        element: <DashboardLayout queryClient={queryClient} />,
         loader: dashboardLoader(queryClient),
         children: [
           {
@@ -96,7 +97,7 @@ const router = createBrowserRouter([
           {
             path: 'profile',
             element: <Profile />,
-            action: updateProfileAction,
+            action: updateProfileAction(queryClient),
           },
           {
             path: 'admin',
@@ -124,7 +125,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router} />
+      <DarkThemeProvider>
+        <RouterProvider router={router} />
+      </DarkThemeProvider>
     </QueryClientProvider>
   );
 };

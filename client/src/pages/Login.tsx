@@ -12,25 +12,28 @@ import { toast } from 'react-toastify';
 import StyledLogin from '../assets/wrappers/RegisterAndLoginPage';
 import { Logo, FormRow, SubmitBtn } from '../components';
 import customFetch from '../utils/customFetch';
+import { QueryClient } from '@tanstack/react-query';
 
-export const action = async (data: ActionFunctionArgs) => {
-  const { request } = data;
-  const formData = await request.formData();
-  const loginData = Object.fromEntries(formData);
-  try {
-    const {
-      data: { msg },
-    } = await customFetch.post('/auth/login', loginData);
-    toast.success(msg);
-    return redirect('/dashboard');
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
+export const action =
+  (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
+    const { request } = data;
+    const formData = await request.formData();
+    const loginData = Object.fromEntries(formData);
+    try {
+      const {
+        data: { msg },
+      } = await customFetch.post('/auth/login', loginData);
+      queryClient.invalidateQueries();
+      toast.success(msg);
+      return redirect('/dashboard');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      console.log(error);
+      return error;
     }
-    console.log(error);
-    return error;
-  }
-};
+  };
 
 const Login = () => {
   const navigate = useNavigate();
