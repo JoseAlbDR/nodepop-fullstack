@@ -1,24 +1,25 @@
-// import { AxiosError } from 'axios';
-// import { toast } from 'react-toastify';
-import { useLoaderData } from 'react-router-dom';
-
-import customFetch from '../utils/customFetch';
-import { IStatsResponse } from '../types/Products';
 import { ChartsContainer, StatsContainer } from '../components';
+import { QueryClient, useQuery } from '@tanstack/react-query';
+import { getStats } from '../services/getStats';
 
-export const loader = async () => {
-  const response: IStatsResponse = await customFetch.get('/products/stats');
-  return response;
+const statsQuery = {
+  queryKey: ['stats'],
+  queryFn: getStats,
+};
+
+export const loader = (queryClient: QueryClient) => async () => {
+  await queryClient.ensureQueryData(statsQuery);
+  return null;
 };
 
 const Stats = () => {
-  const { data } = useLoaderData() as IStatsResponse;
-  const { resultStats, monthlyProducts } = data;
+  const { data: stats } = useQuery(statsQuery);
+
   return (
     <>
-      <StatsContainer defaultStats={resultStats} />
-      {monthlyProducts?.length > 1 && (
-        <ChartsContainer data={monthlyProducts} />
+      <StatsContainer defaultStats={stats!.resultStats} />
+      {stats!.monthlyProducts?.length > 1 && (
+        <ChartsContainer data={stats!.monthlyProducts} />
       )}
     </>
   );
