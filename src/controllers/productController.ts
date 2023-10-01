@@ -72,8 +72,7 @@ const productController = {
     let image;
 
     product.createdBy = req.user.userId;
-    const protocol = req.protocol;
-    const host = req.get('host')!;
+    const origin = req.get('origin');
 
     if (!req.file) {
       image =
@@ -82,7 +81,7 @@ const productController = {
           : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
-      image = getImagePath(protocol, host, filePath, 'products');
+      image = getImagePath(origin!, filePath, 'products');
     }
 
     const newProduct = await productService.createProduct({
@@ -113,10 +112,10 @@ const productController = {
       if (product) await removeImage(product.image!, 'products');
 
       // Create new image path
-      const protocol = req.protocol;
-      const host = req.get('host')!;
+      const origin = req.get('origin');
       const filePath = req.file.path;
-      updates.image = getImagePath(protocol, host, filePath, 'products');
+
+      updates.image = getImagePath(origin!, filePath, 'products');
     }
 
     // Update product

@@ -27,10 +27,9 @@ const userController = {
       await removeImage(user.avatar!, 'users');
 
       // Generate new image path
-      const protocol = req.protocol;
-      const host = req.get('host')!;
+      const origin = req.get('origin');
       const filePath = req.file.path;
-      updates.avatar = getImagePath(protocol, host, filePath, 'users');
+      updates.avatar = getImagePath(origin!, filePath, 'users');
     }
 
     // Update User
