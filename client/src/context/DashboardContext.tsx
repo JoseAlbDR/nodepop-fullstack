@@ -5,9 +5,8 @@ import { NavigateFunction } from 'react-router-dom';
 
 import customFetch from '../utils/customFetch';
 
-import { useQuery } from '@tanstack/react-query';
-import { getCurrentUser } from '../services/getCurrentUser';
 import { IUser } from '../types/UserInterface';
+import { useUser } from '../hooks/useUser';
 
 interface DashboardContextValues {
   showSidebar: boolean;
@@ -21,15 +20,12 @@ const DashboardContext = createContext<DashboardContextValues | undefined>(
   undefined
 );
 
-const currentUserQuery = {
-  queryKey: ['user'],
-  queryFn: getCurrentUser,
-};
-
 function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [showSidebar, setShowSidebar] = useState(false);
-  const user = useQuery(currentUserQuery)?.data?.user;
+  const user = useUser().data!.user;
+
   if (!user) return;
+
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };

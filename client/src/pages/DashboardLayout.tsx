@@ -5,17 +5,12 @@ import { AxiosError } from 'axios';
 import StyledDashboard from '../assets/wrappers/Dashboard';
 import { BigSidebar, SmallSideBar, NavBar, Spinner } from '../components';
 import { DashboardProvider } from '../context/DashboardContext';
-import { getCurrentUser } from '../services/getCurrentUser';
 import { QueryClient } from '@tanstack/react-query';
-
-const currentUserQuery = {
-  queryKey: ['user'],
-  queryFn: getCurrentUser,
-};
+import { userQuery } from '../hooks/useUser';
 
 export const loader = (queryClient: QueryClient) => async () => {
   try {
-    await queryClient.ensureQueryData(currentUserQuery);
+    await queryClient.ensureQueryData(userQuery);
     return null;
   } catch (error) {
     if (error instanceof AxiosError) {
