@@ -13,7 +13,6 @@ import Stats from './Stats';
 import UserProducts from './UserProducts';
 import DeleteProduct from './DeleteProduct';
 
-
 export {
   DashboardLayout,
   Landing,
