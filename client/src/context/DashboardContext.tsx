@@ -41,12 +41,12 @@ function DashboardProvider({
 
   const logoutUser = async (navigate: NavigateFunction) => {
     try {
+      navigate('/');
       const {
         data: { msg },
       } = await customFetch('/auth/logout');
       queryClient.invalidateQueries();
       toast.success(msg);
-      navigate('/');
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {

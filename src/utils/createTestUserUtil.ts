@@ -5,16 +5,16 @@ export const createTestUser = async () => {
   if (!user) {
     try {
       const testUser = {
-        name: 'Bob',
-        email: 'spongebob@gmail.com',
-        password: 'mauricio',
-        lastName: 'Sponge',
-        location: 'A Pineapple Under The Sea',
+        name: 'Morfeo',
+        email: 'morfeo@matrix.com',
+        password: 'redorbluepill',
+        lastName: ' ',
+        location: 'Nebuchadnezzar',
         role: 'tester',
         avatar:
           process.env.NODE_ENV === 'development'
-            ? `http://localhost:${process.env.PORT}/spongebob.png`
-            : '/spongebob.png',
+            ? `http://localhost:${process.env.PORT}/morfeo.jpeg`
+            : '/morfeo.jpeg',
       };
 
       await User.create(testUser);
