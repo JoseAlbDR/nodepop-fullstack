@@ -14,3 +14,4 @@ export { removeImage } from './removeImageUtil';
 export { getQueryParams } from './getQueryParamsUtil';
 export { getMinMaxPrices } from './getMinMaxPricesUtil';
 export { createTestUser } from './createTestUserUtil';
+export { createFolder } from './createFolderUtil';

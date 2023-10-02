@@ -1,7 +1,7 @@
 import { User } from '../models/UserModel';
 import { ILoginUser, IUser } from '../types/authInterfaces';
 import { UnauthenticatedError } from '../errors/unauthenticatedError';
-import { createJWT } from '../utils';
+import { createFolder, createJWT } from '../utils';
 import populateService from './populateService';
 
 export const authService = {
@@ -11,6 +11,8 @@ export const authService = {
     const role = isFirstAccount ? 'admin' : 'user';
     user.role = role;
     const response = await User.create(user);
+
+    await createFolder(response._id.toString());
 
     return response;
   },

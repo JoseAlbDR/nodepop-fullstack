@@ -74,7 +74,6 @@ const productController = {
     let image;
 
     product.createdBy = req.user.userId;
-    const origin = req.get('origin');
 
     if (!req.file) {
       image =
@@ -83,7 +82,9 @@ const productController = {
           : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
-      image = getImagePath(origin!, filePath, 'products');
+      console.log('filepath ', filePath);
+      image = getImagePath(filePath, req.user.userId.toString(), 'products');
+      console.log('imagepath ', image);
     }
 
     const newProduct = await productService.createProduct({
@@ -111,13 +112,22 @@ const productController = {
     if (req.file) {
       // Remove previous image
       const product = await productService.getOneProduct(productId);
-      if (product) await removeImage(product.image!, 'products');
+
+      if (product)
+        await removeImage(
+          product.image!,
+          req.user.userId.toString(),
+          'products'
+        );
 
       // Create new image path
-      const origin = req.get('origin');
       const filePath = req.file.path;
 
-      updates.image = getImagePath(origin!, filePath, 'products');
+      updates.image = getImagePath(
+        filePath,
+        req.user.userId.toString(),
+        'products'
+      );
     }
 
     // Update product
@@ -137,7 +147,12 @@ const productController = {
     // Delete previous image
     const removedProduct = await productService.deleteProduct(productId);
 
-    if (removedProduct) await removeImage(removedProduct.image!, 'products');
+    if (removedProduct)
+      await removeImage(
+        removedProduct.image!,
+        req.user.userId.toString(),
+        'products'
+      );
 
     res
       .status(StatusCodes.OK)

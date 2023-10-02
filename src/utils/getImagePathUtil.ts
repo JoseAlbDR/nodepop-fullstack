@@ -1,12 +1,17 @@
 import path from 'path';
 
 export const getImagePath = (
-  origin: string,
   filePath: string,
+  userId: string,
   folder: string
 ) => {
-  console.log(origin);
-  const relativePath = path.join('uploads', folder, path.basename(filePath));
+  console.log('folder ', folder);
+  const relativePath = path.join(
+    'uploads',
+    userId,
+    folder,
+    path.basename(filePath)
+  );
 
   return `../${relativePath}`;
 };

@@ -2,14 +2,12 @@ import multer from 'multer';
 
 const fileUpload = (folder: string) => {
   const storage = multer.diskStorage({
-    destination: (_req, _file, cb) => {
+    destination: (req, _file, cb) => {
       let newPath = '';
-      if (process.env.NODE_ENV === 'render')
-        newPath = 'opt/render/project/src/build/public/uploads/';
       if (process.env.NODE_ENV === 'development')
-        newPath = 'src/public/uploads/';
+        newPath = `src/public/uploads/${req.user.userId}/`;
       if (process.env.NODE_ENV === 'production')
-        newPath = 'build/public/uploads/';
+        newPath = `build/public/uploads/${req.user.userId}/`;
 
       cb(null, `${newPath}${folder}`);
     },

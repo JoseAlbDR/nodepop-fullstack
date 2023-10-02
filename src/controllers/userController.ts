@@ -24,12 +24,11 @@ const userController = {
     if (req.file) {
       // Remove previous image
       const user = await userService.getCurrentUser(userId);
-      await removeImage(user.avatar!, 'users');
+      await removeImage(user.avatar!, req.user.userId.toString(), 'avatar');
 
       // Generate new image path
-      const origin = req.get('origin');
       const filePath = req.file.path;
-      updates.avatar = getImagePath(origin!, filePath, 'users');
+      updates.avatar = getImagePath(filePath, user._id.toString(), 'avatar');
     }
 
     // Update User

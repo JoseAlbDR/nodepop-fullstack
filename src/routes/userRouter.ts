@@ -17,7 +17,7 @@ router.patch(
   '/update-user',
   checkTestUser,
   authorizePermissions('user', 'admin'),
-  upload('users').single('avatar'),
+  upload('avatar').single('avatar'),
   validateUploadedFiles,
   validateUpdateUser,
   userController.updateUser
