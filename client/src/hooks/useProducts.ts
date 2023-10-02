@@ -8,7 +8,6 @@ export const productsQuery = (
   maxPrice = ''
 ) => {
   const { limit, name, onSale, price, sort, tags, page } = params;
-  console.log(params);
   return {
     queryKey: [
       `${!pageName ? 'products' : 'userProducts'}`,
@@ -20,7 +19,7 @@ export const productsQuery = (
       page ?? 1,
       price ?? `${minPrice}-${maxPrice}`,
     ],
-    queryFn: async () => getProducts(params, page),
+    queryFn: async () => getProducts(params, pageName),
   };
 };
 

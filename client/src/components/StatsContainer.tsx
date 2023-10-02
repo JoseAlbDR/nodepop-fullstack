@@ -5,7 +5,6 @@ import StyledStats from '../assets/wrappers/StatsContainer';
 import { StatItem } from '.';
 
 const StatsContainer = ({ defaultStats }: { defaultStats: IResultStats }) => {
-  console.log(defaultStats);
   return (
     <StyledStats>
       <StatItem

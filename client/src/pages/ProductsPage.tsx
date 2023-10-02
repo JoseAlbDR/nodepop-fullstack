@@ -11,6 +11,7 @@ interface ProductsPageProps {
 
 const ProductsPage: React.FC<ProductsPageProps> = ({ pageType }) => {
   const page = pageType === 'all' ? 'all-products' : 'user-products';
+
   return (
     <StyledProductsPage>
       <ProductsProvider page={pageType === 'all' ? '' : `/${page}`}>

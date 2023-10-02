@@ -1,12 +1,11 @@
 import { LoaderFunctionArgs } from 'react-router-dom';
 import { QueryClient } from '@tanstack/react-query';
 import { productsQuery } from '../hooks/useProducts';
-('react-router-dom');
 
 export const productsLoader = async (
   queryClient: QueryClient,
   data: LoaderFunctionArgs,
-  page = ''
+  pageName = ''
 ) => {
   const { request } = data;
 
@@ -22,7 +21,7 @@ export const productsLoader = async (
   if (params.price) params.price = `${minPrice}-${maxPrice}`;
 
   await queryClient.ensureQueryData(
-    productsQuery(params, page, minPrice, maxPrice)
+    productsQuery(params, pageName, minPrice, maxPrice)
   );
   return { searchValues: { ...params } };
 };
