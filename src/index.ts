@@ -3,8 +3,11 @@ import 'express-async-errors';
 import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
+import path from 'path';
 // import cors from 'cors';
 import debug from 'debug';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
 const serverDebug = debug('nodepop-ts:server');
 
 // DB
@@ -21,7 +24,6 @@ import notFoundMiddleware from './middleware/notFoundMiddleware';
 import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 import cookieParser from 'cookie-parser';
 import { authenticateUser } from './middleware/authMiddleware';
-import path from 'path';
 import { createTestUser } from './utils/createTestUserUtil';
 
 const app = express();
@@ -31,10 +33,8 @@ app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 app.use(express.static(path.resolve(__dirname, './public')));
-
-app.get('/api/v1/test', (_req, res) => {
-  res.json({ msg: 'test route' });
-});
+app.use(helmet());
+app.use(mongoSanitize());
 
 // Routes
 app.use('/api/v1/products', authenticateUser, productsRouter);
