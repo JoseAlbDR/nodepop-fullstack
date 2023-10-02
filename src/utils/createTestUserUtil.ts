@@ -1,6 +1,6 @@
 import { User } from './../models/UserModel';
 export const createTestUser = async () => {
-  const user = await User.findOne({ email: 'spongebob@gmail.com' });
+  const user = await User.findOne({ email: 'morfeo@matrix.com' });
 
   if (!user) {
     try {
