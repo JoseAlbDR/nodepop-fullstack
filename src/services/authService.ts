@@ -6,7 +6,7 @@ import populateService from './populateService';
 
 export const authService = {
   register: async (user: IUser) => {
-    const isFirstAccount = (await User.countDocuments({})) === 0;
+    const isFirstAccount = (await User.countDocuments({})) === 1;
 
     const role = isFirstAccount ? 'admin' : 'user';
     user.role = role;
