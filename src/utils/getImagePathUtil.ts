@@ -6,7 +6,7 @@ export const getImagePath = (
   folder: string
 ) => {
   console.log('folder ', folder);
-  const relativePath = path.join(
+  const relativePath = path.posix.join(
     'uploads',
     userId,
     folder,

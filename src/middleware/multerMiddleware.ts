@@ -5,11 +5,11 @@ const fileUpload = (folder: string) => {
     destination: (req, _file, cb) => {
       let newPath = '';
       if (process.env.NODE_ENV === 'development')
-        newPath = `src/public/uploads/${req.user.userId}/`;
+        newPath = `src/public/uploads/${req.user.userId}`;
       if (process.env.NODE_ENV === 'production')
-        newPath = `build/public/uploads/${req.user.userId}/`;
+        newPath = `build/public/uploads/${req.user.userId}`;
 
-      cb(null, `${newPath}${folder}`);
+      cb(null, `${newPath}/${folder}`);
     },
     filename: (_req, file, cb) => {
       const fileName = Date.now() + file.originalname;

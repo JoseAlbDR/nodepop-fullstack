@@ -7,9 +7,7 @@ export const deleteFile = async (filePath: string) => {
   if (process.env.NODE_ENV === 'production') newPath = 'build';
 
   try {
-    filePath.includes(`${newPath}`)
-      ? await fs.unlink(filePath)
-      : await fs.unlink(path.join(newPath, 'public', filePath));
+    await fs.unlink(path.join(`${newPath}`, 'public', filePath));
   } catch (error) {
     if (
       error instanceof Error &&

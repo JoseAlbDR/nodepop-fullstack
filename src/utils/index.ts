@@ -1,7 +1,7 @@
 export { validateSort } from './validateSortUtil';
 export { checkPermissions } from './checkPermissionsUtil';
 export { getImagePath } from './getImagePathUtil';
-export { deleteFile } from './deleteImageUtil';
+export { deleteFile } from './deleteFileUtil';
 export { hashPassword } from './hashPasswordUtil';
 export { createJWT } from './jwtUtils';
 export { verifyJWT } from './jwtUtils';
