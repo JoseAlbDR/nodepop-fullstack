@@ -13,8 +13,8 @@ export const createTestUser = async () => {
         role: 'tester',
         avatar:
           process.env.NODE_ENV === 'development'
-            ? `http://localhost:${process.env.PORT}/morfeo.jpeg`
-            : '/morfeo.jpeg',
+            ? `http://localhost:${process.env.PORT}/morfeo.jfif`
+            : '/morfeo.jfif',
       };
 
       await User.create(testUser);
