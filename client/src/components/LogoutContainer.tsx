@@ -1,6 +1,6 @@
 import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClickAwayListener } from '@mui/material';
 
@@ -9,8 +9,13 @@ import StyledLogout from '../assets/wrappers/Logout';
 
 const LogoutContainer = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const { user, logoutUser, editProfile } = useDashboardContext();
+  const { user, logoutUser, editProfile, isAuthError } = useDashboardContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthError) return;
+    logoutUser(navigate);
+  }, [isAuthError, logoutUser, navigate]);
 
   const avatar = (
     <img src={user.avatar} alt={`${user.name} avatar`} className="img" />

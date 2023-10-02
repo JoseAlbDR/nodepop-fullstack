@@ -15,6 +15,7 @@ interface DashboardContextValues {
   logoutUser: (navigate: NavigateFunction) => Promise<void>;
   editProfile: (navigate: NavigateFunction) => void;
   user: IUser;
+  isAuthError: boolean;
 }
 
 const DashboardContext = createContext<DashboardContextValues | undefined>(
@@ -29,6 +30,7 @@ function DashboardProvider({
   queryClient: QueryClient;
 }) {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isAuthError, setIsAuthError] = useState(false);
   const user = useUser().data!.user;
 
   if (!user) return;
@@ -54,6 +56,16 @@ function DashboardProvider({
     }
   };
 
+  customFetch.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error?.response?.status === 401) {
+        setIsAuthError(true);
+      }
+      return Promise.reject(error);
+    }
+  );
+
   const editProfile = (navigate: NavigateFunction) => {
     navigate('/dashboard/profile');
   };
@@ -66,6 +78,7 @@ function DashboardProvider({
         toggleSidebar,
         logoutUser,
         editProfile,
+        isAuthError,
       }}
     >
       {children}
