@@ -13,6 +13,7 @@ To get started, clone this repository to your local machine using the following 
 
 ```bash
 git clone https://github.com/JoseAlbDR/nodepop-fullstack.git
+
 cd nodepop-fullstack
 ```
 
@@ -34,6 +35,7 @@ If you want to run the app in development first make sure that `NODE_ENV` env va
 
 ```shell
 npm run setup-project
+
 npm run dev
 ```
 
@@ -43,6 +45,7 @@ If you want to run the app in development first make sure that `NODE_ENV` env va
 
 ```shell
 npm setup-production-app
+
 npm start
 ```
 
