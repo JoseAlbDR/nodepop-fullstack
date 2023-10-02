@@ -44,7 +44,7 @@ npm run dev
 If you want to run the app in development first make sure that `NODE_ENV` env variable in `.env` file is set to `production` then run the following commands:
 
 ```shell
-npm setup-production-app
+npm setup-production-build
 
 npm start
 ```
