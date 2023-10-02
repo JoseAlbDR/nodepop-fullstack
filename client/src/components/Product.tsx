@@ -4,6 +4,7 @@ import {
   FaMoneyBill,
   FaPencilRuler,
   FaTrash,
+  FaUser,
 } from 'react-icons/fa';
 import day from 'dayjs';
 
@@ -40,6 +41,7 @@ const Product = ({
         </div>
         <h2 className="title">{name}</h2>
         <ProductInfo icon={<FaMoneyBill />} text={price + '€'} />
+        <ProductInfo icon={<FaUser />} text={createdBy.name} />
         <ProductInfo icon={<FaCalendarCheck />} text={date} />
         <ProductCategories tags={tags} />
         {createdBy.email !== user.email ? (
