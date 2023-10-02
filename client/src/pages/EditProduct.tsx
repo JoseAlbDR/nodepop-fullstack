@@ -20,6 +20,7 @@ import {
   SubmitBtn,
   FormRowInput,
 } from '../components';
+import { QueryClient } from '@tanstack/react-query';
 
 export interface IProductResponse extends AxiosResponse {
   product: IProduct;
@@ -40,33 +41,38 @@ export const loader = async (data: LoaderFunctionArgs) => {
   }
 };
 
-export const action = async (data: ActionFunctionArgs) => {
-  const { request, params } = data;
-  const formData = await request.formData();
-  const tags = formData.getAll('tags');
-  const type = formData.get('onSale');
+export const action =
+  (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
+    const { request, params } = data;
+    const formData = await request.formData();
+    const tags = formData.getAll('tags');
+    const type = formData.get('onSale');
 
-  formData.set('onSale', String(String(type) === 'on sale'));
+    formData.set('onSale', String(String(type) === 'on sale'));
 
-  if (tags.length === 0) {
-    toast.error('Select at least one tag!');
-    return null;
-  }
-
-  try {
-    const {
-      data: { msg },
-    } = await customFetch.patch(`/products/${params.id}`, formData);
-    toast.success(msg);
-    return redirect('../all-products');
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
+    if (tags.length === 0) {
+      toast.error('Select at least one tag!');
+      return null;
     }
-    console.log(error);
-    return error;
-  }
-};
+
+    try {
+      const {
+        data: { msg },
+      } = await customFetch.patch(`/products/${params.id}`, formData);
+
+      queryClient.invalidateQueries(['userProducts']);
+      queryClient.invalidateQueries(['products']);
+      queryClient.invalidateQueries(['tags']);
+      toast.success(msg);
+      return redirect('../all-products');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+      }
+      console.log(error);
+      return error;
+    }
+  };
 
 const EditJob = () => {
   const navigation = useNavigation();

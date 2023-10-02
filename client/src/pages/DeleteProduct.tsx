@@ -3,7 +3,7 @@ import {
   Form,
   redirect,
   useNavigate,
-  useOutletContext,
+  useNavigation,
 } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
@@ -12,26 +12,32 @@ import { ClickAwayListener } from '@mui/material';
 import customFetch from '../utils/customFetch';
 import StyledDeleteProduct from '../assets/wrappers/DeleteProduct';
 import { Spinner } from '../components';
+import { QueryClient } from '@tanstack/react-query';
 
-export const action = async (data: ActionFunctionArgs) => {
-  const { params } = data;
-  try {
-    await customFetch.delete(`/products/${params.id}`);
-    toast.success(`Product deleted successfully`);
-    return redirect('../user-products');
-  } catch (error) {
-    console.log(error);
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
+export const action =
+  (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
+    const { params } = data;
+    try {
+      await customFetch.delete(`/products/${params.id}`);
+      queryClient.invalidateQueries(['userProducts']);
+      queryClient.invalidateQueries(['products']);
+      queryClient.invalidateQueries(['tags']);
+      toast.success(`Product deleted successfully`);
       return redirect('../user-products');
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+        return redirect('../user-products');
+      }
+      return error;
     }
-    return error;
-  }
-};
+  };
 
 const DeleteProduct = () => {
   const navigate = useNavigate();
-  const isLoading = useOutletContext();
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'submitting';
   return (
     <StyledDeleteProduct>
       <Form method="post" className="confirm-form">

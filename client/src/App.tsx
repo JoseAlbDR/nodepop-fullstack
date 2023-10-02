@@ -76,7 +76,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AddProduct />,
-            action: addProductAction,
+            action: addProductAction(queryClient),
           },
           {
             path: 'stats',
@@ -110,12 +110,12 @@ const router = createBrowserRouter([
             path: 'edit-product/:id',
             element: <EditProduct />,
             loader: editProductLoader,
-            action: editProductAction,
+            action: editProductAction(queryClient),
           },
           {
             path: 'delete-product/:id',
             element: <DeleteProduct />,
-            action: deleteProductAction,
+            action: deleteProductAction(queryClient),
           },
         ],
       },
