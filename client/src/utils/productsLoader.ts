@@ -1,11 +1,13 @@
-import { AxiosError } from 'axios';
-import customFetch from '../utils/customFetch';
-import { toast } from 'react-toastify';
-import { IAxiosResponse } from '../types/Products';
 import { LoaderFunctionArgs } from 'react-router-dom';
+import { QueryClient } from '@tanstack/react-query';
+import { productsQuery } from '../hooks/useProducts';
 ('react-router-dom');
 
-export const productsLoader = async (data: LoaderFunctionArgs, page = '') => {
+export const productsLoader = async (
+  queryClient: QueryClient,
+  data: LoaderFunctionArgs,
+  page = ''
+) => {
   const { request } = data;
 
   const params = Object.fromEntries([
@@ -19,16 +21,6 @@ export const productsLoader = async (data: LoaderFunctionArgs, page = '') => {
 
   if (params.price) params.price = `${minPrice}-${maxPrice}`;
 
-  try {
-    const { data }: IAxiosResponse = await customFetch(`/products${page}`, {
-      params,
-    });
-
-    return { data, searchValues: { ...params } };
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
-    }
-    return error;
-  }
+  await queryClient.ensureQueryData(productsQuery(params, page));
+  return { searchValues: { ...params } };
 };

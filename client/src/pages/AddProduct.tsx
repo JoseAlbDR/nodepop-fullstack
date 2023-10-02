@@ -17,6 +17,7 @@ import {
 } from '../components';
 import { TYPE } from '../../../src/utils/constantsUtil';
 import customFetch from '../utils/customFetch';
+import { useProducts } from '../hooks/useProducts';
 
 export const action = async (data: ActionFunctionArgs) => {
   const { request } = data;
@@ -47,7 +48,6 @@ export const action = async (data: ActionFunctionArgs) => {
 };
 
 const AddProduct = () => {
-  // const { user } = useDashboard();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
   return (

@@ -54,7 +54,7 @@ const SearchContainer = ({ page }: { page: string }) => {
               defaultValue={name}
               disabled={isSubmitting}
             />
-            <FormSearchPrices onChange={submit} defaultValue={[+max, +min]} />
+            <FormSearchPrices onChange={submit} defaultValue={[+min, +max]} />
             <FormRowSelect
               name="onSale"
               types={['all', ...TYPE]}

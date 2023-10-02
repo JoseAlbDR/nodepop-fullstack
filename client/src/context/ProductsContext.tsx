@@ -2,6 +2,9 @@ import React, { createContext, useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import { IProductResponse } from '../types/Products';
+import { useQuery } from '@tanstack/react-query';
+import { productsQuery } from '../hooks/useProducts';
+import { ErrorComponent } from '../components';
 
 interface ProductsContextValues {
   data: IProductResponse;
@@ -14,10 +17,16 @@ const ProductsContext = createContext<ProductsContextValues | undefined>(
 
 function ProductsProvider({
   children,
+  page,
 }: {
   children: React.ReactNode;
+  page: string;
 }): JSX.Element {
-  const { data, searchValues } = useLoaderData() as ProductsContextValues;
+  const { searchValues } = useLoaderData() as ProductsContextValues;
+
+  const { data } = useQuery(productsQuery(searchValues, page));
+
+  if (!data) return <ErrorComponent />;
 
   return (
     <ProductsContext.Provider value={{ data, searchValues }}>

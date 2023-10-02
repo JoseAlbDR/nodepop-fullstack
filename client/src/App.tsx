@@ -87,12 +87,12 @@ const router = createBrowserRouter([
           {
             path: 'all-products',
             element: <AllProducts />,
-            loader: allProductsLoader,
+            loader: allProductsLoader(queryClient),
           },
           {
             path: 'user-products',
             element: <UserProducts />,
-            loader: userProductsLoader,
+            loader: userProductsLoader(queryClient),
           },
           {
             path: 'profile',
