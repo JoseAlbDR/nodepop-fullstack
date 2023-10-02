@@ -8,5 +8,5 @@ export const getImagePath = (
   console.log(origin);
   const relativePath = path.join('uploads', folder, path.basename(filePath));
 
-  return `${process.env.DOMAIN}/${relativePath}`;
+  return `../${relativePath}`;
 };
