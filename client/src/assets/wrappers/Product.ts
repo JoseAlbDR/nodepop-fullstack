@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   width: 100%;
 
   .img {
+    min-height: 30vh;
     border-radius: var(--border-radius);
   }
 
