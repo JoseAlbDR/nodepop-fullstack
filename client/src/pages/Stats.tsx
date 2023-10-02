@@ -15,6 +15,8 @@ export const loader = (queryClient: QueryClient) => async () => {
 const Stats = () => {
   const { data: stats } = useQuery(statsQuery);
 
+  console.log(stats);
+
   return (
     <>
       <StatsContainer defaultStats={stats!.resultStats} />
