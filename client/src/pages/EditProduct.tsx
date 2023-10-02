@@ -6,13 +6,13 @@ import {
   useLoaderData,
   useNavigation,
 } from 'react-router-dom';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
 import StyledAddProduct from '../assets/wrappers/DashboardFormPage';
 import customFetch from '../utils/customFetch';
 import { TYPE } from '../../../src/utils/constantsUtil';
-import { IProduct } from '../types/Products';
+
 import {
   FormRow,
   FormRowSelect,
@@ -20,26 +20,23 @@ import {
   SubmitBtn,
   FormRowInput,
 } from '../components';
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, useQuery } from '@tanstack/react-query';
+import { getProductQuery } from '../hooks/useGetProduct';
 
-export interface IProductResponse extends AxiosResponse {
-  product: IProduct;
-}
-export const loader = async (data: LoaderFunctionArgs) => {
-  const { params } = data;
-  try {
-    const { data }: IProductResponse = await customFetch(
-      `/products/${params.id}`
-    );
-    return data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      toast.error(error?.response?.data?.msg);
-      return redirect('/dashboard/user-products');
+export const loader =
+  (queryClient: QueryClient) => async (data: LoaderFunctionArgs) => {
+    const { params } = data;
+    try {
+      await queryClient.ensureQueryData(getProductQuery(params.id!));
+      return params.id;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast.error(error?.response?.data?.msg);
+        return redirect('/dashboard/user-products');
+      }
+      return error;
     }
-    return error;
-  }
-};
+  };
 
 export const action =
   (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
@@ -62,6 +59,7 @@ export const action =
 
       queryClient.invalidateQueries(['userProducts']);
       queryClient.invalidateQueries(['products']);
+      queryClient.invalidateQueries(['product']);
       queryClient.invalidateQueries(['tags']);
       toast.success(msg);
       return redirect('../all-products');
@@ -77,7 +75,13 @@ export const action =
 const EditJob = () => {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  const { product } = useLoaderData() as IProductResponse;
+  const id = useLoaderData() as string;
+
+  const {
+    data: { product },
+  } = useQuery(getProductQuery(id));
+
+  console.log(product);
 
   return (
     <StyledAddProduct>

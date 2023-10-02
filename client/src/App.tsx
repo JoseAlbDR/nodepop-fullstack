@@ -109,7 +109,7 @@ const router = createBrowserRouter([
           {
             path: 'edit-product/:id',
             element: <EditProduct />,
-            loader: editProductLoader,
+            loader: editProductLoader(queryClient),
             action: editProductAction(queryClient),
           },
           {
