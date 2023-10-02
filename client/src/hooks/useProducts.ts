@@ -1,10 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../services/getProducts';
 
-export const productsQuery = (params: { [k: string]: string }, page = '') => {
-  console.log(page);
+export const productsQuery = (
+  params: { [k: string]: string },
+  pageName = '',
+  minPrice = '',
+  maxPrice = ''
+) => {
+  const { limit, name, onSale, price, sort, tags, page } = params;
+  console.log(params);
   return {
-    queryKey: [`${!page ? 'products' : 'userProducts'}`],
+    queryKey: [
+      `${!pageName ? 'products' : 'userProducts'}`,
+      name ?? '',
+      onSale ?? 'all',
+      tags ?? 'all',
+      sort ?? 'newest',
+      limit ?? '10',
+      page ?? 1,
+      price ?? `${minPrice}-${maxPrice}`,
+    ],
     queryFn: async () => getProducts(params, page),
   };
 };

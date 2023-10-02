@@ -88,11 +88,13 @@ const router = createBrowserRouter([
             path: 'all-products',
             element: <AllProducts />,
             loader: allProductsLoader(queryClient),
+            errorElement: <ErrorComponent />,
           },
           {
             path: 'user-products',
             element: <UserProducts />,
             loader: userProductsLoader(queryClient),
+            errorElement: <ErrorComponent />,
           },
           {
             path: 'profile',

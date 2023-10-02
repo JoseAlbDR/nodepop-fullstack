@@ -11,6 +11,8 @@ import { MinMax } from '../utils/getMinMaxPricesUtil';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
+    console.log(req.query);
+
     const {
       result: queryResult,
       queryObject,

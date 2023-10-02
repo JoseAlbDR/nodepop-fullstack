@@ -23,7 +23,6 @@ function ProductsProvider({
   page: string;
 }): JSX.Element {
   const { searchValues } = useLoaderData() as ProductsContextValues;
-
   const { data } = useQuery(productsQuery(searchValues, page));
 
   if (!data) return <ErrorComponent />;
