@@ -63,9 +63,7 @@ const start = async () => {
   const port = process.env.PORT;
   try {
     await dbConnect(process.env.MONGO_URL);
-    console.log('Connected to db');
     await createTestUser();
-    console.log('Test user created');
     app.listen(port, () => {
       serverDebug(`Server listening on port: ${port}`);
     });

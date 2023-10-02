@@ -1,3 +1,4 @@
+import populateService from '../services/populateService';
 import { User } from './../models/UserModel';
 export const createTestUser = async () => {
   const user = await User.findOne({ email: 'morfeo@matrix.com' });
@@ -17,7 +18,10 @@ export const createTestUser = async () => {
             : '/morfeo.jfif',
       };
 
-      await User.create(testUser);
+      const user = await User.create(testUser);
+      console.log('Test user created.');
+      await populateService.populateDatabase(50, user._id);
+      console.log('Database Populated with 50 Test User products.');
     } catch (error) {
       console.log(error);
       throw error;
