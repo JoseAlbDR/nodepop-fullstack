@@ -16,7 +16,7 @@ export const productsQuery = (
       tags ?? 'all',
       sort ?? 'newest',
       limit ?? '10',
-      page ?? 1,
+      +page ?? 1,
       price ?? `${minPrice}-${maxPrice}`,
     ],
     queryFn: async () => getProducts(params, pageName),
