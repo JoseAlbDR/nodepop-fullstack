@@ -146,8 +146,8 @@ export const validateProductCreation = [
     .trim()
     .notEmpty()
     .withMessage('price is required')
-    .isFloat({ min: 0 })
-    .withMessage('price must be a positive number'),
+    .isFloat({ min: 0, max: 100000 })
+    .withMessage('price must be between 0 and 100000'),
 
   body('tags')
     .notEmpty()
