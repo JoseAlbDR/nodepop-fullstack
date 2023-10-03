@@ -28,7 +28,7 @@ router.post(
   checkTestUser,
   authorizePermissions('user', 'admin'),
   validateChangePassword,
-  userController.updatePassword
+  userController.changePassword
 );
 router.get('/admin/app-stats', [
   authorizePermissions('admin'),

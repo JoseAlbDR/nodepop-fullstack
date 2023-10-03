@@ -37,7 +37,7 @@ const userService = {
     return { users, products };
   },
 
-  updatePassword: async (
+  changePassword: async (
     oldPassword: string,
     newPassword: string,
     userId: mongoose.Types.ObjectId

@@ -44,11 +44,11 @@ const userController = {
     res.status(StatusCodes.OK).json({ users, products });
   },
 
-  updatePassword: async (req: UpdatePasswordDTO, res: Response) => {
+  changePassword: async (req: UpdatePasswordDTO, res: Response) => {
     const { oldPassword, newPassword } = req.body;
     const { userId } = req.user;
 
-    await userService.updatePassword(oldPassword, newPassword, userId);
+    await userService.changePassword(oldPassword, newPassword, userId);
 
     res.status(StatusCodes.OK).json({ msg: 'password updated' });
   },
