@@ -5,7 +5,6 @@ import userService from '../services/userService';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { removeImage, getImagePath } from '../utils';
 import { UpdatePasswordDTO } from '../dtos/updatePasswordDto';
-import { BadRequestError } from '../errors';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -26,11 +25,11 @@ const userController = {
     if (req.file) {
       // Remove previous image
       const user = await userService.getCurrentUser(userId);
-      await removeImage(user.avatar!, req.user.userId.toString(), 'avatar');
+      await removeImage(user.avatar!, userId, 'avatar');
 
       // Generate new image path
       const filePath = req.file.path;
-      updates.avatar = getImagePath(filePath, user._id.toString(), 'avatar');
+      updates.avatar = getImagePath(filePath, user._id, 'avatar');
     }
 
     // Update User
@@ -46,16 +45,10 @@ const userController = {
   },
 
   updatePassword: async (req: UpdatePasswordDTO, res: Response) => {
-    const { oldPassword, newPassword, repeatNewPassword } = req.body;
+    const { oldPassword, newPassword } = req.body;
+    const { userId } = req.user;
 
-    if (oldPassword === newPassword) {
-      throw new BadRequestError('Can not repeat same password');
-    }
-
-    if (newPassword !== repeatNewPassword)
-      throw new BadRequestError('New password do not match');
-
-    await userService.updatePassword(oldPassword, newPassword, req.user.userId);
+    await userService.updatePassword(oldPassword, newPassword, userId);
 
     res.status(StatusCodes.OK).json({ msg: 'password updated' });
   },

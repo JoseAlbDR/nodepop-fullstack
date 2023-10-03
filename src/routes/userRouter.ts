@@ -3,6 +3,7 @@ import express from 'express';
 import userController from '../controllers/userController';
 
 import {
+  validateChangePassword,
   validateUpdateUser,
   validateUploadedFiles,
 } from '../middleware/validationMiddleware';
@@ -22,7 +23,13 @@ router.patch(
   validateUpdateUser,
   userController.updateUser
 );
-router.post('/update-password', userController.updatePassword);
+router.post(
+  '/update-password',
+  checkTestUser,
+  authorizePermissions('user', 'admin'),
+  validateChangePassword,
+  userController.updatePassword
+);
 router.get('/admin/app-stats', [
   authorizePermissions('admin'),
   userController.getApplicationStats,
