@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import { User } from '../models/UserModel';
 import { IUpdateUser } from '../types/userInterfaces';
-import { NotFoundError, UnauthenticatedError } from '../errors';
+import { BadRequestError, NotFoundError } from '../errors';
 import { Product } from '../models/ProductModel';
 
 const userService = {
@@ -46,7 +46,7 @@ const userService = {
 
     if (user) {
       const isPasswordValid = await user.checkPassword(oldPassword);
-      if (!isPasswordValid) throw new UnauthenticatedError('Invalid password');
+      if (!isPasswordValid) throw new BadRequestError('Invalid password');
       user.password = newPassword;
       await user.save();
     }

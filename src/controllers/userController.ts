@@ -48,8 +48,6 @@ const userController = {
   updatePassword: async (req: UpdatePasswordDTO, res: Response) => {
     const { oldPassword, newPassword, repeatNewPassword } = req.body;
 
-    console.log(req.body);
-
     if (oldPassword === newPassword) {
       throw new BadRequestError('Can not repeat same password');
     }
