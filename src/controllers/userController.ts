@@ -4,6 +4,8 @@ import { StatusCodes } from 'http-status-codes';
 import userService from '../services/userService';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { removeImage, getImagePath } from '../utils';
+import { UpdatePasswordDTO } from '../dtos/updatePasswordDto';
+import { BadRequestError } from '../errors';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -41,6 +43,21 @@ const userController = {
     const { users, products } = await userService.getApplicationStats();
 
     res.status(StatusCodes.OK).json({ users, products });
+  },
+
+  updatePassword: async (req: UpdatePasswordDTO, res: Response) => {
+    const { oldPassword, newPassword, repeatNewPassword } = req.body;
+
+    if (oldPassword !== newPassword) {
+      throw new BadRequestError('Can not repeat same password');
+    }
+
+    if (newPassword !== repeatNewPassword)
+      throw new BadRequestError('New password do not match');
+
+    await userService.updatePassword(oldPassword, newPassword, req.user.userId);
+
+    res.status(StatusCodes.OK).json({ msg: 'password updated' });
   },
 };
 

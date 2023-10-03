@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import { User } from '../models/UserModel';
 import { IUpdateUser } from '../types/userInterfaces';
-import { NotFoundError } from '../errors';
+import { NotFoundError, UnauthenticatedError } from '../errors';
 import { Product } from '../models/ProductModel';
 
 const userService = {
@@ -35,6 +35,18 @@ const userService = {
     const products = await Product.countDocuments();
 
     return { users, products };
+  },
+
+  updatePassword: async (
+    oldPassword: string,
+    newPassword: string,
+    userId: mongoose.Types.ObjectId
+  ) => {
+    const user = await userService.getCurrentUser(userId);
+    const isPasswordValid = await user.checkPassword(oldPassword);
+    if (!isPasswordValid) throw new UnauthenticatedError('Invalid password');
+    user.password = newPassword;
+    await user.save();
   },
 };
 
