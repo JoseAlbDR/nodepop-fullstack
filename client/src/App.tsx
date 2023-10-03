@@ -29,8 +29,10 @@ import { action as deleteProductAction } from './pages/DeleteProduct';
 import { loader as adminLoader } from './pages/Admin';
 import { action as editProfileAction } from './pages/Profile';
 import { loader as statsLoader } from './pages/Stats';
+import { action as deleteAccountAction } from './pages/DeleteAccount';
 import { ErrorComponent } from './components';
 import { DarkThemeProvider } from './context/ToggleDarkThemeContext';
+import DeleteAccount from './pages/DeleteAccount';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -116,6 +118,11 @@ const router = createBrowserRouter([
             path: 'delete-product/:id',
             element: <DeleteProduct />,
             action: deleteProductAction(queryClient),
+          },
+          {
+            path: 'delete-user/:email',
+            element: <DeleteAccount />,
+            action: deleteAccountAction(queryClient),
           },
         ],
       },

@@ -3,6 +3,17 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
   width: 100%;
 
+  .close-account-form {
+    margin-top: 2rem;
+    h4 {
+      color: red;
+    }
+
+    button {
+      margin-top: 2rem;
+    }
+  }
+
   .dashboard-page {
     background: var(--background-secondary-color);
     padding: 3rem 2rem 4rem;

@@ -7,6 +7,7 @@ import StyledProfile from '../assets/wrappers/DashboardFormPage';
 
 import ChangePassword from '../components/UpdatePassword';
 import UpdateProfile from '../components/UpdateProfile';
+import CloseAccount from '../components/CloseAccount';
 export const action =
   (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
     const { request } = data;
@@ -71,6 +72,7 @@ const Profile = () => {
     <StyledProfile>
       <UpdateProfile isSubmitting={isSubmitting} />
       <ChangePassword isSubmitting={isSubmitting} />
+      <CloseAccount />
     </StyledProfile>
   );
 };
