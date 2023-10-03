@@ -13,12 +13,12 @@ export const productsLoader = async (
     ...new URL(request.url).searchParams.entries(),
   ]);
 
-  const [minPrice, maxPrice] = request.url
-    .split('&')
-    .filter((item) => item.startsWith('price='))
-    .map((item) => item.split('=')[1]);
+  const minPrice = params['min-price'];
+  const maxPrice = params['max-price'];
 
-  if (params.price) params.price = `${minPrice}-${maxPrice}`;
+  if (minPrice && maxPrice) params.price = `${minPrice}-${maxPrice}`;
+
+  console.log(params);
 
   await queryClient.ensureQueryData(
     productsQuery(params, pageName, minPrice, maxPrice)

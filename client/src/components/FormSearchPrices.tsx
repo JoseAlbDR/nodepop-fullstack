@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { SubmitFunction } from 'react-router-dom';
 
 import { useProductsContext } from '../context/ProductsContext';
+import { changePriceUrl } from '../utils/changePriceUrl';
 
 const FormSearchPrices = ({
   onChange,
@@ -39,6 +40,7 @@ const FormSearchPrices = ({
         onChange={handleChange}
         onChangeCommitted={() => {
           const form = document.getElementById('search-form');
+          if (form) changePriceUrl(form as HTMLFormElement);
           onChange(form as HTMLFormElement);
         }}
         valueLabelDisplay="auto"

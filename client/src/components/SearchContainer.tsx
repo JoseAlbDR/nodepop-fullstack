@@ -6,6 +6,7 @@ import { FormRow, FormRowSelect, FormSearchPrices } from '.';
 import { SORT, TYPE } from '../../../src/utils/constantsUtil';
 import { useTags } from '../hooks/useTags';
 import { useProductsContext } from '../context/ProductsContext';
+import { changePriceUrl } from '../utils/changePriceUrl';
 
 const SearchContainer = ({ page }: { page: string }) => {
   const navigation = useNavigation();
@@ -46,6 +47,7 @@ const SearchContainer = ({ page }: { page: string }) => {
           <div className="form-center">
             <FormRow
               onChange={debounce((form) => {
+                if (form) changePriceUrl(form as HTMLFormElement);
                 submit(form);
               })}
               type="search"
