@@ -1,8 +1,9 @@
+import mongoose from 'mongoose';
 import { deleteFile } from './deleteFileUtil';
 
 export const removeImage = async (
   image: string,
-  userId: string,
+  userId: mongoose.Types.ObjectId,
   folder: string
 ) => {
   if (!image || image.startsWith('https')) return;

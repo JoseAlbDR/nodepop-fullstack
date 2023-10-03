@@ -71,6 +71,7 @@ const productController = {
 
   createProduct: async (req: CreateProductDTO, res: Response) => {
     const product = req.body;
+    const { userId } = req.user;
     let image;
 
     product.createdBy = req.user.userId;
@@ -78,12 +79,12 @@ const productController = {
     if (!req.file) {
       image =
         process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3000/no-image-available.webp'
+          ? `http://localhost:${process.env.PORT}/no-image-available.webp`
           : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
       console.log('filepath ', filePath);
-      image = getImagePath(filePath, req.user.userId.toString(), 'products');
+      image = getImagePath(filePath, userId, 'products');
       console.log('imagepath ', image);
     }
 
@@ -107,27 +108,19 @@ const productController = {
 
   updateProduct: async (req: UpdateProductDTO, res: Response) => {
     const { id: productId } = req.params;
+    const { userId } = req.user;
     const updates = req.body;
 
     if (req.file) {
       // Remove previous image
       const product = await productService.getOneProduct(productId);
 
-      if (product)
-        await removeImage(
-          product.image!,
-          req.user.userId.toString(),
-          'products'
-        );
+      if (product) await removeImage(product.image!, userId, 'products');
 
       // Create new image path
       const filePath = req.file.path;
 
-      updates.image = getImagePath(
-        filePath,
-        req.user.userId.toString(),
-        'products'
-      );
+      updates.image = getImagePath(filePath, userId, 'products');
     }
 
     // Update product
@@ -143,16 +136,13 @@ const productController = {
 
   deleteProduct: async (req: Request, res: Response) => {
     const { id: productId } = req.params;
+    const { userId } = req.user;
 
     // Delete previous image
     const removedProduct = await productService.deleteProduct(productId);
 
     if (removedProduct)
-      await removeImage(
-        removedProduct.image!,
-        req.user.userId.toString(),
-        'products'
-      );
+      await removeImage(removedProduct.image!, userId, 'products');
 
     res
       .status(StatusCodes.OK)
