@@ -102,7 +102,10 @@ const Wrapper = styled.section`
       }
 
       .password-rows {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+          'old new repeat'
+          'submit . .';
       }
     }
   }
