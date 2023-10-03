@@ -303,3 +303,38 @@ export const validateUpdateUser = [
 
   requestValidator,
 ];
+
+export const validateChangePassword = [
+  body('oldPassword')
+    .trim()
+    .notEmpty()
+    .withMessage('old password is required')
+    .isString()
+    .withMessage('old password must be a string')
+    .isLength({ min: 8 })
+    .withMessage('old password must be at least 83 characters long'),
+
+  body('newPassword')
+    .trim()
+    .notEmpty()
+    .withMessage('new password is required')
+    .isString()
+    .withMessage('new password must be a string')
+    .isLength({ min: 8 })
+    .withMessage('new password must be at least 8 characters long')
+    .custom((value, { req }) => {
+      if (value === req.body.oldPassword) {
+        throw new BadRequestError('Can not repeat same password');
+      }
+      return true;
+    }),
+
+  body('repeatNewPassword').custom((value, { req }) => {
+    if (value !== req.body.newPassword) {
+      throw new BadRequestError('Passwords do not match');
+    }
+    return true;
+  }),
+
+  requestValidator,
+];
