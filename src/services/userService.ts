@@ -42,11 +42,14 @@ const userService = {
     newPassword: string,
     userId: mongoose.Types.ObjectId
   ) => {
-    const user = await userService.getCurrentUser(userId);
-    const isPasswordValid = await user.checkPassword(oldPassword);
-    if (!isPasswordValid) throw new UnauthenticatedError('Invalid password');
-    user.password = newPassword;
-    await user.save();
+    const user = await User.findById(userId);
+
+    if (user) {
+      const isPasswordValid = await user.checkPassword(oldPassword);
+      if (!isPasswordValid) throw new UnauthenticatedError('Invalid password');
+      user.password = newPassword;
+      await user.save();
+    }
   },
 };
 
