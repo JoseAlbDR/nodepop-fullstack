@@ -22,6 +22,7 @@ router.patch(
   validateUpdateUser,
   userController.updateUser
 );
+router.post('/update-password', userController.updatePassword);
 router.get('/admin/app-stats', [
   authorizePermissions('admin'),
   userController.getApplicationStats,
