@@ -13,6 +13,7 @@ export const getImagePath = (
     folder,
     path.basename(filePath)
   );
-
-  return `../${relativePath}`;
+  return process.env.NODE_ENV === 'development'
+    ? `http://localhost:${process.env.PORT}/${relativePath}`
+    : `../${relativePath}`;
 };

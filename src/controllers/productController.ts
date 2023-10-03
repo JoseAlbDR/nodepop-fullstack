@@ -111,10 +111,9 @@ const productController = {
     const { userId } = req.user;
     const updates = req.body;
 
-    if (req.file) {
-      // Remove previous image
-      const product = await productService.getOneProduct(productId);
+    const product = await productService.getOneProduct(productId);
 
+    if (req.file) {
       if (product) await removeImage(product.image!, userId, 'products');
 
       // Create new image path
