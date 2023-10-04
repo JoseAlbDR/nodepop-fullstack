@@ -9,7 +9,7 @@ export const deleteUserFolder = async (userId: mongoose.Types.ObjectId) => {
 
   try {
     const absolutePath = path.resolve(__dirname, folderPath);
-    await fs.rmdir(absolutePath, { recursive: true });
+    await fs.rm(absolutePath, { recursive: true });
   } catch (err) {
     console.log(err);
     throw err;
