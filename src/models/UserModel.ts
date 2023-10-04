@@ -41,4 +41,12 @@ UserSchema.pre('save', async function () {
   this.password = await hashPassword(this.password);
 });
 
+UserSchema.pre(
+  'deleteOne',
+  { document: true, query: false },
+  async function (this) {
+    await this.$model('Product').deleteMany({ createdBy: this._id });
+  }
+);
+
 export const User = mongoose.model('User', UserSchema);
