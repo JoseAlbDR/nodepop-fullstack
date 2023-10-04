@@ -19,7 +19,7 @@ export const action =
     const { params } = data;
 
     try {
-      await customFetch.delete(`/user/${params.email}`);
+      await customFetch.delete(`/users/${params.email}`);
       queryClient.invalidateQueries();
       toast.success(`Account deleted successfully`);
       return redirect('/');
@@ -27,7 +27,7 @@ export const action =
       console.log(error);
       if (error instanceof AxiosError) {
         toast.error(error?.response?.data?.msg);
-        return redirect('.');
+        return redirect('/dashboard/profile');
       }
       return error;
     }
