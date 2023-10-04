@@ -5,6 +5,7 @@ import userService from '../services/userService';
 import { UpdateUserDTO } from '../dtos/updateUserDto';
 import { removeImage, getImagePath } from '../utils';
 import { UpdatePasswordDTO } from '../dtos/updatePasswordDto';
+import { authController } from './authController';
 
 const userController = {
   getCurrentUser: async (req: Request, res: Response) => {
@@ -57,6 +58,7 @@ const userController = {
     const { email } = req.user;
 
     await userService.deleteAccount(email);
+    await authController.logout(req, res);
 
     res.status(StatusCodes.OK).json({ msg: 'account successfully deleted' });
   },
