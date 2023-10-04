@@ -52,6 +52,14 @@ const userController = {
 
     res.status(StatusCodes.OK).json({ msg: 'password updated' });
   },
+
+  deleteUser: async (req: Request, res: Response) => {
+    const { email } = req.params;
+
+    await userService.deleteAccount(email);
+
+    res.status(StatusCodes.OK).json({ msg: 'account successfully deleted' });
+  },
 };
 
 export default userController;

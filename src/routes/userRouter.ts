@@ -31,8 +31,15 @@ router.post(
   userController.changePassword
 );
 router.get('/admin/app-stats', [
+  checkTestUser,
   authorizePermissions('admin'),
   userController.getApplicationStats,
 ]);
+router.delete(
+  '/:email',
+  checkTestUser,
+  authorizePermissions('user', 'admin'),
+  userController.deleteUser
+);
 
 export default router;

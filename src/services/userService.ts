@@ -4,6 +4,7 @@ import { User } from '../models/UserModel';
 import { IUpdateUser } from '../types/userInterfaces';
 import { BadRequestError, NotFoundError } from '../errors';
 import { Product } from '../models/ProductModel';
+import { deleteUserFolder } from '../utils/deleteUserFolderUtil';
 
 const userService = {
   getCurrentUser: async (
@@ -50,6 +51,15 @@ const userService = {
       user.password = newPassword;
       await user.save();
     }
+  },
+
+  deleteAccount: async (email: string) => {
+    const user = await User.findOne({ email: email });
+
+    if (!user) throw new NotFoundError('User not found');
+
+    await deleteUserFolder(user._id);
+    await user.deleteOne();
   },
 };
 
