@@ -1,0 +1,408 @@
+openapi: 3.0.0
+info:
+  title: Nodepop
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://nodepop.jadero.dev/api/v1
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LoginUserRequest'
+                - example:
+                    email: test@gmail.com
+                    password: secrettest
+            example:
+              email: test@gmail.com
+              password: secrettest
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/logout:
+    get:
+      tags:
+        - Auth
+      summary: Logout User
+      operationId: LogoutUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+                - example:
+                    name: test
+                    email: test@gmail.com
+                    password: secrettest
+            example:
+              name: test
+              email: test@gmail.com
+              password: secrettest
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products:
+    get:
+      tags:
+        - Products
+      summary: Get All Products
+      operationId: GetAllProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+        - Products
+      summary: Create Product
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - name
+                - onSale
+                - price
+                - image
+                - tags
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: play5
+                onSale:
+                  type: boolean
+                  example: true
+                price:
+                  type: integer
+                  format: int32
+                  example: 350
+                image:
+                  type: string
+                  format: binary
+                tags:
+                  type: string
+                  example: work
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/stats:
+    get:
+      tags:
+        - Products
+      summary: Show Stats
+      operationId: ShowStats
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/user-products:
+    get:
+      tags:
+        - Products
+      summary: Get User Products
+      operationId: GetUserProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/tags:
+    get:
+      tags:
+        - Products
+      summary: Get All Tags
+      operationId: GetAllTags
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product id
+    get:
+      tags:
+        - Products
+      summary: Get One Product
+      operationId: GetOneProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+        - Products
+      summary: Update Product
+      operationId: UpdateProduct
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+                - name
+                - onSale
+                - price
+                - image
+                - tags
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: play 4
+                onSale:
+                  type: boolean
+                  example: false
+                price:
+                  type: integer
+                  format: int32
+                  example: 1000
+                image:
+                  type: string
+                  format: binary
+                tags:
+                  type: string
+                  example: lifestyle
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+        - Products
+      summary: Delete Product
+      operationId: DeleteProduct
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /populate:
+    post:
+      tags:
+        - Products
+      summary: Populate
+      operationId: Populate
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/current-user:
+    get:
+      tags:
+        - User
+      summary: Show Current User
+      operationId: ShowCurrentUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/admin/app-stats:
+    get:
+      tags:
+        - User
+      summary: Show Stats
+      operationId: GetShowStats
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/update-user:
+    patch:
+      tags:
+        - User
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+                - name
+                - lastName
+                - location
+                - email
+                - avatar
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: admin
+                lastName:
+                  type: string
+                  example: admin
+                location:
+                  type: string
+                  example: nowhere
+                email:
+                  type: string
+                  example: test@gmail.com
+                avatar:
+                  type: string
+                  example: myself.jpg
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/update-password:
+    post:
+      tags:
+        - User
+      summary: Update Password
+      operationId: UpdatePassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdatePasswordRequest'
+                - example:
+                    oldPassword: secrettest
+                    newPassword: anothersecret
+                    repeatNewPassword: anothersecret
+            example:
+              oldPassword: secrettest
+              newPassword: anothersecret
+              repeatNewPassword: anothersecret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/delete-user:
+    delete:
+      tags:
+        - User
+      summary: Delete User
+      operationId: DeleteUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: test@gmail.com
+        password: secrettest
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: test
+        email: test@gmail.com
+        password: secrettest
+    UpdatePasswordRequest:
+      title: UpdatePasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+        - repeatNewPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+        repeatNewPassword:
+          type: string
+      example:
+        oldPassword: secrettest
+        newPassword: anothersecret
+        repeatNewPassword: anothersecret
+tags:
+  - name: Auth
+  - name: Products
+  - name: User

@@ -8,6 +8,9 @@ import path from 'path';
 import debug from 'debug';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
+import swaggerUI, { JsonObject } from 'swagger-ui-express';
+import YAML from 'yamljs';
+
 const serverDebug = debug('nodepop-ts:server');
 
 // DB
@@ -25,6 +28,9 @@ import errorHandlerMiddleware from './middleware/errorHandlerMiddleware';
 import cookieParser from 'cookie-parser';
 import { authenticateUser } from './middleware/authMiddleware';
 import { createTestUser } from './utils/createTestUserUtil';
+
+// Swagger
+const swaggerDocument = YAML.load('./swagger.yaml') as JsonObject;
 
 const app = express();
 
@@ -45,6 +51,7 @@ app.use(
 app.use(mongoSanitize());
 
 // Routes
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/api/v1/products', authenticateUser, productsRouter);
 app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
