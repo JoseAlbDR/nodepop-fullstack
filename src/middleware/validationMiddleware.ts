@@ -312,7 +312,7 @@ export const validateChangePassword = [
     .isString()
     .withMessage('old password must be a string')
     .isLength({ min: 8 })
-    .withMessage('old password must be at least 83 characters long'),
+    .withMessage('old password must be at least 8 characters long'),
 
   body('newPassword')
     .trim()
