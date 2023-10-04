@@ -36,7 +36,7 @@ router.get('/admin/app-stats', [
   userController.getApplicationStats,
 ]);
 router.delete(
-  '/:email',
+  '/delete-user',
   checkTestUser,
   authorizePermissions('user', 'admin'),
   userController.deleteUser

@@ -1,10 +1,4 @@
-import {
-  ActionFunctionArgs,
-  Form,
-  redirect,
-  useNavigate,
-  useNavigation,
-} from 'react-router-dom';
+import { Form, redirect, useNavigate, useNavigation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { ClickAwayListener } from '@mui/material';
@@ -14,24 +8,21 @@ import StyledDeleteAccount from '../assets/wrappers/DeleteProduct';
 import { Spinner } from '../components';
 import { QueryClient } from '@tanstack/react-query';
 
-export const action =
-  (queryClient: QueryClient) => async (data: ActionFunctionArgs) => {
-    const { params } = data;
-
-    try {
-      await customFetch.delete(`/users/${params.email}`);
-      queryClient.invalidateQueries();
-      toast.success(`Account deleted successfully`);
-      return redirect('/');
-    } catch (error) {
-      console.log(error);
-      if (error instanceof AxiosError) {
-        toast.error(error?.response?.data?.msg);
-        return redirect('/dashboard/profile');
-      }
-      return error;
+export const action = (queryClient: QueryClient) => async () => {
+  try {
+    await customFetch.delete(`/users/delete-user`);
+    queryClient.invalidateQueries();
+    toast.success(`Account deleted successfully`);
+    return redirect('/');
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError) {
+      toast.error(error?.response?.data?.msg);
+      return redirect('/dashboard/profile');
     }
-  };
+    return error;
+  }
+};
 
 const DeleteAccount = () => {
   const navigate = useNavigate();

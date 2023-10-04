@@ -120,7 +120,7 @@ const router = createBrowserRouter([
             action: deleteProductAction(queryClient),
           },
           {
-            path: 'delete-user/:email',
+            path: 'delete-user',
             element: <DeleteAccount />,
             action: deleteAccountAction(queryClient),
           },

@@ -54,7 +54,7 @@ const userController = {
   },
 
   deleteUser: async (req: Request, res: Response) => {
-    const { email } = req.params;
+    const { email } = req.user;
 
     await userService.deleteAccount(email);
 

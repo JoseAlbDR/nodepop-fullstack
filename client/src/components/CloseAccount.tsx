@@ -1,9 +1,7 @@
 import { Form, useNavigate } from 'react-router-dom';
-import { useDashboardContext } from '../context/DashboardContext';
 
 const CloseAccount = () => {
   const navigate = useNavigate();
-  const { user } = useDashboardContext();
 
   return (
     <div className="dashboard-page close-account-form">
@@ -17,7 +15,7 @@ const CloseAccount = () => {
         <button
           type="submit"
           className="btn danger-btn"
-          onClick={() => navigate(`../delete-user/${user.email}`)}
+          onClick={() => navigate(`../delete-user`)}
         >
           Delete your account
         </button>
