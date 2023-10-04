@@ -15,3 +15,4 @@ export { getQueryParams } from './getQueryParamsUtil';
 export { getMinMaxPrices } from './getMinMaxPricesUtil';
 export { createTestUser } from './createTestUserUtil';
 export { createFolder } from './createFolderUtil';
+export { deleteUserFolder } from './deleteUserFolderUtil';
