@@ -160,14 +160,29 @@ Example Query to Filter Products by Price Range (Min Price: 100, Max Price: 500)
 /api/v1/products?price=100-500
 ```
 
-### Sort Products: 
+#### Sort Products: 
 Users can sort the list of products by different attributes, including name, price, and creation date. Sorting options are available as query parameters.
 
 Example Query to Sort Products by Price in Ascending Order:
 ```
 /api/v1/products?sort=lowest
-
 ```
+
+#### Pagination: 
+When viewing a list of products, users can navigate through multiple pages of results. The pagination feature allows users to specify the page number and the number of items per page.
+
+Example Query to Get the Second Page of Products with 10 Items per Page:
+```
+/api/v1/products?page=2&limit=10
+```
+
+#### Full Filter, Sort, Pagination Query Example
+
+For products with letter `a`, that are on sale `onSale=on-sale`, containing tag mobile `tags=mobile`, sort by oldest products `sort=oldest`, limited to 10 products per page `limit=10`, showing the page 2 `page=2` and in a 119 to 979 price range `price=119-979"
+```
+http://localhost:5173/api/v1/products?name=a&onSale=on+sale&tags=mobile&sort=oldest&limit=10&page=2&price=119-979
+```
+
 ### Update Product
 
 Users can update the details of a product they created. They can modify the name, price, image, tags, and other attributes. Users can also upload a new image for the product.
