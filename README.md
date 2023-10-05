@@ -1,7 +1,7 @@
 
-# Nodepop Backend
+# Nodepop
 
-Nodepop Backend is a server application built with Node.js and Express that provides services for a fictional product-selling application. This repository contains the source code and instructions for running the application in both development and production environments.
+Nodepop is a fullstack application built with Node.js, Express and React that provides services for a fictional product-selling application. This repository contains the source code and instructions for running the application in both development and production environments.
 
 ## Usage Instructions
 
