@@ -152,6 +152,22 @@ Users can create a new product by providing product details such as name, price,
 
 Users can view a list of all products. Additionally, users can view details of a specific product by clicking on its listing. The product details include its name, price, image, tags, and the user who created it.
 
+#### Filter Products: 
+Users can filter products based on specific criteria such as price range, availability (on sale or not), and tags. Filters can be applied using query parameters when fetching the list of products.
+
+Example Query to Filter Products by Price Range (Min Price: 100, Max Price: 500):
+```
+/api/v1/products?price=100-500
+```
+
+### Sort Products: 
+Users can sort the list of products by different attributes, including name, price, and creation date. Sorting options are available as query parameters.
+
+Example Query to Sort Products by Price in Ascending Order:
+```
+/api/v1/products?sort=lowest
+
+```
 ### Update Product
 
 Users can update the details of a product they created. They can modify the name, price, image, tags, and other attributes. Users can also upload a new image for the product.
