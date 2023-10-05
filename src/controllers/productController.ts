@@ -11,8 +11,6 @@ import { MinMax } from '../utils/getMinMaxPricesUtil';
 
 const productController = {
   getAllProducts: async (req: Request, res: Response) => {
-    console.log(req.query);
-
     const {
       result: queryResult,
       queryObject,
@@ -83,9 +81,7 @@ const productController = {
           : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
-      console.log('filepath ', filePath);
       image = getImagePath(filePath, userId, 'products');
-      console.log('imagepath ', image);
     }
 
     const newProduct = await productService.createProduct({
