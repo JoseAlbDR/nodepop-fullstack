@@ -1,5 +1,8 @@
 # NodePop - Classified Ads
 
+## API Docs
+[Documentation](https://nodepop.jadero.dev/api/v1/docs/)
+
 # NodePop Application
 
 NodePop is a web application that allows users to buy and sell products. This README provides an overview of the application's features, setup, and usage.
