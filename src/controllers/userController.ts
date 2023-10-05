@@ -59,8 +59,6 @@ const userController = {
 
     await userService.deleteAccount(email);
     await authController.logout(req, res);
-
-    res.status(StatusCodes.OK).json({ msg: 'account successfully deleted' });
   },
 };
 
