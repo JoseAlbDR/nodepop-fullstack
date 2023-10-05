@@ -18,7 +18,8 @@ export const productsLoader = async (
 
   if (minPrice && maxPrice) params.price = `${minPrice}-${maxPrice}`;
 
-  console.log(params);
+  if (params['min-price']) delete params['min-price'];
+  if (params['max-price']) delete params['max-price'];
 
   await queryClient.ensureQueryData(
     productsQuery(params, pageName, minPrice, maxPrice)
