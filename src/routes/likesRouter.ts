@@ -3,6 +3,7 @@ import { likesController } from '../controllers/likesController';
 
 const router = express.Router();
 
-router.post('/add', likesController.addLike);
+router.post('/', likesController.addLike);
+router.delete('/:id', likesController.deleteLike);
 
 export default router;

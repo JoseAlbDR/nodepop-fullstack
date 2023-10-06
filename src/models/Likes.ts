@@ -19,16 +19,14 @@ const LikesSchema = new mongoose.Schema(
     timestamps: true,
     statics: {
       async calculateLikes(
-        type: string,
         product: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>
       ) {
-        const operation = type === 'add' ? 1 : -1;
         const result: AggResult[] = await this.aggregate([
           { $match: { product } },
           {
             $group: {
               _id: null,
-              likes: { $sum: operation },
+              likes: { $sum: 1 },
             },
           },
         ]);
@@ -44,14 +42,14 @@ const LikesSchema = new mongoose.Schema(
 );
 
 LikesSchema.post('save', async function () {
-  await Likes.calculateLikes('add', this.product);
+  await Likes.calculateLikes(this.product);
 });
 
 LikesSchema.post(
   'deleteOne',
   { document: true, query: false },
   async function () {
-    await Likes.calculateLikes('sub', this.product);
+    await Likes.calculateLikes(this.product);
   }
 );
 
