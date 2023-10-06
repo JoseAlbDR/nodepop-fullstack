@@ -338,3 +338,14 @@ export const validateChangePassword = [
 
   requestValidator,
 ];
+
+export const validateAddLike = [
+  body('productId')
+    .trim()
+    .notEmpty()
+    .withMessage('product id is required')
+    .isMongoId()
+    .withMessage('product id has to be a MongoId'),
+
+  requestValidator,
+];
