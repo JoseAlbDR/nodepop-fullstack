@@ -33,6 +33,26 @@ const UserSchema = new mongoose.Schema(
         return await bcrypt.compare(password, this.password);
       },
     },
+    statics: {
+      async calculateLikes(product: mongoose.Types.ObjectId) {
+        const result = await this.aggregate([
+          { $match: { product } },
+          {
+            $group: {
+              _id: null,
+              likes: { $sum: 1 },
+            },
+          },
+        ]);
+        console.log(result);
+        await mongoose.model('Product').findOneAndUpdate(
+          { _id: product },
+          {
+            likes: result[0]?.likes || 0,
+          }
+        );
+      },
+    },
   }
 );
 

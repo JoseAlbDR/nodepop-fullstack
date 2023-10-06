@@ -34,6 +34,7 @@ const populateService = {
         tags,
         createdBy: userId,
         createdAt,
+        likes: 0,
       };
       products.push(product);
     }

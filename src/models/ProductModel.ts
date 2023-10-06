@@ -31,6 +31,10 @@ const ProductSchema = new mongoose.Schema(
         },
       },
     },
+    likes: {
+      type: Number,
+      min: 0,
+    },
     createdBy: {
       type: mongoose.Types.ObjectId,
       ref: 'User',
