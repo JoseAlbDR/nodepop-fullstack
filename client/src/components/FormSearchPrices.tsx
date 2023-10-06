@@ -15,6 +15,7 @@ const FormSearchPrices = ({
 }) => {
   const { data } = useProductsContext();
   const { minPrice, maxPrice } = data;
+  console.log(data);
   const [value, setValue] = useState<[number, number]>(defaultValue);
 
   const handleChange = (_event: Event, newValue: number | number[]) => {

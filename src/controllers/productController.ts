@@ -81,7 +81,9 @@ const productController = {
           : '/no-image-available.webp';
     } else {
       const filePath = req.file.path;
+      console.log('filepath ', filePath);
       image = getImagePath(filePath, userId, 'products');
+      console.log('imagepath ', image);
     }
 
     const newProduct = await productService.createProduct({

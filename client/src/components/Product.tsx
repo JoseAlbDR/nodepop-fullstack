@@ -7,6 +7,7 @@ import {
   FaUser,
 } from 'react-icons/fa';
 import day from 'dayjs';
+import Heart from 'react-animated-heart';
 
 import { ProductButton, ProductInfo, ProductCategories } from '.';
 import search from '../assets/images/search.svg';
@@ -14,6 +15,7 @@ import sale from '../assets/images/sell.svg';
 import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import { useDashboardContext } from '../context/DashboardContext';
+import { useState } from 'react';
 
 interface ProductProps extends IProduct {}
 
@@ -29,15 +31,18 @@ const Product = ({
   tags,
 }: ProductProps) => {
   const { user } = useDashboardContext();
-
+  const [click, setClick] = useState(false);
   const date = day(createdAt).format('D MMM, YYYY');
   return (
     <StyledProduct>
       <img className="img" src={image} alt={`${name} image`} />
       <div className="content">
-        <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
-          {onSale ? 'on-sale' : 'search'}
-          <img src={onSale ? sale : search} alt="" />
+        <div className="content-header">
+          <Heart isClick={click} onClick={() => setClick(!click)} />
+          <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
+            {onSale ? 'on-sale' : 'search'}
+            <img src={onSale ? sale : search} alt="" />
+          </div>
         </div>
         <h2 className="title">{name}</h2>
         <ProductInfo icon={<FaMoneyBill />} text={price + '€'} />

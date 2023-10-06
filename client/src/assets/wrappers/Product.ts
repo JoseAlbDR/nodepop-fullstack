@@ -23,6 +23,13 @@ const Wrapper = styled.div`
     gap: 1rem;
   }
 
+  .content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+  }
+
   .on-sale,
   .search {
     align-self: flex-end;
