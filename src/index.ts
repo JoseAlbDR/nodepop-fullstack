@@ -21,6 +21,7 @@ import productsRouter from './routes/productRouter';
 import populateRouter from './routes/populateDatabaseRouter';
 import authRouter from './routes/authRouter';
 import userRouter from './routes/userRouter';
+import likesRouter from './routes/likesRouter';
 
 // Middlewares
 import notFoundMiddleware from './middleware/notFoundMiddleware';
@@ -55,6 +56,7 @@ app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/api/v1/products', authenticateUser, productsRouter);
 app.use('/api/v1/populate', authenticateUser, populateRouter);
 app.use('/api/v1/users', authenticateUser, userRouter);
+app.use('/api/v1/likes', authenticateUser, likesRouter);
 app.use('/api/v1/auth', authRouter);
 
 if (process.env.NODE_ENV === 'production')
