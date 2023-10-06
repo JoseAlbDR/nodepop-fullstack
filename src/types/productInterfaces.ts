@@ -9,7 +9,7 @@ export interface IProduct {
   image: string | null;
   tags: ITags[];
   createdBy: mongoose.SchemaDefinitionProperty<mongoose.Types.ObjectId>;
-  likes: number;
+  numOfLikes: number;
 }
 
 export interface IUpdateProduct extends Partial<IProduct> {}

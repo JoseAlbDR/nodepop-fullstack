@@ -31,9 +31,9 @@ const ProductSchema = new mongoose.Schema(
         },
       },
     },
-    likes: {
+    numOfLikes: {
       type: Number,
-      min: 0,
+      default: 0,
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
@@ -42,7 +42,22 @@ const ProductSchema = new mongoose.Schema(
       index: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+ProductSchema.virtual('likes', {
+  ref: 'Like',
+  localField: '_id',
+  foreignField: 'product',
+  justOne: false,
+});
+
+ProductSchema.pre(
+  'deleteOne',
+  { document: true, query: false },
+  async function (this) {
+    await this.$model('Like').deleteMany({ product: this._id });
+  }
 );
 
 export const Product = mongoose.model('Product', ProductSchema);

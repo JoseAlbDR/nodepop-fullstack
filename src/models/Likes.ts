@@ -26,7 +26,7 @@ const LikesSchema = new mongoose.Schema(
           {
             $group: {
               _id: null,
-              likes: { $sum: 1 },
+              numOfLikes: { $sum: 1 },
             },
           },
         ]);
@@ -41,6 +41,8 @@ const LikesSchema = new mongoose.Schema(
   }
 );
 
+LikesSchema.index({ product: 1, user: 1 }, { unique: true });
+
 LikesSchema.post('save', async function () {
   await Likes.calculateLikes(this.product);
 });
@@ -53,6 +55,4 @@ LikesSchema.post(
   }
 );
 
-LikesSchema.index({ product: 1, user: 1 }, { unique: true });
-
-export const Likes = mongoose.model('Likes', LikesSchema);
+export const Likes = mongoose.model('Like', LikesSchema);

@@ -8,10 +8,15 @@ import { IProductQuery } from '../types/queryInterfaces';
 
 const productService = {
   getAllProducts: (query: IProductQuery) => {
-    const results = Product.find(query).populate({
-      path: 'createdBy',
-      select: 'name email',
-    });
+    const results = Product.find(query)
+      .populate({
+        path: 'createdBy',
+        select: 'name email',
+      })
+      .populate('likes');
+
+    console.log(results);
+
     return results;
   },
 
