@@ -16,6 +16,7 @@ import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import { useDashboardContext } from '../context/DashboardContext';
 import { useState } from 'react';
+import { useAddLike, useRemoveLike } from '../hooks/useAddDeleteLikes';
 
 interface ProductProps extends IProduct {}
 
@@ -29,16 +30,50 @@ const Product = ({
   onSale,
   price,
   tags,
+  likes,
 }: ProductProps) => {
   const { user } = useDashboardContext();
-  const [click, setClick] = useState(false);
   const date = day(createdAt).format('D MMM, YYYY');
+  const like = likes.filter((like) => like.product === _id);
+
+  const { addLike } = useAddLike();
+  const { removeLike } = useRemoveLike();
+
+  let liked = false;
+  if (
+    like.length > 0 &&
+    like[0].product === _id &&
+    like[0].user === user._id &&
+    user._id !== createdBy._id
+  ) {
+    liked = true;
+  }
+
+  const [click, setClick] = useState(liked);
+
+  const handleLikeClick = () => {
+    console.log(click);
+    if (!click) {
+      addLike(_id);
+      setClick(true);
+    }
+
+    if (click) {
+      removeLike(_id);
+      setClick(false);
+    }
+  };
+
   return (
     <StyledProduct>
       <img className="img" src={image} alt={`${name} image`} />
       <div className="content">
         <div className="content-header">
-          <Heart isClick={click} onClick={() => setClick(!click)} />
+          {user._id !== createdBy._id ? (
+            <Heart isClick={liked} onClick={handleLikeClick} />
+          ) : (
+            <div></div>
+          )}
           <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
             {onSale ? 'on-sale' : 'search'}
             <img src={onSale ? sale : search} alt="" />

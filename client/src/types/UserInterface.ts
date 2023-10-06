@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 export type Role = 'admin' | 'user';
 
 export interface IUser {
+  _id: string;
   name: string;
   email: string;
   lastName: string;

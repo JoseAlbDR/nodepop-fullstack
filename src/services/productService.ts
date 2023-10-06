@@ -36,10 +36,12 @@ const productService = {
     const products = Product.find({
       createdBy: userId,
       ...query,
-    }).populate({
-      path: 'createdBy',
-      select: 'name email',
-    });
+    })
+      .populate({
+        path: 'createdBy',
+        select: 'name email',
+      })
+      .populate('likes');
     return products;
   },
 

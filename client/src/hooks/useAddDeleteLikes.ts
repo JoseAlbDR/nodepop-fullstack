@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   addLike as addLikeApi,
   removeLike as removeLikeApi,
-} from '../services/apiAuth';
+} from '../services/apiLikes';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 

@@ -7,6 +7,11 @@ export interface ICreatedBy {
   _id: string;
 }
 
+export interface ILikes {
+  product: string;
+  user: string;
+}
+
 export interface IProduct {
   _id: string;
   createdAt: Date;
@@ -17,6 +22,7 @@ export interface IProduct {
   onSale: boolean;
   price: number;
   tags: ITags[];
+  likes: ILikes[];
 }
 
 export interface IProductResponse {

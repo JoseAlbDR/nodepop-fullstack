@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-type AggResult = { _id: null; likes: number };
+type AggResult = { _id: null; numOfLikes: number };
 
 const LikesSchema = new mongoose.Schema(
   {
@@ -33,7 +33,7 @@ const LikesSchema = new mongoose.Schema(
         await mongoose.model('Product').findOneAndUpdate(
           { _id: product },
           {
-            likes: result[0]?.likes || 0,
+            numOfLikes: result[0]?.numOfLikes || 0,
           }
         );
       },
