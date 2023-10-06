@@ -180,7 +180,7 @@ Example Query to Get the Second Page of Products with 10 Items per Page:
 
 For products with letter `a`, that are on sale `onSale=on-sale`, containing tag mobile `tags=mobile`, sort by oldest products `sort=oldest`, limited to 10 products per page `limit=10`, showing the page 2 `page=2` and in a 119 to 979 price range `price=119-979`
 ```
-http://localhost:5173/api/v1/products?name=a&onSale=on+sale&tags=mobile&sort=oldest&limit=10&page=2&price=119-979
+http://localhost:3000/api/v1/products?name=a&onSale=on+sale&tags=mobile&sort=oldest&limit=10&page=2&price=119-979
 ```
 
 ### Update Product
