@@ -30,6 +30,16 @@ const Wrapper = styled.div`
     height: 50px;
   }
 
+  .product-likes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .likes {
+    margin-left: -1rem;
+  }
+
   .on-sale,
   .search {
     align-self: flex-end;
