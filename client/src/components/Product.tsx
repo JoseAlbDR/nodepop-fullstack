@@ -31,15 +31,18 @@ const Product = ({
   price,
   tags,
   likes,
+  numOfLikes,
 }: ProductProps) => {
   const { user } = useDashboardContext();
   const date = day(createdAt).format('D MMM, YYYY');
-  const like = likes.filter((like) => like.product === _id);
+  const like = likes.filter(
+    (like) => like.product === _id && like.user === user._id
+  );
 
   const { addLike } = useAddLike();
   const { removeLike } = useRemoveLike();
 
-  let liked = false;
+  let liked;
   if (
     like.length > 0 &&
     like[0].product === _id &&
@@ -47,12 +50,14 @@ const Product = ({
     user._id !== createdBy._id
   ) {
     liked = true;
+  } else {
+    liked = false;
   }
 
   const [click, setClick] = useState(liked);
 
   const handleLikeClick = () => {
-    console.log(click);
+    if (user._id === createdBy._id) return;
     if (!click) {
       addLike(_id);
       setClick(true);
@@ -69,11 +74,10 @@ const Product = ({
       <img className="img" src={image} alt={`${name} image`} />
       <div className="content">
         <div className="content-header">
-          {user._id !== createdBy._id ? (
+          <div className="product-likes">
             <Heart isClick={liked} onClick={handleLikeClick} />
-          ) : (
-            <div></div>
-          )}
+            <span className="likes">{numOfLikes}</span>
+          </div>
           <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
             {onSale ? 'on-sale' : 'search'}
             <img src={onSale ? sale : search} alt="" />
