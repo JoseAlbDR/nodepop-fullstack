@@ -6,7 +6,7 @@ import { SearchContainer, ProductsContainer } from '../components';
 import { ProductsProvider } from '../context/ProductsContext';
 
 interface ProductsPageProps {
-  pageType: 'user' | 'all';
+  pageType: 'user' | 'all' | 'favorites';
 }
 
 const ProductsPage: React.FC<ProductsPageProps> = ({ pageType }) => {

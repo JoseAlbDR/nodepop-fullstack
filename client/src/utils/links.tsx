@@ -5,7 +5,7 @@ import { TiShoppingCart } from 'react-icons/ti';
 import { ImProfile } from 'react-icons/im';
 import { IoBarChartSharp } from 'react-icons/io5';
 import { MdAdminPanelSettings } from 'react-icons/md';
-import { FaCubes } from 'react-icons/fa';
+import { FaCubes, FaHeart } from 'react-icons/fa';
 
 interface Links {
   text: string;
@@ -22,6 +22,7 @@ const links: Links[] = [
   },
   { text: 'my products', path: 'user-products?page=1', icon: <FaCubes /> },
   { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
+  { text: 'favorites', path: 'favorites', icon: <FaHeart /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
   { text: 'admin', path: 'admin', icon: <MdAdminPanelSettings /> },
 ];

@@ -5,6 +5,5 @@ export const addLike = async (productId: string) => {
 };
 
 export const removeLike = async (productId: string) => {
-  console.log('removeLike');
   await customFetch.delete(`/likes/${productId}`);
 };

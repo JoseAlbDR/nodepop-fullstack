@@ -33,6 +33,7 @@ import { action as deleteAccountAction } from './pages/DeleteAccount';
 import { ErrorComponent } from './components';
 import { DarkThemeProvider } from './context/ToggleDarkThemeContext';
 import DeleteAccount from './pages/DeleteAccount';
+import Favorites from './pages/Favorites';
 
 export const checkDefaultTheme = () => {
   const isDarkTheme = localStorage.getItem('darkTheme') === 'true';
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
             element: <Stats />,
             loader: statsLoader(queryClient),
             errorElement: <ErrorComponent />,
+          },
+          {
+            path: 'favorites',
+            element: <Favorites />,
           },
           {
             path: 'all-products',
