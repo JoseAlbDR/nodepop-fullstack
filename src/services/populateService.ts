@@ -10,11 +10,20 @@ import {
 } from '../utils';
 
 const populateService = {
+  /**
+   * Populate the database with randomly generated products for a user.
+   *
+   * @param {number} n - The number of products to generate and insert into the database.
+   * @param {mongoose.Types.ObjectId} userId - The ID of the user associated with the products.
+   * @returns {Promise<IProduct[]>} An array of the created products.
+   */
   populateDatabase: async (n: number, userId: mongoose.Types.ObjectId) => {
+    // Delete existing products created by the user
     await Product.deleteMany({ createdBy: userId });
 
     const products: IProduct[] = [];
 
+    // Generate and add 'n' products to the array
     for (let i = 0; i < n; i++) {
       const name = faker.commerce.product();
       const image = faker.image.urlLoremFlickr({
@@ -39,6 +48,7 @@ const populateService = {
       products.push(product);
     }
 
+    // Insert the generated products into the database
     const createdProducts = await Product.insertMany(products);
 
     return createdProducts;
