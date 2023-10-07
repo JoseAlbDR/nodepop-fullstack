@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { hashPassword } from '../utils/hashPasswordUtil';
 
+// Define the User schema
 const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -29,6 +30,7 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
 
     methods: {
+      // Method to check if a given password matches the stored password
       async checkPassword(password: string) {
         return await bcrypt.compare(password, this.password);
       },
@@ -36,11 +38,13 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+// Hash the password before saving it
 UserSchema.pre('save', async function () {
   if (!this.isModified('password')) return;
   this.password = await hashPassword(this.password);
 });
 
+// Delete associated products when a user is deleted
 UserSchema.pre(
   'deleteOne',
   { document: true, query: false },
@@ -49,4 +53,5 @@ UserSchema.pre(
   }
 );
 
+// Create the User model based on the schema
 export const User = mongoose.model('User', UserSchema);

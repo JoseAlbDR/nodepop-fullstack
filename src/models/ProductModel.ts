@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { TAGS } from '../utils/constantsUtil';
 
+// Define the schema for the Product collection
 const ProductSchema = new mongoose.Schema(
   {
     name: {
@@ -26,6 +27,7 @@ const ProductSchema = new mongoose.Schema(
       index: true,
       required: [true, 'Tag is required'],
       validate: {
+        // Validate that all tags in the array are included in the TAGS constant
         validator: (tags: string[]) => {
           return tags.every((tag) => TAGS.includes(tag));
         },
@@ -45,6 +47,7 @@ const ProductSchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+// Create a virtual field 'likes' to populate likes associated with a product
 ProductSchema.virtual('likes', {
   ref: 'Like',
   localField: '_id',
@@ -52,6 +55,7 @@ ProductSchema.virtual('likes', {
   justOne: false,
 });
 
+// Delete associated likes when a product is deleted
 ProductSchema.pre(
   'deleteOne',
   { document: true, query: false },
@@ -60,4 +64,5 @@ ProductSchema.pre(
   }
 );
 
+// Create the Product model based on the schema
 export const Product = mongoose.model('Product', ProductSchema);
