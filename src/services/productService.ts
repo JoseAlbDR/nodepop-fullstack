@@ -15,8 +15,6 @@ const productService = {
       })
       .populate('likes');
 
-    console.log(results);
-
     return results;
   },
 

@@ -1,9 +1,6 @@
 import express from 'express';
 import { likesController } from '../controllers/likesController';
-import {
-  validateAddLike,
-  validateIdParam,
-} from '../middleware/validationMiddleware';
+import { validateAddLike } from '../middleware/validationMiddleware';
 import { checkTestUser } from '../middleware/checkTestUserMiddleware';
 import { authorizePermissions } from '../middleware/authMiddleware';
 
@@ -21,7 +18,6 @@ router.delete(
   '/:id',
   checkTestUser,
   authorizePermissions('user', 'admin'),
-  validateIdParam,
   likesController.deleteLike
 );
 
