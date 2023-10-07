@@ -1,8 +1,14 @@
 import mongoose from 'mongoose';
-
 import productService from '../services/productService';
 import { IProductQuery } from '../types/queryInterfaces';
 
+/**
+ * Build a MongoDB query object and execute the query based on the provided query parameters.
+ *
+ * @param {IProductQuery} queryParams - The query parameters for filtering, sorting, and pagination.
+ * @param {mongoose.Types.ObjectId} userId - (Optional) The user ID for filtering user-specific products.
+ * @returns {object} An object containing the query result, query object, page, and limit.
+ */
 export const getQueryParams = (
   queryParams: IProductQuery,
   userId?: mongoose.Types.ObjectId
@@ -31,7 +37,6 @@ export const getQueryParams = (
   // Filter by sale type
   if (onSale && typeof onSale === 'string' && onSale !== 'all') {
     queryObject.onSale = onSale === 'on sale' ? true : false;
-    console.log(queryObject.onSale);
   }
 
   // Filter by price
@@ -43,6 +48,7 @@ export const getQueryParams = (
     if (max === undefined) queryObject.price = { $eq: min };
   }
 
+  // Retrieve products based on user ID or all products
   let result = userId
     ? productService.getUserProducts(userId, queryObject)
     : productService.getAllProducts(queryObject);

@@ -4,7 +4,6 @@ import 'dotenv/config';
 import morgan from 'morgan';
 import express from 'express';
 import path from 'path';
-// import cors from 'cors';
 import debug from 'debug';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
@@ -35,11 +34,19 @@ const swaggerDocument = YAML.load('./swagger.yaml') as JsonObject;
 
 const app = express();
 
-// app.use(cors());
-app.use(express.json());
-app.use(cookieParser(process.env.JWT_SECRET));
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+// Initialize Express application settings and middleware
+app.use(express.json()); // Parse JSON request bodies
+app.use(cookieParser(process.env.JWT_SECRET)); // Parse cookies with JWT secret
+
+// Request logging middleware for development environment
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+// Serve static files from the 'public' directory
 app.use(express.static(path.resolve(__dirname, './public')));
+
+// Enhance security with various HTTP headers
 app.use(helmet());
 app.use(
   helmet.contentSecurityPolicy({
@@ -49,37 +56,42 @@ app.use(
     },
   })
 );
+
+// Prevent MongoDB query injection
 app.use(mongoSanitize());
 
 // Routes
-app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-app.use('/api/v1/products', authenticateUser, productsRouter);
-app.use('/api/v1/populate', authenticateUser, populateRouter);
-app.use('/api/v1/users', authenticateUser, userRouter);
-app.use('/api/v1/likes', authenticateUser, likesRouter);
-app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument)); // Serve Swagger documentation
+app.use('/api/v1/products', authenticateUser, productsRouter); // Products API route
+app.use('/api/v1/populate', authenticateUser, populateRouter); // Populate Database API route
+app.use('/api/v1/users', authenticateUser, userRouter); // Users API route
+app.use('/api/v1/likes', authenticateUser, likesRouter); // Likes API route
+app.use('/api/v1/auth', authRouter); // Authentication API route
 
-if (process.env.NODE_ENV === 'production')
+// Serve the frontend in production mode
+if (process.env.NODE_ENV === 'production') {
   app.get('*', (_req, res) => {
     res.sendFile(path.resolve(__dirname, './public', 'index.html'));
   });
+}
 
-// Middlewares
+// Error handling middleware
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
+// Start the server
 const start = async () => {
   const port = process.env.PORT;
   try {
-    await dbConnect(process.env.MONGO_URL);
-    await createTestUser();
+    await dbConnect(process.env.MONGO_URL); // Connect to the MongoDB database
+    await createTestUser(); // Create a test user if it doesn't exist
     app.listen(port, () => {
       serverDebug(`Server listening on port: ${port}`);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     process.exit(1);
   }
 };
 
-void start();
+void start(); // Start the server

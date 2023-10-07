@@ -26,7 +26,6 @@ const productService = {
 
     const productIds = userLikes.map((like) => like.product);
 
-    // Busca los productos que tienen esos IDs.
     const favoriteProducts = await Product.find({ _id: { $in: productIds } })
       .populate({
         path: 'createdBy',
