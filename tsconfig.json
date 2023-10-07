@@ -9,7 +9,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
-  }
-  // "include": ["src/index.ts"],
-  // "files": ["src/types/index.d.ts"]
+  },
+  "include": ["src/index.ts"],
+  "files": ["src/types/index.d.ts"]
 }
