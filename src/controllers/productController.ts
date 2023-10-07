@@ -157,6 +157,13 @@ const productController = {
 
     res.status(StatusCodes.OK).json(defaultStats);
   },
+
+  getFavoriteProducts: async (req: Request, res: Response) => {
+    const { userId } = req.user;
+    const products = await productService.getFavoriteProducts(userId);
+
+    res.send(StatusCodes.OK).json({ products });
+  },
 };
 
 export default productController;

@@ -31,6 +31,8 @@ router
     productController.createProduct
   );
 
+router.get('/favorite', productController.getFavoriteProducts);
+
 router.get('/user-products', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getUserProducts,

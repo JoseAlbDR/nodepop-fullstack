@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { Product } from '../models/ProductModel';
 import { IProduct, IUpdateProduct } from '../types/productInterfaces';
 import { IProductQuery } from '../types/queryInterfaces';
+import { Likes } from '../models/Likes';
 
 const productService = {
   getAllProducts: (query: IProductQuery) => {
@@ -16,6 +17,18 @@ const productService = {
       .populate('likes');
 
     return results;
+  },
+
+  getFavoriteProducts: async (userId: mongoose.Types.ObjectId) => {
+    const data = await Likes.find({ user: userId }).populate({
+      path: 'product',
+    });
+
+    const products = data
+      .filter(({ product }) => product !== null)
+      .map((item) => item.product);
+
+    return products;
   },
 
   countProducts: async (
