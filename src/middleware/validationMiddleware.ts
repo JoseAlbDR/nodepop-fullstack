@@ -5,6 +5,7 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from '../errors';
 import { validateProductGetDeleteUpdate } from '../utils/validateProductGetDeleteUpdate';
 import { tagsValidationMessage, validateSort, validateTags } from '../utils';
 
+// Middleware to validate request data and handle validation errors
 export const requestValidator = (
   req: Request,
   _res: Response,
@@ -16,11 +17,11 @@ export const requestValidator = (
       .array()
       .map((error) => error.msg as string);
 
-    // If error starts with "Product" means that is a NotFoundError
+    // If error starts with "Product" means that it is a NotFoundError
     if (errorMessages[0].startsWith('Product'))
       throw new NotFoundError(errorMessages.join(', '));
 
-    // If error starts with "Not authorized" means that is a UnauthorizedError
+    // If error starts with "Not authorized" means that it is an UnauthorizedError
     if (errorMessages[0].startsWith('Not authorized'))
       throw new UnauthorizedError(errorMessages.join(', '));
 
@@ -29,7 +30,7 @@ export const requestValidator = (
   next();
 };
 
-// Upload image file
+// Middleware to validate uploaded image files
 export const validateUploadedFiles = (
   req: Request,
   _res: Response,
@@ -58,7 +59,7 @@ export const validateUploadedFiles = (
   next();
 };
 
-// Populate param
+// Middleware to validate the "n" parameter for populating
 export const validatePopulateParam = [
   param('n')
     .optional()
@@ -68,7 +69,7 @@ export const validatePopulateParam = [
   requestValidator,
 ];
 
-// Product params, create and update
+// Middleware to validate parameters for product operations (get, delete, update)
 export const validateIdParam = [
   param('id')
     .notEmpty()
@@ -80,8 +81,10 @@ export const validateIdParam = [
   requestValidator,
 ];
 
+// Regular expression to validate the price parameter in query
 const priceRegex = /^(?:-?\d+-\d+|-?\d+|\d+-|\d+)$/;
 
+// Middleware to validate query parameters for product retrieval
 export const validateQueryParam = [
   query('name')
     .trim()
@@ -93,7 +96,7 @@ export const validateQueryParam = [
     .trim()
     .optional()
     .notEmpty()
-    .withMessage('onSale can not be empty'),
+    .withMessage('onSale cannot be empty'),
 
   query('price')
     .trim()
@@ -108,7 +111,7 @@ export const validateQueryParam = [
     .trim()
     .optional()
     .notEmpty()
-    .withMessage('tags can not be empty')
+    .withMessage('tags cannot be empty')
     .custom((tags: string[]) => validateTags(tags))
     .withMessage(tagsValidationMessage),
 
@@ -125,6 +128,7 @@ export const validateQueryParam = [
   requestValidator,
 ];
 
+// Middleware to validate request body for creating a product
 export const validateProductCreation = [
   body('name')
     .trim()
@@ -158,6 +162,7 @@ export const validateProductCreation = [
   requestValidator,
 ];
 
+// Middleware to validate request body for updating a product
 export const validateProductUpdate = [
   body('name')
     .trim()
@@ -191,7 +196,7 @@ export const validateProductUpdate = [
   requestValidator,
 ];
 
-// Auth validation
+// Middleware to validate request body for registering a user
 export const validateRegisterUser = [
   body('name')
     .trim()
@@ -222,18 +227,7 @@ export const validateRegisterUser = [
     .notEmpty()
     .withMessage('password is required')
     .isLength({ min: 8 })
-    // .isStrongPassword({
-    //   minLength: 8,
-    //   // minUppercase: 1,
-    //   // minNumbers: 1,
-    //   // minLowercase: 1,
-    //   // minSymbols: 1,
-    // })
-    .withMessage('Password must be at least 8 characters long'),
-  // .withMessage(
-  //   `Password must be at least 8 characters long and contains: one uppercase letter, one
-  //   lowercase letter, one number and one symbol`
-  // ),
+    .withMessage('password must be at least 8 characters long'),
 
   body('location')
     .trim()
@@ -246,6 +240,7 @@ export const validateRegisterUser = [
   requestValidator,
 ];
 
+// Middleware to validate request body for user login
 export const validateLoginUser = [
   body('email')
     .trim()
@@ -255,21 +250,11 @@ export const validateLoginUser = [
     .withMessage('email must be a valid email address'),
 
   body('password').trim().notEmpty().withMessage('password is required'),
-  // .isStrongPassword({
-  //   minLength: 8,
-  //   minUppercase: 1,
-  //   minNumbers: 1,
-  //   minLowercase: 1,
-  //   minSymbols: 1,
-  // })
-  // .withMessage(
-  //   `Password must be at least 8 characters long and contains: one uppercase letter, one lowercase letter, one number and one symbol`
-  // ),
 
   requestValidator,
 ];
 
-// User Validation
+// Middleware to validate request body for updating user details
 export const validateUpdateUser = [
   body('name')
     .trim()
@@ -304,6 +289,7 @@ export const validateUpdateUser = [
   requestValidator,
 ];
 
+// Middleware to validate request body for changing user's password
 export const validateChangePassword = [
   body('oldPassword')
     .trim()
@@ -324,7 +310,7 @@ export const validateChangePassword = [
     .withMessage('new password must be at least 8 characters long')
     .custom((value, { req }) => {
       if (value === req.body.oldPassword) {
-        throw new BadRequestError('Can not repeat same password');
+        throw new BadRequestError('Cannot repeat the same password');
       }
       return true;
     }),
@@ -339,6 +325,7 @@ export const validateChangePassword = [
   requestValidator,
 ];
 
+// Middleware to validate request body for adding a like to a product
 export const validateAddLike = [
   body('productId')
     .trim()
