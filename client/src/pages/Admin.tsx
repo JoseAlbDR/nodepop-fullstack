@@ -27,8 +27,6 @@ export const loader = async () => {
 const Admin = () => {
   const { users, products } = useLoaderData() as StatsResponse;
 
-  console.log(users, products);
-
   return (
     <StyledStats>
       <StatItem

@@ -160,9 +160,20 @@ const productController = {
 
   getFavoriteProducts: async (req: Request, res: Response) => {
     const { userId } = req.user;
-    const products = await productService.getFavoriteProducts(userId);
 
-    res.send(StatusCodes.OK).json({ products });
+    const { page, limit } = getQueryParams(req.query);
+    const products = await productService.getFavoriteProducts(userId);
+    const numOfPages = Math.ceil(products.length / limit);
+
+    res
+      .status(StatusCodes.OK)
+      .json({
+        numOfPages,
+        totalProducts: products.length,
+        currentPage: page,
+        products,
+        limit: limit || 5,
+      });
   },
 };
 

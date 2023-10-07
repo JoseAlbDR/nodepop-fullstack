@@ -20,15 +20,21 @@ const productService = {
   },
 
   getFavoriteProducts: async (userId: mongoose.Types.ObjectId) => {
-    const data = await Likes.find({ user: userId }).populate({
+    const userLikes = await Likes.find({ user: userId }).populate({
       path: 'product',
     });
 
-    const products = data
-      .filter(({ product }) => product !== null)
-      .map((item) => item.product);
+    const productIds = userLikes.map((like) => like.product);
 
-    return products;
+    // Busca los productos que tienen esos IDs.
+    const favoriteProducts = await Product.find({ _id: { $in: productIds } })
+      .populate({
+        path: 'createdBy',
+        select: 'name email',
+      })
+      .populate('likes');
+
+    return favoriteProducts;
   },
 
   countProducts: async (

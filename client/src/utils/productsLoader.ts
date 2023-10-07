@@ -24,5 +24,6 @@ export const productsLoader = async (
   await queryClient.ensureQueryData(
     productsQuery(params, pageName, minPrice, maxPrice)
   );
+
   return { searchValues: { ...params } };
 };

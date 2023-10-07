@@ -15,7 +15,7 @@ import sale from '../assets/images/sell.svg';
 import StyledProduct from '../assets/wrappers/Product';
 import { IProduct } from '../types/Products';
 import { useDashboardContext } from '../context/DashboardContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAddLike, useRemoveLike } from '../hooks/useAddDeleteLikes';
 
 interface ProductProps extends IProduct {}
@@ -42,7 +42,7 @@ const Product = ({
   const { addLike } = useAddLike();
   const { removeLike } = useRemoveLike();
 
-  let liked;
+  let liked: boolean | ((prevState: boolean) => boolean);
   if (
     like.length > 0 &&
     like[0].product === _id &&
@@ -54,18 +54,20 @@ const Product = ({
     liked = false;
   }
 
-  const [click, setClick] = useState(liked);
+  const [click, setClick] = useState(false);
+
+  useEffect(() => {
+    setClick(liked);
+  }, [liked]);
 
   const handleLikeClick = () => {
     if (user._id === createdBy._id) return;
     if (!click) {
       addLike(_id);
-      setClick(true);
     }
 
     if (click) {
       removeLike(_id);
-      setClick(false);
     }
   };
 

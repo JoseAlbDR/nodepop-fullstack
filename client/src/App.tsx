@@ -30,6 +30,7 @@ import { loader as adminLoader } from './pages/Admin';
 import { action as editProfileAction } from './pages/Profile';
 import { loader as statsLoader } from './pages/Stats';
 import { action as deleteAccountAction } from './pages/DeleteAccount';
+import { loader as favoritesLoader } from './pages/Favorites';
 import { ErrorComponent } from './components';
 import { DarkThemeProvider } from './context/ToggleDarkThemeContext';
 import DeleteAccount from './pages/DeleteAccount';
@@ -90,6 +91,7 @@ const router = createBrowserRouter([
           {
             path: 'favorites',
             element: <Favorites />,
+            loader: favoritesLoader(queryClient),
           },
           {
             path: 'all-products',

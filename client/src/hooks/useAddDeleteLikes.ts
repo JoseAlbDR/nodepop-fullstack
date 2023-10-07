@@ -12,8 +12,9 @@ export const useAddLike = () => {
   const { isLoading, mutate: addLike } = useMutation({
     mutationFn: addLikeApi,
     onSuccess: () => {
-      queryClient.invalidateQueries(['products']),
-        queryClient.invalidateQueries(['user-products']);
+      queryClient.invalidateQueries(['favorites']);
+      queryClient.invalidateQueries(['products']);
+      queryClient.invalidateQueries(['user-products']);
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -29,6 +30,7 @@ export const useRemoveLike = () => {
   const { isLoading, mutate: removeLike } = useMutation({
     mutationFn: removeLikeApi,
     onSuccess: () => {
+      queryClient.invalidateQueries(['favorites']);
       queryClient.invalidateQueries(['products']);
       queryClient.invalidateQueries(['user-products']);
     },
