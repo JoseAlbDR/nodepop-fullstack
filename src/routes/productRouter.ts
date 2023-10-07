@@ -15,6 +15,7 @@ import { checkTestUser } from '../middleware/checkTestUserMiddleware';
 
 const router = express.Router();
 
+// Route for retrieving all products and creating a new product
 router
   .route('/')
   .get(
@@ -31,6 +32,7 @@ router
     productController.createProduct
   );
 
+// Route for retrieving favorite products
 router.get(
   '/favorites',
   checkTestUser,
@@ -38,18 +40,22 @@ router.get(
   productController.getFavoriteProducts
 );
 
+// Route for retrieving user's products
 router.get('/user-products', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getUserProducts,
 ]);
 
+// Route for retrieving product statistics
 router.route('/stats').get(productController.showStats);
 
+// Route for retrieving all product tags
 router.get('/tags', [
   authorizePermissions('user', 'admin', 'tester'),
   productController.getAllTags,
 ]);
 
+// Route for updating and deleting a specific product
 router
   .route('/:id([0-9a-fA-F]{24})')
   .get(validateIdParam, productController.getOneProduct)

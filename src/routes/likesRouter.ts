@@ -6,6 +6,7 @@ import { authorizePermissions } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
+// Route to add a like to a product
 router.post(
   '/',
   checkTestUser,
@@ -14,6 +15,7 @@ router.post(
   likesController.addLike
 );
 
+// Route to unlike a product
 router.delete(
   '/:id',
   checkTestUser,

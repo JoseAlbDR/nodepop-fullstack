@@ -13,7 +13,10 @@ import { checkTestUser } from '../middleware/checkTestUserMiddleware';
 
 const router = express.Router();
 
+// Route to get the current user
 router.get('/current-user', userController.getCurrentUser);
+
+// Route to update user information, including avatar
 router.patch(
   '/update-user',
   checkTestUser,
@@ -23,6 +26,8 @@ router.patch(
   validateUpdateUser,
   userController.updateUser
 );
+
+// Route to update the user's password
 router.post(
   '/update-password',
   checkTestUser,
@@ -30,11 +35,15 @@ router.post(
   validateChangePassword,
   userController.changePassword
 );
+
+// Route to get application statistics (admin only)
 router.get('/admin/app-stats', [
   checkTestUser,
   authorizePermissions('admin'),
   userController.getApplicationStats,
 ]);
+
+// Route to delete a user's account
 router.delete(
   '/delete-user',
   checkTestUser,

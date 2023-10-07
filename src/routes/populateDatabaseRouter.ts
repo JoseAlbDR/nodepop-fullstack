@@ -6,6 +6,7 @@ import { authorizePermissions } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
+// Route to populate the database with test data
 router
   .route('/:n?')
   .post(
