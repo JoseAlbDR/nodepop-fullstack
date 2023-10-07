@@ -23,6 +23,7 @@ export interface IProduct {
   price: number;
   tags: ITags[];
   likes: ILikes[];
+  numOfLikes: number;
 }
 
 export interface IProductResponse {
