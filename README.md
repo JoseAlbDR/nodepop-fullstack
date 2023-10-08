@@ -90,7 +90,7 @@ npm setup-production-build
 
 npm start
 ```
-Navigate to `http://locahost:3000` or whatever por you setup in .env file
+Navigate to `http://locahost:3000` or whatever port you setup in .env file
 
 # Cookies
 
