@@ -51,7 +51,7 @@ export const validateUploadedFiles = (
   const maxSize = 1024 * 1024;
 
   if (image.size > maxSize) {
-    throw new BadRequestError('File has to be smaller than 1MB');
+    throw new BadRequestError('File has to be smaller than 0.5MB');
   }
 
   req.file = image;
