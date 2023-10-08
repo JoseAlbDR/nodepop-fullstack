@@ -4,7 +4,7 @@ info:
   contact: {}
   version: '1.0'
 servers:
-  - url: https://nodepop.jadero.dev/api/v1
+  - url: https://nodepop.jadero.dev
     variables: {}
 paths:
   /auth/login:
@@ -156,6 +156,18 @@ paths:
         - Products
       summary: Get All Tags
       operationId: GetAllTags
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/favorites:
+    get:
+      tags:
+        - Products
+      summary: Get User Favorites
+      operationId: GetUserFavorites
       parameters: []
       responses:
         '200':
@@ -350,6 +362,49 @@ paths:
           description: ''
           headers: {}
       deprecated: false
+  /likes:
+    post:
+      tags:
+        - Likes
+      summary: Add Like
+      operationId: AddLike
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AddLikeRequest'
+                - example:
+                    productId: 651f2ff8d5950048cf400034
+            example:
+              productId: 651f2ff8d5950048cf400034
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /likes/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The product id
+    delete:
+      tags:
+        - Likes
+      summary: Delete Like
+      operationId: DeleteLike
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
 components:
   schemas:
     LoginUserRequest:
@@ -402,7 +457,18 @@ components:
         oldPassword: secrettest
         newPassword: anothersecret
         repeatNewPassword: anothersecret
+    AddLikeRequest:
+      title: AddLikeRequest
+      required:
+        - productId
+      type: object
+      properties:
+        productId:
+          type: string
+      example:
+        productId: 651f2ff8d5950048cf400034
 tags:
   - name: Auth
   - name: Products
   - name: User
+  - name: Likes
