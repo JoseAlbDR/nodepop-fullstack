@@ -36,14 +36,14 @@ export const validateUploadedFiles = (
   _res: Response,
   next: NextFunction
 ) => {
+  console.log('FILES:', req.file);
+
   if (!req.file || Object.keys(req.file).length === 0) {
     return next();
     // throw new BadRequestError('No file uploaded');
   }
 
   const image = req.file;
-
-  console.log(image);
 
   if (!image.mimetype.startsWith('image')) {
     throw new BadRequestError('File has to be an image');

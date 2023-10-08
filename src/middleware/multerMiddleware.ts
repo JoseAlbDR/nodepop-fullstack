@@ -8,8 +8,10 @@ import multer from 'multer';
  */
 const fileUpload = (folder: string) => {
   const storage = multer.diskStorage({
-    destination: (req, _file, cb) => {
+    destination: (req, file, cb) => {
       let newPath = '';
+
+      console.log('Multer file:', file);
 
       // Determine the file upload path based on the environment
       if (process.env.NODE_ENV === 'development') {
