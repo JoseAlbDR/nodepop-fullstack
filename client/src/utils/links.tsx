@@ -21,8 +21,8 @@ const links: Links[] = [
     icon: <TiShoppingCart />,
   },
   { text: 'my products', path: 'user-products?page=1', icon: <FaCubes /> },
-  { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'favorites', path: 'favorites', icon: <FaHeart /> },
+  { text: 'stats', path: 'stats', icon: <IoBarChartSharp /> },
   { text: 'profile', path: 'profile', icon: <ImProfile /> },
   { text: 'admin', path: 'admin', icon: <MdAdminPanelSettings /> },
 ];
