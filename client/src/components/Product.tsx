@@ -39,7 +39,7 @@ const Product = ({
     (like) => like.product === _id && like.user === user._id
   );
 
-  const { addLike } = useAddLike();
+  const { addLike, isLoading } = useAddLike();
   const { removeLike } = useRemoveLike();
 
   let liked: boolean | ((prevState: boolean) => boolean);
@@ -71,13 +71,18 @@ const Product = ({
     }
   };
 
+  console.log(isLoading);
+
   return (
     <StyledProduct>
       <img className="img" src={image} alt={`${name} image`} />
       <div className="content">
         <div className="content-header">
           <div className="product-likes">
-            <Heart isClick={liked} onClick={handleLikeClick} />
+            <Heart
+              isClick={liked}
+              onClick={isLoading ? () => {} : handleLikeClick}
+            />
             <span className="likes">{numOfLikes}</span>
           </div>
           <div className={`status ${onSale ? 'on-sale' : 'search'}`}>
