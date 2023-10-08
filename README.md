@@ -172,6 +172,8 @@ Upon successful login, the user is issued a JWT token, which is sent to the clie
 
 # CRUD Operations
 
+General CRUD operations explained next, for all endpoints available in the API please refer to API Documentation.
+
 ## CRUD Operations on Products
 
 NodePop allows authorized users ("user" and "admin" roles) to perform CRUD operations on products.
