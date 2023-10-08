@@ -33,7 +33,7 @@
     "start": "node build/index.js",
     "setup-project": "npm i && cd client && npm i",
     "setup-production-build": "npm i && cd client && npm i && cd .. && npm run build-server && npm run build-client",
-    "create-backup": "mkdirp build/public/uploads && cp -R build/public/uploads/* backup/"
+    "create-backup": "mkdir -p build/public/uploads && cp -R build/public/uploads/* backup/"
   },
   "repository": {
     "type": "git",
