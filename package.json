@@ -27,13 +27,14 @@
     "server": "cross-env DEBUG=nodepop-ts:* ts-node-dev --files src/index.ts",
     "client": "cd client && npm run dev",
     "dev": "concurrently --kill-others-on-fail \" npm run server\" \"npm run client\"",
-    "build-server": "npm run create-backup && rm -rf build && tsc",
+    "build-server": "rm -rf build && tsc",
     "build-client": "mkdirp build/public/uploads && cp -R src/public/* build/public && cd client && npm run build && cp -fr dist/* ../build/public && cp -R ../backup/* ../build/public/uploads",
     "lint": "eslint --ext .ts .",
     "start": "node build/index.js",
     "setup-project": "npm i && cd client && npm i",
     "setup-production-build": "npm i && cd client && npm i && cd .. && npm run build-server && npm run build-client",
-    "create-backup": "if [ -d 'build/public/uploads' ]; then find build/public/uploads -type f -exec cp {} backup/ \\;; fi"
+    "rebuild-server": "npm run create-backup && npm run setup-production-build",
+    "create-backup": "mkdirp -p backup && cp -R build/public/uploads/* backup/"
   },
   "repository": {
     "type": "git",
