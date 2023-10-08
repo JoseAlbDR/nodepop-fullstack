@@ -43,6 +43,8 @@ export const validateUploadedFiles = (
 
   const image = req.file;
 
+  console.log(image);
+
   if (!image.mimetype.startsWith('image')) {
     throw new BadRequestError('File has to be an image');
   }
