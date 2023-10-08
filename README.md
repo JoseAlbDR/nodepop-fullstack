@@ -79,6 +79,7 @@ npm run setup-project
 
 npm run dev
 ```
+Navigate to `http://locahost:5137`
 
 ### Production environment
 
@@ -89,6 +90,7 @@ npm setup-production-build
 
 npm start
 ```
+Navigate to `http://locahost:3000` or whatever por you setup in .env file
 
 # Cookies
 
