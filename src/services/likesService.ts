@@ -51,7 +51,7 @@ export const likesService = {
       user: user.userId,
     });
 
-    if (!like) throw new NotFoundError('Like for product not found');
+    if (!like) throw new NotFoundError('Too many clicks ANSIAS');
 
     // Delete the like and return `true` to indicate success
     await like.deleteOne();
