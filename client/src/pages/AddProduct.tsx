@@ -44,6 +44,8 @@ export const action =
       return redirect('all-products');
     } catch (error) {
       if (error instanceof AxiosError) {
+        if (error?.response?.status === 413)
+          toast.error('File has to be smaller than 0.5MB');
         toast.error(error?.response?.data?.msg);
       }
       console.log(error);
