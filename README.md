@@ -19,6 +19,7 @@ NodePop is a web application that allows users to buy and sell products. This RE
    - [CRUD Operations](#crud-operations)
    - [CRUD Operations on Products](#crud-operations-on-products)
    - [CRUD Operations on Users](#crud-operations-on-users)
+   - [CRUD Operations on Likes](#crud-operations-on-likes)
    - [API Documentation](#api-documentation)
 6. [Folder Structure](#folder-structure)
 7. [Contributing](#contributing)
@@ -30,6 +31,7 @@ NodePop offers the following features:
 - User registration and authentication
 - Product listing and browsing
 - Product creation, editing, and deletion
+- Add and Delete Products Likes
 - User profile management
 - User role management (admin, user, tester)
 - User avatars and uploaded image handling
@@ -199,11 +201,23 @@ Certain authorized users ("user" and "admin" roles) have the privilege to perfor
 
 ### Update User
 
-Admins can update the details of any user account, including their name, email, role, and avatar. They can also change the user's password.
+Users can update the details of his account, including their name, email, role, and avatar. They can also change the user's password.
 
 ### Delete User
 
-Admins can delete any user account, including all associated data and files. This action is irreversible and permanently removes the user from the system.
+Users can delete his account including all associated data and files. This action is irreversible and permanently removes the user from the system.
+
+## CRUD Operations on Likes
+
+Certain authorized users ("user" and "admin" roles) have the privilege to perform CRUD operations on product likes.
+
+### Add Like
+
+Users can Add a Like to a Product.
+
+### Delete Like (Unlike)
+
+Users can Unlike a Product.
 
 # API Documentation
 
