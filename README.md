@@ -172,7 +172,7 @@ Upon successful login, the user is issued a JWT token, which is sent to the clie
 
 # CRUD Operations
 
-General CRUD operations explained next, for all endpoints available in the API please refer to API Documentation.
+General CRUD operations explained next, for all endpoints available in the API please refer to [API Docs](#api-docs).
 
 ## CRUD Operations on Products
 
