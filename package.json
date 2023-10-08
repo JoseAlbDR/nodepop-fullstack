@@ -33,7 +33,7 @@
     "start": "node build/index.js",
     "setup-project": "npm i && cd client && npm i",
     "setup-production-build": "npm i && cd client && npm i && cd .. && npm run build-server && npm run build-client",
-    "create-backup": "if [ -d 'build/public/uploads' ]; then cp -R build/public/uploads/* backup/; else mkdirp -p build/public/uploads; fi"
+    "create-backup": "node -e \"const fs = require('fs'); if (fs.existsSync('build/public/uploads')) { const execSync = require('child_process').execSync; execSync('cp -R build/public/uploads/* backup/'); }\""
   },
   "repository": {
     "type": "git",
