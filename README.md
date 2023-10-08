@@ -1,5 +1,21 @@
 # NodePop - Classified Ads
 
+## Practice requeriments:
+
+### Product list with pagination, filters and sorting:
+- [CRUD Operations on Products](#crud-operations-on-products)
+- EndPoint GET /api/v1/products
+
+### Existing Tag List
+- [CRUD Operations on Products](#crud-operations-on-products)
+- EndPoint GET /api/v1/products/tags
+
+### Product Creation
+- [CRUD Operations on Products](#crud-operations-on-products)
+- EndPoint POST /api/v1/products
+
+More info and Testing in API Documentation
+
 ## API Docs
 [Production API Documentation](https://nodepop.jadero.dev/api/v1/docs/)
 
@@ -62,11 +78,11 @@ npm run setup-project
 Before running the application, you need to configure environment variables in a `.env` file. Copy and paste the following content into a file named `.env` at the project's root and fill in the values as needed:
 
 ```plaintext
-NODE_ENV=development or production
-PORT=3000
+NODE_ENV=development_or_production
+PORT=desired_port
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
-JWT_EXPIRES_IN=30d
+JWT_EXPIRES_IN=jwt_duration(expample: 30d)
 ```
 
 ## Usage
@@ -87,12 +103,24 @@ Navigate to `http://locahost:5137`
 
 If you want to run the app in development first make sure that `NODE_ENV` env variable in `.env` file is set to `production` then run the following commands:
 
+First time build.
+
 ```shell
 npm setup-production-build
 
 npm start
 ```
-Navigate to `http://locahost:3000` or whatever port you setup in .env file
+
+Build once the server have been build at least one time.
+In order to backup users related data (avatar and products images) there is another script that you should run to rebuild the server once it has users/products with uploaded images.
+
+```shell
+npm rebuild-app
+
+npm start
+```
+
+In both cases Navigate to `http://locahost:3000` or whatever port you setup in .env file
 
 # Cookies
 
@@ -118,7 +146,7 @@ After validation, a new user account is created in the database. The user's pass
 
 ## Folder Creation
 
-A folder is created for the user (typically using their unique user ID) to store their files, such as avatars and uploaded images.
+A folder is created for the user (using their unique user ID) to store their files, such as avatars and uploaded images.
 
 ## JWT Generation
 
@@ -156,6 +184,10 @@ Users can create a new product by providing product details such as name, price,
 
 Users can view a list of all products. Additionally, users can view details of a specific product by clicking on its listing. The product details include its name, price, image, tags, and the user who created it.
 
+### Read Unique TAGS
+
+Users can view a list of current unique TAGS within all the Products Stored in the Database.
+
 #### Filter Products: 
 Users can filter products based on specific criteria such as price range, availability (on sale or not), and tags. Filters can be applied using query parameters when fetching the list of products.
 
@@ -181,7 +213,6 @@ Example Query to Get the Second Page of Products with 10 Items per Page:
 ```
 
 #### Full Filter, Sort, Pagination Query Example
-
 For products with letter `a`, that are on sale `onSale=on-sale`, containing tag mobile `tags=mobile`, sort by oldest products `sort=oldest`, limited to 10 products per page `limit=10`, showing the page 2 `page=2` and in a 119 to 979 price range `price=119-979`
 ```
 http://localhost:3000/api/v1/products?name=a&onSale=on+sale&tags=mobile&sort=oldest&limit=10&page=2&price=119-979
