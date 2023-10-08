@@ -52,7 +52,7 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", 'https://loremflickr.com'],
+      imgSrc: ["'self'", 'https://loremflickr.com', 'data:'],
     },
   })
 );
