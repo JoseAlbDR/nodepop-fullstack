@@ -25,8 +25,8 @@ export const loader = (queryClient: QueryClient) => async () => {
 const Favorites = () => {
   const { data } = useQuery(favoritesQuery);
 
-  const totalProducts = data!.totalProducts || 0;
-  const products = data!.products;
+  const totalProducts = data?.totalProducts || 0;
+  const products = data?.products || [];
 
   if (products.length === 0) {
     return (
